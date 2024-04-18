@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/18 16:44:30 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/18 17:33:23 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef struct s_player
 	float	height;
 	float	rotation_angle;
 }	t_player;
+
+typedef struct line
+{
+	int32_t	x0;
+	int32_t	y0;
+	int32_t	x1;
+	int32_t	y1;
+}	t_line;
+
 // key_commands.c
 void	handle_rotation(mlx_key_data_t keydata, t_player *player);
 void	handle_movement(mlx_key_data_t keydata, t_player *player);
@@ -35,3 +44,6 @@ void	my_keyhook(mlx_key_data_t keydata, void	*param);
 // graphics_helper.c
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void	put_pixel(int32_t x, int32_t y, mlx_image_t *image);
+int32_t	get_step(int32_t start, int32_t end);
+int32_t	get_error(int32_t dx, int32_t dy);
+void	bresenham(t_line line, mlx_image_t *image);
