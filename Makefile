@@ -1,47 +1,45 @@
-NAME		=	cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/04/18 14:52:04 by ohoro             #+#    #+#              #
+#    Updated: 2024/04/18 14:52:09 by ohoro            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC			= cc
-CCFLAGS		= -Wall -Wextra -Werror
+NAME	:= cub3D
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+LIBMLX	:= ./lib/MLX42
 
-RM			= rm -rf
+HEADERS	:= -I ./include -I $(LIBMLX)/include
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+SRCS	:= $(shell find ./src -iname "*.c")
+OBJS	:= ${SRCS:%.c=%.o}
 
-MLX42_DIR	= ./MLX42/
-MLX42_GIT	= git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
-MLX42_LIB	= $(MLX42_DIR)/build/libmlx42.a
-MLX42_FLG	= -L$(MLX_PATH)/build -lglfw -ldl -lm -pthread
+all: libmlx $(NAME)
 
-SRCS = cub3d.c \
+libmlx:
+	@if [ ! -d "$(LIBMLX)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+	fi
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-OBJS = $(SRCS:.c=.o)
+%.o: %.c
+	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< && printf "Compiling: $(notdir $<)\n"
 
-%.o: %.c $(DEPS)
-	$(CC) $(CCFLAGS) -c $< -o $@
-
-all: mlx42_clone mlx42_build $(NAME)
-
-$(NAME): $(OBJS) $(MLX42_LIB)
-	$(CC) $(CFLAGS) $(MLX42_FLG) -o $@ $^
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
-	$(RM) $(MLX42_DIR)/build
+	@rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) $(MLX42_DIR)
-	$(RM) $(MUSIC_DIR)
+	@rm -rf $(NAME)
 
-re: fclean all
+re: clean all
 
-mlx42_clone:
-	@if [ ! -d $(MLX42_DIR) ]; then \
-		$(MLX42_GIT); \
-    fi
-
-mlx42_build:
-	@if [ ! -d $(MLX42_DIR)/build ]; then \
-		cmake $(MLX42_DIR) -B $(MLX42_DIR)/build; \
-		make -C $(MLX42_DIR)/build -j4; \
-    fi
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re libmlx
