@@ -6,7 +6,7 @@
 #    By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 14:52:04 by ohoro             #+#    #+#              #
-#    Updated: 2024/04/18 14:52:09 by ohoro            ###   ########.fr        #
+#    Updated: 2024/04/18 15:01:45 by ohoro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
+	@rm -rf lib/MLX42
 
 re: clean all
 
