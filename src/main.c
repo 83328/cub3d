@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/18 14:27:38 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/18 15:32:57 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		player->y -= 1;
 		printf("x: %f, y: %f\n", player->x, player->y);
 	}
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	 	exit(0);
 }
-
 // bresenham's line algorithm
 void drawLine(mlx_image_t* img, int x0, int y0, int x1, int y1, int color)
 {

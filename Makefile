@@ -6,7 +6,7 @@
 #    By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 14:52:04 by ohoro             #+#    #+#              #
-#    Updated: 2024/04/18 15:01:45 by ohoro            ###   ########.fr        #
+#    Updated: 2024/04/18 15:33:22 by ohoro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,4 +43,7 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all clean fclean re libmlx
+alpha: all
+	@./$(NAME)
+
+.PHONY: all clean fclean re libmlx alpha
