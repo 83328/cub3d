@@ -6,13 +6,14 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/21 18:11:44 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/21 18:27:32 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 #include <MLX42/MLX42.h>
 
 #define WIDTH 512
@@ -65,3 +66,5 @@ void	erase_old_player(t_game *game);
 void	update_player(t_game *game);
 void	draw_new_player(t_game *game);
 void	redraw_player(void *param);
+// player_rays.c
+void	draw_player_middle_ray(t_game *game);
