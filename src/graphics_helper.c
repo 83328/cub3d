@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:59:32 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/18 17:33:40 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/20 19:18:46 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ void	put_pixel(int32_t x, int32_t y, mlx_image_t *image)
 	uint32_t	color;
 
 	color = ft_pixel(255, 255, 255, 255);
+	mlx_put_pixel(image, x, y, color);
+}
+
+// erase pixel
+void	erase_pixel(int32_t x, int32_t y, mlx_image_t *image)
+{
+	uint32_t	color;
+
+	color = ft_pixel(0, 0, 0, 0);
 	mlx_put_pixel(image, x, y, color);
 }
 
