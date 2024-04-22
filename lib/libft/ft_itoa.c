@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:25:20 by alimpens          #+#    #+#             */
-/*   Updated: 2022/12/21 17:34:55 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:35:31 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_itoa(int n)
 	{
 		num_arr[0] = '-';
 		num = num * -1;
-	}		
+	}
 	if (num == 0)
 		num_arr[0] = '0';
 	num_arr[len] = '\0';
