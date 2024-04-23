@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/23 19:32:02 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:25:45 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void init_game(t_game *game)
 	game->player_y = 100;
 	game->player_width = 1;
 	game->player_height = 1;
-	game->player_rotation_angle = 0;
+	game->player_rotation_angle = M_PI_2;
 	game->key_a_pressed = 0;
 	game->key_s_pressed = 0;
 	game->key_d_pressed = 0;
