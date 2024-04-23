@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/21 18:10:48 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/23 14:59:35 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void	handle_movement_keys(mlx_key_data_t keydata, t_game *game)
 
 // this might not be the best way,
 // maybe we should use the MLX_CLOSE_WINDOW event
-// this causes a possible memory leak 
-// the best w
+// this causes a possible memory leak
 void	handle_escape_key(mlx_key_data_t keydata)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)

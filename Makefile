@@ -6,18 +6,20 @@
 #    By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 14:52:04 by ohoro             #+#    #+#              #
-#    Updated: 2024/04/22 15:58:11 by alimpens         ###   ########.fr        #
+#    Updated: 2024/04/23 17:26:51 by alimpens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC		:= clang
 NAME	:= cub3D
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
+GNL		:= ./lib/get_next_line
+LIBMLX	:= ./lib/MLX42
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include
+HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(GNL)
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
-SRCS	:= $(shell find ./src -iname "*.c")
+SRCS	:= $(shell find ./src -iname "*.c") $(shell find $(GNL) -iname "*.c")
 OBJS	:= ${SRCS:%.c=%.o}
 
 all: libmlx libft $(NAME)
@@ -35,7 +37,7 @@ libft:
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< && printf "Compiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) -o $(NAME)
+	@$(CC) -v $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS)

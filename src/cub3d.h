@@ -6,19 +6,29 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/22 11:07:22 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:28:02 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdbool.h>
 #include <math.h>
+#include <fcntl.h>
 #include <MLX42/MLX42.h>
+#include "../lib/get_next_line/get_next_line.h"
 
 #define WIDTH 512
 #define HEIGHT 512
 #define M_PI_2 1.57079632679489661923
+
+typedef struct s_map
+{
+	int width;
+	int height;
+	char **map;
+} t_map;
 
 typedef struct s_game
 {
@@ -35,9 +45,8 @@ typedef struct s_game
 	bool						key_w_pressed;
 	bool						key_left_pressed;
 	bool						key_right_pressed;
-	
+	t_map						*map;
 }	t_game;
-
 
 typedef struct line
 {
@@ -68,3 +77,6 @@ void	draw_new_player(t_game *game);
 void	redraw_player(void *param);
 // player_rays.c
 void	draw_player_middle_ray(t_game *game);
+// parser.c
+int	load_map(t_game *game, char *filename);
+int check_map_validity(t_map *map);
