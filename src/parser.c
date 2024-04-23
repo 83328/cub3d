@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/23 16:48:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:03:56 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,18 @@ int	check_map_validity(t_map *map)
 		}
 		i++;
 	}
+	printf("Height: %d\n", map->height);
+	printf("Width: %d\n", map->width);
 	return (1);
 }
 
 int	load_map(t_game *game, char *filename)
 {
-	int fd;
-	char *line;
-	t_map *map;
-	int i;
+	int		fd;
+	char	*line;
+	t_map	*map;
+	int		i;
+	char    first_char;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -51,6 +54,19 @@ int	load_map(t_game *game, char *filename)
 		printf("Could not open file %s\n", filename);
 		return (0);
 	}
+	
+	// Read the first character of the file
+	if (read(fd, &first_char, 1) != 1)
+	{
+		printf("Could not read from file %s\n", filename);
+		close(fd);
+		return (0);
+	}
+	printf("First character of the file: %c\n", first_char);
+
+	// Move the file pointer back to the beginning of the file
+	lseek(fd, 0, SEEK_SET);
+
 	map = malloc(sizeof(t_map));
 	if (map == NULL)
 	{
@@ -70,6 +86,7 @@ int	load_map(t_game *game, char *filename)
 		map->map[i] = line;
 		i++;
 	}
+
 	game->map = map;
 	close(fd);
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/23 18:33:47 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/23 19:32:02 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	validate_input_and_load_map(int argc, char **argv, t_game *game)
 	return (1);
 }
 
-int32_t	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game game;
 
