@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 16:28:02 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:32:16 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ typedef struct s_game
 	float						player_width;
 	float						player_height;
 	float						player_rotation_angle;
-	bool						key_a_pressed;
-	bool						key_s_pressed;
-	bool						key_d_pressed;
-	bool						key_w_pressed;
-	bool						key_left_pressed;
-	bool						key_right_pressed;
+	int							key_a_pressed;
+	int							key_s_pressed;
+	int							key_d_pressed;
+	int							key_w_pressed;
+	int							key_left_pressed;
+	int							key_right_pressed;
 	t_map						*map;
 }	t_game;
 
