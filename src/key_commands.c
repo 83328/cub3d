@@ -6,40 +6,47 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 19:06:40 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/23 19:50:55 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+#if 0
 void handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game)
 {
-float move_speed = 2.0f;
+	float move_speed;
+	move_speed = 2.0f;
+
     if (keydata.key == MLX_KEY_W) {
         if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) {
             game->key_w_pressed = 1;
-        } else if (keydata.action == MLX_RELEASE) {
+        }
+		if (keydata.action == MLX_RELEASE) {
             game->key_w_pressed = 0;
         }
     }
     if (keydata.key == MLX_KEY_S) {
         if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) {
             game->key_s_pressed = 1;
-        } else if (keydata.action == MLX_RELEASE) {
+        }
+		if (keydata.action == MLX_RELEASE) {
             game->key_s_pressed = 0;
         }
     }
     if (keydata.key == MLX_KEY_D) {
         if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) {
             game->key_d_pressed = 1;
-        } else if (keydata.action == MLX_RELEASE) {
+        }
+		if (keydata.action == MLX_RELEASE) {
             game->key_d_pressed = 0;
         }
     }
     if (keydata.key == MLX_KEY_A) {
         if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) {
             game->key_a_pressed = 1;
-        } else if (keydata.action == MLX_RELEASE) {
+        }
+		if (keydata.action == MLX_RELEASE) {
             game->key_a_pressed = 0;
         }
     }
@@ -49,7 +56,7 @@ float move_speed = 2.0f;
 		{
 			game->key_left_pressed = 1;
 		}
-		else if (keydata.action == MLX_RELEASE)
+		if (keydata.action == MLX_RELEASE)
 		{
 			game->key_left_pressed = 0;
 		}
@@ -101,11 +108,34 @@ float move_speed = 2.0f;
     game->player_y += dy;
 
 }
+#endif
+void update_player_position(t_game *game, float dx, float dy)
+{
+    game->player_x += dx;
+    game->player_y += dy;
+}
 
 
+void update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
+{
+    if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+        move_forward(game, move_speed);
+    if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+        move_backward(game, move_speed);
+    if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+        move_left(game, move_speed);
+    if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+        move_right(game, move_speed);
+}
 
 
+void handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game)
+{
+    update_rotation(game, keydata);
 
+    float move_speed = 2.0f;
+    update_movement(game, move_speed, keydata);
+}
 
 // this might not be the best way,
 // maybe we should use the MLX_CLOSE_WINDOW event
@@ -114,16 +144,6 @@ void	handle_escape_key(mlx_key_data_t keydata)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit(0);
-}
-
-void reset_keys(t_game *game)
-{
-	game->key_a_pressed = false;
-	game->key_s_pressed = false;
-	game->key_d_pressed = false;
-	game->key_w_pressed = false;
-	game->key_left_pressed = false;
-	game->key_right_pressed = false;
 }
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)

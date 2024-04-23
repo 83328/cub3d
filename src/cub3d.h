@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 18:32:16 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/23 19:49:48 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,17 @@ typedef struct line
 }	t_line;
 
 // key_commands.c
-void	handle_rotation_keys(mlx_key_data_t keydata,	t_game *game);
-void	handle_movement_keys(mlx_key_data_t keydata,	t_game *game);
+void	handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game);
+void	update_player_position(t_game *game, float dx, float dy);
+void	update_movement(t_game *game, float move_speed, mlx_key_data_t keydata);
 void	handle_escape_key(mlx_key_data_t keydata);
 void	my_keyhook(mlx_key_data_t keydata, void	*param);
-void	reset_keys(t_game *game);
+// key_commands_helper.c
+void	update_rotation(t_game *game, mlx_key_data_t keydata);
+void	move_forward(t_game *game, float move_speed);
+void	move_backward(t_game *game, float move_speed);
+void	move_left(t_game *game, float move_speed);
+void	move_right(t_game *game, float move_speed);
 
 // graphics_helper.c
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
@@ -71,10 +77,9 @@ int32_t	get_step(int32_t start, int32_t end);
 int32_t	get_error(int32_t dx, int32_t dy);
 void	bresenham(t_line line, mlx_image_t *image);
 // player_movements.c
-void	erase_old_player(t_game *game);
-void	update_player(t_game *game);
 void	draw_new_player(t_game *game);
 void	redraw_player(void *param);
+void	clear_image(t_game *game);
 // player_rays.c
 void	draw_player_middle_ray(t_game *game);
 // parser.c
