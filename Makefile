@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 14:52:04 by ohoro             #+#    #+#              #
-#    Updated: 2024/04/23 17:26:51 by alimpens         ###   ########.fr        #
+#    Updated: 2024/04/23 17:58:59 by ohoro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ libft:
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< && printf "Compiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)
-	@$(CC) -v $(OBJS) $(LIBS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS)
@@ -52,6 +52,6 @@ fclean: clean
 re: clean all
 
 alpha: all
-	@./$(NAME)
+	@./$(NAME) maps/basic.cub
 
 .PHONY: all clean fclean re libmlx alpha libft
