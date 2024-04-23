@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_rays.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:23:15 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 17:30:41 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:12:12 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_player_middle_ray(t_game *game)
 
 	line.x0 = game->player_x;
 	line.y0 = game->player_y;
-	line.x1 = game->player_x + cos(game->player_rotation_angle) * 100;
-	line.y1 = game->player_y + sin(game->player_rotation_angle) * 100;
+	line.x1 = game->player_x + cos(game->player_rotation_angle) * 24;
+	line.y1 = game->player_y + sin(game->player_rotation_angle) * 24;
 	bresenham(line, game->image);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:08:58 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/22 11:12:26 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:14:53 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,23 @@ void	draw_new_player(t_game *game)
 		put_pixel(game->player_x, game->player_y, game->image);
 }
 
-void	update_player(t_game *game)
+
+void clear_image(t_game *game)
 {
-	if (game->key_w_pressed)
-		game->player_y -= 1;
-	if (game->key_s_pressed)
-		game->player_y += 1;
-	if (game->key_a_pressed)
-		game->player_x -= 1;
-	if (game->key_d_pressed)
-		game->player_x += 1;
-	if (game->key_left_pressed)
-		game->player_rotation_angle -= 0.1;
-	if (game->key_right_pressed)
-		game->player_rotation_angle += 0.1;
+	int x;
+	int y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			erase_pixel(x, y, game->image);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	redraw_player(void *param)
@@ -45,16 +48,8 @@ void	redraw_player(void *param)
 	t_game *game;
 
 	game = (t_game *)param;
-   #if 0
-	erase_old_player(game);
-	update_player(game);
+  
+	clear_image(game);
 	draw_new_player(game);
-	reset_keys(game);
-	#endif
-	mlx_delete_image(game->mlx, game->image);
-	game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	update_player(game);
-	draw_new_player(game);
-	mlx_image_to_window(game->mlx, game->image, 0, 0);
-	reset_keys(game);	
+	draw_player_middle_ray(game);	
 }
