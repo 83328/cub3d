@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/23 17:02:16 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:31:26 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	validate_input_and_load_map(int argc, char **argv, t_game *game)
 		printf("Usage: ./cub3d ./maps/mapfile.cub\n");
 		return (0);
 	}
-	// Load the map from the file specified by argv[1].
 	if (!load_map(game, argv[1]))
 	{
 		printf("Failed to load map\n");

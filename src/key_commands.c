@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 14:59:35 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:31:03 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	handle_rotation_keys(mlx_key_data_t keydata, t_game *game)
 
 void	handle_movement_keys(mlx_key_data_t keydata, t_game *game)
 {
-	
 	if (keydata.key == MLX_KEY_W
 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 		game->key_w_pressed = true;
