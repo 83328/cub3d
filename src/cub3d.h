@@ -39,12 +39,6 @@ typedef struct s_game
 	float						player_width;
 	float						player_height;
 	float						player_rotation_angle;
-	int							key_a_pressed;
-	int							key_s_pressed;
-	int							key_d_pressed;
-	int							key_w_pressed;
-	int							key_left_pressed;
-	int							key_right_pressed;
 	t_map						*map;
 }	t_game;
 

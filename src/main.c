@@ -21,12 +21,6 @@ void init_game(t_game *game)
 	game->player_width = 1;
 	game->player_height = 1;
 	game->player_rotation_angle = M_PI_2;
-	game->key_a_pressed = 0;
-	game->key_s_pressed = 0;
-	game->key_d_pressed = 0;
-	game->key_w_pressed = 0;
-	game->key_left_pressed = 0;
-	game->key_right_pressed = 0;
 }
 
 void	init_test_line(t_line *line)
