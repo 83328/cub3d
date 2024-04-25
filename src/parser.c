@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/25 15:00:10 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/25 21:35:11 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,70 @@
 /* int get_file_line_count(int fd)
 {
 	char ch;
-	int line_count;
+	int map_height;
 
-	line_count = 0;
+	map_height = 0;
 	// Move the file pointer back to the beginning of the file
 	lseek(fd, 0, SEEK_SET);
 	while(read(fd, &ch, 1) > 0)
 	{
 		if(ch == '\n')
 		{
-			line_count++;
+			map_height++;
 		}
 	}
 	// Move the file pointer back to the beginning of the file
 	lseek(fd, 0, SEEK_SET);
-	return (line_count);
+	return (map_height);
 } */
-int get_file_line_count(int fd)
+int get_map_height(int fd)
 {
-	char ch;
-	int line_count;
-	int current_line;
-	int non_empty_line;
+	char	c;
+	int		map_height;
+	int		non_empty_line_count;
+	int		non_empty_line;
 
-	line_count = 0;
-	current_line = 0;
+	map_height = 0;
+	non_empty_line_count = 0;
 	non_empty_line = 0;
-	lseek(fd, 0, SEEK_SET);
-	while(read(fd, &ch, 1) > 0)
+	while (read(fd, &c, 1) > 0)
 	{
-		if(ch == '\n')
+		if(c == '\n')
 		{
-			if(current_line >= 7 && non_empty_line)
-				line_count++;
-			current_line++;
+			if (non_empty_line && ++non_empty_line_count > 6)
+				map_height++;
 			non_empty_line = 0;
 		}
-		else if(ch != ' ' && ch != '\t')
+		else if (c != ' ' && c != '\t')
 			non_empty_line = 1;
 	}
-	if(current_line >= 6 && non_empty_line)
-		line_count++;
-	lseek(fd, 0, SEEK_SET);
-	return line_count;
+	if (non_empty_line && non_empty_line_count >= 6)
+		map_height++;
+	return (map_height);
 }
+
+/* int	get_map_start(int fd)
+{
+	char	*line;
+	int		total_line_count;
+	int		non_empty_line_count;
+
+	total_line_count = 0;
+	non_empty_line_count = 0;
+	while(read(fd, &line, 1) > 0)
+	{
+		total_line_count++;
+		if(line[0] != '\0' && ++non_empty_line_count == 7)
+		{
+			free(line);
+			return (total_line_count);
+		}
+		free(line);
+	}
+	if(non_empty_line_count == 6)
+		return (total_line_count + 1);
+	return -1;
+} */
 
 int get_max_line_length(int fd)
 {
@@ -119,8 +139,9 @@ int	load_map(t_game *game, char *filename)
 		close(fd);
 		return (0);
 	}
-	map->height = get_file_line_count(fd);
+	map->height = get_map_height(fd);
  	map->width = get_max_line_length(fd);
+	//map->start = get_map_start(fd);
 	map->map = malloc(sizeof(char *) * map->height);
 	if (map->map == NULL)
 	{

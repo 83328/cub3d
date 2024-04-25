@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/25 11:32:59 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/25 21:35:23 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_map
 {
 	int width;
 	int height;
+	//int start;
 	char **map;
 } t_map;
 
