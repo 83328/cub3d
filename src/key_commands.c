@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 19:50:55 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/25 11:12:43 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
     if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
         move_right(game, move_speed);
 }
-
 
 void handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game)
 {

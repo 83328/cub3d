@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 19:49:48 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/25 11:32:59 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void	clear_image(t_game *game);
 void	draw_player_middle_ray(t_game *game);
 // parser.c
 int	load_map(t_game *game, char *filename);
-int check_map_validity(t_map *map);
+//map_check.c
+int	check_map_validity(t_map *map);
