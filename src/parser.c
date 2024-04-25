@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/25 11:31:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:00:10 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 /* int get_file_line_count(int fd)
 {
 	char ch;
-	int line_count = 0;
+	int line_count;
 
+	line_count = 0;
 	// Move the file pointer back to the beginning of the file
 	lseek(fd, 0, SEEK_SET);
-
 	while(read(fd, &ch, 1) > 0)
 	{
 		if(ch == '\n')
@@ -29,19 +29,46 @@
 	}
 	// Move the file pointer back to the beginning of the file
 	lseek(fd, 0, SEEK_SET);
+	return (line_count);
+} */
+int get_file_line_count(int fd)
+{
+	char ch;
+	int line_count;
+	int current_line;
+	int non_empty_line;
 
+	line_count = 0;
+	current_line = 0;
+	non_empty_line = 0;
+	lseek(fd, 0, SEEK_SET);
+	while(read(fd, &ch, 1) > 0)
+	{
+		if(ch == '\n')
+		{
+			if(current_line >= 7 && non_empty_line)
+				line_count++;
+			current_line++;
+			non_empty_line = 0;
+		}
+		else if(ch != ' ' && ch != '\t')
+			non_empty_line = 1;
+	}
+	if(current_line >= 6 && non_empty_line)
+		line_count++;
+	lseek(fd, 0, SEEK_SET);
 	return line_count;
 }
 
 int get_max_line_length(int fd)
 {
 	char ch;
-	int max_length = 0;
-	int current_length = 0;
+	int max_length;
+	int current_length;
 
-	// Move the file pointer back to the beginning of the file
+	max_length = 0;
+	current_length = 0;
 	lseek(fd, 0, SEEK_SET);
-
 	while(read(fd, &ch, 1) > 0)
 	{
 		if(ch == '\n')
@@ -53,22 +80,13 @@ int get_max_line_length(int fd)
 			current_length = 0;
 		}
 		else
-		{
 			current_length++;
-		}
 	}
-
-	// Check if the last line is the longest
 	if(current_length > max_length)
-	{
 		max_length = current_length;
-	}
-
-	// Move the file pointer back to the beginning of the file
 	lseek(fd, 0, SEEK_SET);
-
-	return max_length;
-} */
+	return (max_length);
+}
 
 int	load_map(t_game *game, char *filename)
 {
@@ -84,8 +102,7 @@ int	load_map(t_game *game, char *filename)
 		printf("Could not open file %s\n", filename);
 		return (0);
 	}
-
-	// Read the first character of the file
+	// Read the first character of the file, ust as a test, will remove later
 	if (read(fd, &first_char, 1) != 1)
 	{
 		printf("Could not read from file %s\n", filename);
@@ -93,13 +110,8 @@ int	load_map(t_game *game, char *filename)
 		return (0);
 	}
 	printf("First character of the file: %c\n", first_char);
-
 	// Move the file pointer back to the beginning of the file
 	lseek(fd, 0, SEEK_SET);
-
-	// Determine the height and width of the map
-	//map->height = get_file_line_count(fd);
- 	//map->width = get_max_line_length(fd);
 
 	map = malloc(sizeof(t_map));
 	if (map == NULL)
@@ -107,6 +119,8 @@ int	load_map(t_game *game, char *filename)
 		close(fd);
 		return (0);
 	}
+	map->height = get_file_line_count(fd);
+ 	map->width = get_max_line_length(fd);
 	map->map = malloc(sizeof(char *) * map->height);
 	if (map->map == NULL)
 	{
@@ -121,6 +135,8 @@ int	load_map(t_game *game, char *filename)
 		i++;
 	}
 	game->map = map;
+	printf("Height: %d\n", map->height);
+	printf("Width: %d\n", map->width);
 	close(fd);
 	return (1);
 }

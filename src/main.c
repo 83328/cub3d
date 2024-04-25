@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/23 20:25:45 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/25 14:22:37 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	validate_input_and_load_map(int argc, char **argv, t_game *game)
 		printf("Failed to load map\n");
 		return (0);
 	}
-	if (!check_map_validity(game->map))
+/* 	if (!check_map_validity(game->map))
 	{
 		printf("Invalid map\n");
 		return (0);
-	}
+	} */
 	return (1);
 }
 
