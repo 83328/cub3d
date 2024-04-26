@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/25 21:35:23 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:11:03 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 
 #define WIDTH 512
 #define HEIGHT 512
+#define PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489661923
+#define FOV_ANGLE (60 * (PI / 180))
 
 typedef struct s_map
 {
@@ -30,6 +32,11 @@ typedef struct s_map
 	//int start;
 	char **map;
 } t_map;
+
+typedef struct ray
+{
+	float	ray_angle;
+}	t_ray;
 
 typedef struct s_game
 {
@@ -41,6 +48,7 @@ typedef struct s_game
 	float						player_height;
 	float						player_rotation_angle;
 	t_map						*map;
+	t_ray						rays[WIDTH];
 }	t_game;
 
 typedef struct line
@@ -77,6 +85,7 @@ void	redraw_player(void *param);
 void	clear_image(t_game *game);
 // player_rays.c
 void	draw_player_middle_ray(t_game *game);
+void	cast_all_rays(void *param);
 // parser.c
 int	load_map(t_game *game, char *filename);
 //map_check.c
