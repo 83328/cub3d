@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/26 12:11:03 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/04/28 18:12:28 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,3 +90,5 @@ void	cast_all_rays(void *param);
 int	load_map(t_game *game, char *filename);
 //map_check.c
 int	check_map_validity(t_map *map);
+// math_helper.c
+void normalize_angle(float *angle);
