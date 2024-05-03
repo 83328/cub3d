@@ -3,14 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:52:14 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/22 11:07:20 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:33:35 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void clear_image(void *param)
+{
+	t_game *game;
+
+	game = (t_game *)param;
+	int x;
+	int y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			erase_pixel(x, y, game->image);
+			x++;
+		}
+		y++;
+	}
+}
+
+void draw_all_and_clear(void *param)
+{
+	t_game *game;
+
+	game = (t_game *)param;
+	clear_image(game);
+	draw_map(game);
+	redraw_player(game);
+	cast_all_rays(game);
+}
 
 /* void draw_map(mlx_image_t *image, t_player *player)
 {

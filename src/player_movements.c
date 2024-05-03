@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:08:58 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/23 19:14:53 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/03 12:12:28 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,12 @@ void	draw_new_player(t_game *game)
 }
 
 
-void clear_image(t_game *game)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			erase_pixel(x, y, game->image);
-			x++;
-		}
-		y++;
-	}
-}
-
 void	redraw_player(void *param)
 {
 	t_game *game;
 
 	game = (t_game *)param;
   
-	clear_image(game);
 	draw_new_player(game);
 	draw_player_middle_ray(game);	
 }

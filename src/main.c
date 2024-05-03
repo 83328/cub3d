@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/03 11:32:25 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/03 13:34:12 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ int	main(int argc, char **argv)
 	if (!game.image || (mlx_image_to_window(game.mlx, game.image, 0, 0) < 0))
 		printf("Failed to create image\n");
 	mlx_key_hook(game.mlx, my_keyhook, &game);
-	mlx_loop_hook(game.mlx, redraw_player, &game);
-	mlx_loop_hook(game.mlx, cast_all_rays, &game);
+	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);
+	//mlx_loop_hook(game.mlx, draw_map, &game);
+	//mlx_loop_hook(game.mlx, redraw_player, &game);
+	//mlx_loop_hook(game.mlx, clear_image, &game);
+	//mlx_loop_hook(game.mlx, cast_all_rays, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);

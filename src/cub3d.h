@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/03 11:26:15 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/03 13:33:46 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 #define WIDTH 512
 #define HEIGHT 512
-#define TILE_SIZE 64
+#define TILE_SIZE 32
 #define MAP_NUM_ROWS 10
 #define MAP_NUM_COLS 11
 #define PI 3.14159265358979323846
@@ -87,7 +87,6 @@ void	bresenham(t_line line, mlx_image_t *image);
 // player_movements.c
 void	draw_new_player(t_game *game);
 void	redraw_player(void *param);
-void	clear_image(t_game *game);
 // player_rays.c
 void	draw_player_middle_ray(t_game *game);
 void	cast_all_rays(void *param);
@@ -101,3 +100,14 @@ void normalize_angle(float *angle);
 bool has_wall_at(t_game game, float  x, float y);
 bool is_inside_map(float x, float y);
 int get_map_at(t_game game, int i, int j);
+// test_draw_map.c
+void draw_vertical_line_left(t_game *game, int x, int y);
+void draw_vertical_line_right(t_game *game, int x, int y);
+void draw_horizontal_line_top(t_game *game, int x, int y);
+void draw_horizontal_line_bottom(t_game *game, int x, int y);
+void draw_rectangle(t_game *game, int x, int y);
+void fill_rectangle_white(t_game *game, int x, int y);
+void draw_map(void *param);
+// draw.c
+void clear_image(void *param);
+void draw_all_and_clear(void *param);
