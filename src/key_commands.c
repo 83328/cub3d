@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/25 11:12:43 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:34:03 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
         game->player_rotation_angle -= 0.1;
     if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
         game->player_rotation_angle += 0.1;
-    if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-        move_forward(game, move_speed);
     if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+        move_forward(game, move_speed);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_W))
         move_backward(game, move_speed);
-    if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-        move_left(game, move_speed);
     if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+        move_left(game, move_speed);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_A))
         move_right(game, move_speed);
 }
 
