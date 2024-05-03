@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/26 12:09:45 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/03 11:25:47 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,28 @@ int	validate_input_and_load_map(int argc, char **argv, t_game *game)
 int	main(int argc, char **argv)
 {
 	t_game game;
+	
+	int test_map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	};
+
+	// copy map to game.map_grid
+	for (int i = 0; i < MAP_NUM_ROWS; i++)
+	{
+		for (int j = 0; j < MAP_NUM_COLS; j++)
+		{
+			game.map_grid[i][j] = test_map[i][j];
+		}
+	};
 
 	if (!validate_input_and_load_map(argc, argv, &game))
 	{

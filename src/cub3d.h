@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/28 19:03:48 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/03 11:26:15 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 #define WIDTH 512
 #define HEIGHT 512
+#define TILE_SIZE 64
+#define MAP_NUM_ROWS 10
+#define MAP_NUM_COLS 11
 #define PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489661923
 #define TWO_PI 6.28318530717958647692
@@ -49,6 +52,7 @@ typedef struct s_game
 	float						player_height;
 	float						player_rotation_angle;
 	t_map						*map;
+	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	t_ray						rays[WIDTH];
 }	t_game;
 
@@ -93,3 +97,7 @@ int	load_map(t_game *game, char *filename);
 int	check_map_validity(t_map *map);
 // math_helper.c
 void normalize_angle(float *angle);
+// map_helper.c
+bool has_wall_at(t_game game, float  x, float y);
+bool is_inside_map(float x, float y);
+int get_map_at(t_game game, int i, int j);
