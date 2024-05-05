@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/05 11:40:17 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/05 11:45:40 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_game
 	float						player_rotation_angle;
 	t_map						*map;
 	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
-	t_ray						rays[WIDTH];
+	t_ray						rays[42];
 }	t_game;
 
 typedef struct line
