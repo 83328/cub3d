@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:35:09 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/05 11:35:53 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/05 11:39:05 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ int is_ray_facing_left(float angle)
 {
 	return (angle > 0.5 * PI && angle < 1.5 * PI);
 }
-
-float distance_between_points(float x1, float y1, float x2, float y2)
-{
-    return (sqrtf((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
-}
-
-
 
 void horizontal_and_vertical_grid_intersection(t_game *game, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/05 11:37:53 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/05 11:40:17 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	load_map(t_game *game, char *filename);
 int	check_map_validity(t_map *map);
 // math_helper.c
 void normalize_angle(float *angle);
+float distance_between_points(float x1, float y1, float x2, float y2);
 // map_helper.c
 bool has_wall_at(t_game game, float  x, float y);
 bool is_inside_map(float x, float y);
@@ -123,4 +124,8 @@ void draw_map(void *param);
 void clear_image(void *param);
 void draw_all_and_clear(void *param);
 // DDA_helper.c
-void cast_ray(t_game *game, float ray_angle, int strip_id);
+int is_ray_facing_up(float angle);
+int is_ray_facing_down(float angle);
+int is_ray_facing_left(float angle);
+int is_ray_facing_right(float angle);
+void horizontal_and_vertical_grid_intersection(t_game *game, int i);
