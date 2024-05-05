@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/05 11:45:40 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/05 13:37:34 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,31 @@ typedef struct s_map
 	//int start;
 	char **map;
 } t_map;
+
+typedef struct s_dda
+{
+	float xintercept;
+	float yintercept;
+	float xstep;
+	float ystep;
+	int is_ray_facing_down;
+	int is_ray_facing_up;
+	int is_ray_facing_right;
+	int is_ray_facing_left;
+	bool found_horz_wall_hit;
+	float horz_wall_hit_x;
+	float horz_wall_hit_y;
+	int horz_wall_content;
+	float next_horz_touch_x;
+	float next_horz_touch_y;
+	bool found_vert_wall_hit;
+	float vert_wall_hit_x;
+	float vert_wall_hit_y;
+	int vert_wall_content;
+	float next_vert_touch_x;
+	float next_vert_touch_y;
+	
+} t_dda;
 
 typedef struct ray
 {
