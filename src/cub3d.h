@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/03 13:33:46 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/05 11:37:53 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <math.h>
+// FLT_MAX and FLT_MIN are defined in float.h
+#include <float.h>
 #include <fcntl.h>
 #include <MLX42/MLX42.h>
 #include "../lib/get_next_line/get_next_line.h"
@@ -40,6 +42,15 @@ typedef struct s_map
 typedef struct ray
 {
 	float	ray_angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	float	distance;
+	bool	was_hit_vertical;
+	bool	is_ray_facing_up;
+	bool	is_ray_facing_down;
+	bool	is_ray_facing_left;
+	bool	is_ray_facing_right;
+	bool	wall_hit_content;
 }	t_ray;
 
 typedef struct s_game
@@ -111,3 +122,5 @@ void draw_map(void *param);
 // draw.c
 void clear_image(void *param);
 void draw_all_and_clear(void *param);
+// DDA_helper.c
+void cast_ray(t_game *game, float ray_angle, int strip_id);
