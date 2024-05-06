@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/03 13:34:12 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/06 11:31:54 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,79 @@ int	validate_input_and_load_map(int argc, char **argv, t_game *game)
 	return (1);
 }
 
+void load_map_from_file(t_game *game, char *argv)
+{
+//	int fd = open("./maps/test_map.cub", O_RDONLY);
+	int fd = open(argv, O_RDONLY);
+	printf("Loading map from file...\n");
+	if (fd < 0)
+	{
+		printf("Failed to open file\n");
+		return;
+	}
+	int i = 0;
+	while (i < MAP_NUM_ROWS)
+	{
+		char *line = get_next_line(fd);
+		if (line == NULL)
+		{
+			printf("Failed to read line\n");
+			close(fd);
+			return;
+		}
+		int j = 0;
+		while (j < MAP_NUM_COLS)
+		{
+			if (line[j] == '0')
+				game->map_grid[i][j] = 0;
+			else if (line[j] == '1')
+				game->map_grid[i][j] = 1;
+			else
+			{
+				printf("Invalid character in map. Only '0' and '1' are allowed.\n");
+				free(line);
+				close(fd);
+				return;
+			}
+			j++;
+		}
+		free(line);
+		i++;
+	}
+	close(fd);
+}
+
+// printf the map to the console
+void print_map(t_game *game)
+{
+	for (int i = 0; i < MAP_NUM_ROWS; i++)
+	{
+		for (int j = 0; j < MAP_NUM_COLS; j++)
+		{
+			printf("%d", game->map_grid[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+void init_map(t_game *game)
+{
+	// Initialize the map using map
+	for (int i = 0; i < MAP_NUM_ROWS; i++)
+	{
+		for (int j = 0; j < MAP_NUM_COLS; j++)
+		{
+			game->map_grid[i][j] = 0;
+		}
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_game game;
+	//t_map map;
 	
-	int test_map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
+	/* int test_map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -66,17 +134,21 @@ int	main(int argc, char **argv)
 		{0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-	};
+	}; */
 
 	// copy map to game.map_grid
-	for (int i = 0; i < MAP_NUM_ROWS; i++)
+/* 	for (int i = 0; i < MAP_NUM_ROWS; i++)
 	{
 		for (int j = 0; j < MAP_NUM_COLS; j++)
 		{
 			game.map_grid[i][j] = test_map[i][j];
 		}
-	};
+	}; */
+	init_map(&game);
 
+	//close(fd);
+	load_map_from_file(&game, argv[1]);
+	print_map(&game);
 	if (!validate_input_and_load_map(argc, argv, &game))
 	{
 		return (EXIT_FAILURE);
