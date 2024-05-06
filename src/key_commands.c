@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/03 11:34:03 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/06 18:36:49 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
 
 void handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game)
 {
-    update_rotation(game, keydata);
+  //  update_rotation(game, keydata);
 
     float move_speed = 2.0f;
     update_movement(game, move_speed, keydata);
