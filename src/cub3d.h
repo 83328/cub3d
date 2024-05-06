@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/05 13:37:34 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/06 18:23:59 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
 #include <MLX42/MLX42.h>
 #include "../lib/get_next_line/get_next_line.h"
 
-#define WIDTH 512
-#define HEIGHT 512
+#define WIDTH 1024
+#define HEIGHT 768
+#define WINDOW_HEIGHT HEIGHT
+#define NUM_RAYS 512
+#define WALL_STRIP_WIDTH 1
 #define TILE_SIZE 32
 #define MAP_NUM_ROWS 10
 #define MAP_NUM_COLS 11
@@ -30,6 +33,7 @@
 #define M_PI_2 1.57079632679489661923
 #define TWO_PI 6.28318530717958647692
 #define FOV_ANGLE (60 * (PI / 180))
+#define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
 
 typedef struct s_map
 {
@@ -89,7 +93,7 @@ typedef struct s_game
 	float						player_rotation_angle;
 	t_map						*map;
 	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
-	t_ray						rays[42];
+	t_ray						rays[NUM_RAYS];
 }	t_game;
 
 typedef struct line

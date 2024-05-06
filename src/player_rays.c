@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:23:15 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/05 11:45:49 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/06 18:12:45 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void cast_all_rays(void *param)
  {
 	t_game *game;
 	game = (t_game *)param;
-	 for (int i = 0; i < 42; i++)
+	 for (int i = 0; i < NUM_RAYS; i++)
 	 {
-		 game->rays[i].ray_angle = game->player_rotation_angle - (FOV_ANGLE / 2) + (FOV_ANGLE / 42) * i;
+		 game->rays[i].ray_angle = game->player_rotation_angle - (FOV_ANGLE / 2) + (FOV_ANGLE / NUM_RAYS) * i;
 		 normalize_angle(&game->rays[i].ray_angle);
 		 horizontal_and_vertical_grid_intersection(game, i);
 	 }
