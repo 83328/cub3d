@@ -6,12 +6,12 @@
 #    By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 14:52:04 by ohoro             #+#    #+#              #
-#    Updated: 2024/04/23 17:58:59 by ohoro            ###   ########.fr        #
+#    Updated: 2024/05/06 18:34:22 by ohoro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		:= clang
-NAME	:= cub3D
+NAME	:= cub3d
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 LIBFT	:= ./lib/libft
 GNL		:= ./lib/get_next_line
@@ -52,6 +52,6 @@ fclean: clean
 re: clean all
 
 alpha: all
-	@./$(NAME) maps/basic.cub
+	@./$(NAME) ./maps/map2.cub
 
 .PHONY: all clean fclean re libmlx alpha libft
