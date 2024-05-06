@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/06 18:23:59 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/06 18:29:55 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define WIDTH 1024
 #define HEIGHT 768
 #define WINDOW_HEIGHT HEIGHT
-#define NUM_RAYS 512
+#define NUM_RAYS WIDTH
 #define WALL_STRIP_WIDTH 1
 #define TILE_SIZE 32
 #define MAP_NUM_ROWS 10
@@ -158,3 +158,6 @@ int is_ray_facing_down(float angle);
 int is_ray_facing_left(float angle);
 int is_ray_facing_right(float angle);
 void horizontal_and_vertical_grid_intersection(t_game *game, int i);
+// wall_projection.c
+void draw_strip(int x, int y, int width, int height, int color, t_game *game);
+void wall_projection(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:52:14 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/03 13:33:35 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/06 18:31:40 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void draw_all_and_clear(void *param)
 	draw_map(game);
 	redraw_player(game);
 	cast_all_rays(game);
+	wall_projection(game);
+	draw_map(game);
 }
 
 /* void draw_map(mlx_image_t *image, t_player *player)
