@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/06 11:31:54 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/06 11:35:52 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,28 +93,40 @@ void load_map_from_file(t_game *game, char *argv)
 	close(fd);
 }
 
-// printf the map to the console
-void print_map(t_game *game)
+void	print_map(t_game *game)
 {
-	for (int i = 0; i < MAP_NUM_ROWS; i++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < MAP_NUM_ROWS)
 	{
-		for (int j = 0; j < MAP_NUM_COLS; j++)
+		j = 0;
+		while (j < MAP_NUM_COLS)
 		{
 			printf("%d", game->map_grid[i][j]);
+			j++;
 		}
 		printf("\n");
+		i++;
 	}
 }
 
-void init_map(t_game *game)
+void	init_map(t_game *game)
 {
-	// Initialize the map using map
-	for (int i = 0; i < MAP_NUM_ROWS; i++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < MAP_NUM_ROWS)
 	{
-		for (int j = 0; j < MAP_NUM_COLS; j++)
+		j = 0;
+		while (j < MAP_NUM_COLS)
 		{
 			game->map_grid[i][j] = 0;
+			j++;
 		}
+		i++;
 	}
 }
 

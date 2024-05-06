@@ -6,31 +6,12 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/25 21:35:11 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/06 11:45:54 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* int get_file_line_count(int fd)
-{
-	char ch;
-	int map_height;
-
-	map_height = 0;
-	// Move the file pointer back to the beginning of the file
-	lseek(fd, 0, SEEK_SET);
-	while(read(fd, &ch, 1) > 0)
-	{
-		if(ch == '\n')
-		{
-			map_height++;
-		}
-	}
-	// Move the file pointer back to the beginning of the file
-	lseek(fd, 0, SEEK_SET);
-	return (map_height);
-} */
 int get_map_height(int fd)
 {
 	char	c;
@@ -161,60 +142,6 @@ int	load_map(t_game *game, char *filename)
 	close(fd);
 	return (1);
 }
-
-/* int	load_map(t_game *game, char *filename)
-{
-	int fd;
-	char *line;
-	t_map *map;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Could not open file %s\n", filename);
-		return (0);
-	}
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		map = malloc(sizeof(t_map));
-		if (map == NULL)
-		{
-			free(line);
-			close(fd);
-			return (0);
-		}
-		map->map = line;
-		game->map = map;
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (1);
-} */
-/* 
-int	load_map(t_game *game, char *filename)
-{
-	int fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Could not open file %s\n", filename);
-		return (0);
-	}
-	char *line;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		// Create a new t_map structure and set its map field to the line.
-		t_map *map = malloc(sizeof(t_map));
-		map->map = line;
-
-		// Assign the new t_map structure to the map field of the game structure.
-		game->map = map;
-		free(line);
-	}
-	free(line);
-	close(fd);
-	return (1);
-} */
 
 /* void	parse_cub_file(char *path, t_player *player, mlx_t *mlx)
 {
