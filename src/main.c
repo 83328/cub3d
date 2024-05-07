@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/06 11:35:52 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:24:02 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void init_game(t_game *game)
 	game->player_width = 1;
 	game->player_height = 1;
 	game->player_rotation_angle = M_PI_2;
+	game->map_cols = 0;
+	game->map_rows = 0;
 }
 
 void	init_test_line(t_line *line)
@@ -62,7 +64,7 @@ void load_map_from_file(t_game *game, char *argv)
 		return;
 	}
 	int i = 0;
-	while (i < MAP_NUM_ROWS)
+	while (i < game->map_rows)
 	{
 		char *line = get_next_line(fd);
 		if (line == NULL)
@@ -72,7 +74,7 @@ void load_map_from_file(t_game *game, char *argv)
 			return;
 		}
 		int j = 0;
-		while (j < MAP_NUM_COLS)
+		while (j < game->map_cols)
 		{
 			if (line[j] == '0')
 				game->map_grid[i][j] = 0;
@@ -99,10 +101,10 @@ void	print_map(t_game *game)
 	int	j;
 
 	i = 0;
-	while (i < MAP_NUM_ROWS)
+	while (i < game->map_rows)
 	{
 		j = 0;
-		while (j < MAP_NUM_COLS)
+		while (j < game->map_cols)
 		{
 			printf("%d", game->map_grid[i][j]);
 			j++;
@@ -118,10 +120,10 @@ void	init_map(t_game *game)
 	int	j;
 
 	i = 0;
-	while (i < MAP_NUM_ROWS)
+	while (i < game->map_rows)
 	{
 		j = 0;
-		while (j < MAP_NUM_COLS)
+		while (j < game->map_cols)
 		{
 			game->map_grid[i][j] = 0;
 			j++;
@@ -130,9 +132,23 @@ void	init_map(t_game *game)
 	}
 }
 
+void	load_map_dimensions_from_file(t_game *game, char *argv)
+{
+	int fd = open(argv, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Failed to open file\n");
+		return;
+	}
+	game->map_rows = get_map_height(fd);
+	game->map_cols = get_max_line_length(fd);
+	close(fd);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game game;
+	
 	//t_map map;
 	
 	/* int test_map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
@@ -159,6 +175,8 @@ int	main(int argc, char **argv)
 	init_map(&game);
 
 	//close(fd);
+	load_map_dimensions_from_file(&game, argv[1]);
+	printf("Map Dimensions: %d x %d\n", game.map_rows, game.map_cols);
 	load_map_from_file(&game, argv[1]);
 	print_map(&game);
 	if (!validate_input_and_load_map(argc, argv, &game))

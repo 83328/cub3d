@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/06 11:45:54 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:09:43 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,14 @@ int get_map_height(int fd)
 	{
 		if(c == '\n')
 		{
+			/*
+			this line checks the file and jumps to the sixth line of the file
+			there starts the actual map coordinates
+			
 			if (non_empty_line && ++non_empty_line_count > 6)
+			
+			*/
+			if (non_empty_line && non_empty_line_count >= 0)
 				map_height++;
 			non_empty_line = 0;
 		}
@@ -35,7 +42,7 @@ int get_map_height(int fd)
 	}
 	if (non_empty_line && non_empty_line_count >= 6)
 		map_height++;
-	return (map_height);
+	return (map_height + 1);
 }
 
 /* int	get_map_start(int fd)
@@ -60,6 +67,7 @@ int get_map_height(int fd)
 		return (total_line_count + 1);
 	return -1;
 } */
+
 
 int get_max_line_length(int fd)
 {
@@ -120,6 +128,9 @@ int	load_map(t_game *game, char *filename)
 		close(fd);
 		return (0);
 	}
+	game->map_rows = get_map_height(fd);
+	game->map_cols = get_max_line_length(fd);
+	
 	map->height = get_map_height(fd);
  	map->width = get_max_line_length(fd);
 	//map->start = get_map_start(fd);
@@ -137,8 +148,10 @@ int	load_map(t_game *game, char *filename)
 		i++;
 	}
 	game->map = map;
-	printf("Height: %d\n", map->height);
-	printf("Width: %d\n", map->width);
+	//printf("Height: %d\n", map->height);
+	//printf("Width: %d\n", map->width);
+	printf("map_rows: %d\n", game->map_rows);
+	printf("map_cols: %d\n", game->map_cols);
 	close(fd);
 	return (1);
 }

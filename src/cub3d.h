@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/06 18:29:55 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/07 15:26:43 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define WALL_STRIP_WIDTH 1
 #define TILE_SIZE 32
 #define MAP_NUM_ROWS 10
-#define MAP_NUM_COLS 11
+#define MAP_NUM_COLS 14
 #define PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489661923
 #define TWO_PI 6.28318530717958647692
@@ -93,6 +93,9 @@ typedef struct s_game
 	float						player_rotation_angle;
 	t_map						*map;
 	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
+	int							**map_grid_2d;
+	int							map_rows;
+	int							map_cols;
 	t_ray						rays[NUM_RAYS];
 }	t_game;
 
@@ -132,6 +135,8 @@ void	draw_player_middle_ray(t_game *game);
 void	cast_all_rays(void *param);
 // parser.c
 int	load_map(t_game *game, char *filename);
+int	get_map_height(int fd);
+int	get_max_line_length(int fd);
 //map_check.c
 int	check_map_validity(t_map *map);
 // math_helper.c
