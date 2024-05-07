@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/07 16:10:30 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/07 16:18:47 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void draw_horizontal_line_bottom(t_game *game, int x, int y);
 void draw_rectangle(t_game *game, int x, int y);
 void fill_rectangle_white(t_game *game, int x, int y);
 void draw_map(void *param);
+void draw_minimap(void *param);
 // draw.c
 void clear_image(void *param);
 void draw_all_and_clear(void *param);

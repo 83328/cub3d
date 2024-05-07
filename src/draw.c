@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:52:14 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/06 18:37:25 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/07 16:33:22 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void draw_all_and_clear(void *param)
 
 	game = (t_game *)param;
 	clear_image(game);
-	draw_map(game);
+	//draw_minimap(game);
 	redraw_player(game);
 	cast_all_rays(game);
 	wall_projection(game);
-	draw_map(game);
+	draw_minimap(game);
 	cast_all_rays(game);
 }
 

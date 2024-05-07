@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:44:27 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/03 12:14:02 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/07 16:25:42 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,29 @@ void draw_map(void *param)
 			{
 				fill_rectangle_white(game, j * TILE_SIZE, i * TILE_SIZE);
                 //printf("1");
+			}
+		}
+	}
+	
+}
+
+void draw_minimap(void *param)
+{
+	t_game *game = (t_game *)param;
+
+	for (int i = 0; i < game->map_rows; i++)
+	{
+		for (int j = 0; j < game->map_cols; j++)
+		{
+			if (game->map_grid[i][j] == 0)
+			{
+				draw_rectangle(game, j * TILE_SIZE, i * TILE_SIZE);
+			//	printf("0");
+			}
+			else if (game->map_grid[i][j] == 1)
+			{
+				fill_rectangle_white(game, j * TILE_SIZE, i * TILE_SIZE);
+			//	printf("1");
 			}
 		}
 	}

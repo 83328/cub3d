@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/07 16:09:09 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/07 16:24:53 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void init_game(t_game *game)
 	game->player_width = 1;
 	game->player_height = 1;
 	game->player_rotation_angle = M_PI_2;
-	game->map_cols = 0;
-	game->map_rows = 0;
 }
 
 void	init_test_line(t_line *line)
