@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/07 15:26:43 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/07 16:10:30 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,3 +166,8 @@ void horizontal_and_vertical_grid_intersection(t_game *game, int i);
 // wall_projection.c
 void draw_strip(int x, int y, int width, int height, int color, t_game *game);
 void wall_projection(t_game *game);
+// minimap_helper.c
+void load_map_dimensions_from_file(t_game *game, char *argv);
+void allocate_map(t_game *game);
+void fill_2d_map_from_file(t_game *game, char argv[1]);
+void print_map_2d(t_game *game);
