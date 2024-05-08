@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/08 12:21:38 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/08 17:41:26 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,10 @@ int	load_map(t_game *game, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		printf("Could not open file %s\n", filename);
-		return (0);
-	}
-	// Read the first character of the file, used as a test, will remove later
+		ft_error(ERR_FILE, NULL);
 	if (read(fd, &first_char, 1) != 1)
-	{
-		printf("Could not read from file %s\n", filename);
-		close(fd);
-		return (0);
-	}
+		ft_error(ERR_READ, NULL);
+	// Read the first character of the file, used as a test, will remove later
 	printf("First character of the file: %c\n", first_char);
 	// Move the file pointer back to the beginning of the file
 	lseek(fd, 0, SEEK_SET);

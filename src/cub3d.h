@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/08 15:20:23 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/08 17:41:33 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@
 #define FOV_ANGLE (60 * (PI / 180))
 #define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
 
+# define ERR_ARGS "Error: Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
+# define ERR_FILETYPE "WError: Invalid file extension: use .cub for map files\n"
 # define ERR_INVALID_MAP_CHAR "Invalid file format: Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not closed\n"
+# define ERR_FILE "File not found\n"
+# define ERR_READ "Could not read from the file\n"
 
 typedef struct s_map
 {
@@ -88,9 +92,9 @@ typedef struct ray
 
 typedef struct s_game
 {
-	char						char_read;//n
-	char						map_char;//n
-	int							total_chars_read;//n
+	char						char_read;//not used yet
+	char						map_char;//not used yet
+	int							total_chars_read;//not used yet
 	mlx_t						*mlx;
 	mlx_image_t					*image;
 	float						player_x;
@@ -101,8 +105,8 @@ typedef struct s_game
 	t_map						*map;
 	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;
-	int							map_start;//n
-	int							map_end;//n
+	int							map_start;//not used yet
+	int							map_end;//not used yet
 	int							map_rows;
 	int							map_cols;
 	t_ray						rays[NUM_RAYS];
@@ -182,3 +186,6 @@ void	load_map_dimensions_from_file(t_game *game, char *argv);
 void	allocate_map(t_game *game);
 void	fill_2d_map_from_file(t_game *game, char argv[1]);
 void	print_map_2d(t_game *game);
+//utils.c
+void	ft_error(char *str, t_game *game);
+void	free_game(t_game *game);

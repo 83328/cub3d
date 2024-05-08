@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/08 15:29:05 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/08 17:27:13 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_test_line(t_line *line)
 	line->y1 = 200;
 }
 
-int	validate_input_and_load_map(int argc, char **argv, t_game *game)
+/* int	validate_input_and_load_map(int argc, char **argv, t_game *game)
 {
 	if (argc != 2)
 	{
@@ -43,13 +43,13 @@ int	validate_input_and_load_map(int argc, char **argv, t_game *game)
 		printf("Failed to load map\n");
 		return (0);
 	}
-/* 	if (!check_map_validity(game->map))
+ 	if (!check_map_validity(game->map))
 	{
 		printf("Invalid map\n");
 		return (0);
-	} */
+	}
 	return (1);
-}
+} */
 
 void load_map_from_file(t_game *game, char *argv)
 {
@@ -115,13 +115,12 @@ void	print_map(t_game *game)
 	}
 }
 
-void	init_map(t_game *game)
+/* void	init_map(int ac, char **argv, t_game *game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-//	read_map(char **argv, t_game *game);
 	while (i < game->map_rows)
 	{
 		j = 0;
@@ -132,9 +131,7 @@ void	init_map(t_game *game)
 		}
 		i++;
 	}
-}
-
-
+} */
 
 int	main(int argc, char **argv)
 {
@@ -164,7 +161,7 @@ int	main(int argc, char **argv)
 		}
 	}; */
 	check_file(argc, argv);
-	init_map(&game);
+	//init_map(argc, argv, &game);
 
 	//close(fd);
 	load_map_dimensions_from_file(&game, argv[1]);
@@ -174,10 +171,10 @@ int	main(int argc, char **argv)
 	print_map_2d(&game);
 	load_map_from_file(&game, argv[1]);
 	//print_map(&game);
-	if (!validate_input_and_load_map(argc, argv, &game))
+/* 	if (!validate_input_and_load_map(argc, argv, &game))
 	{
 		return (EXIT_FAILURE);
-	}
+	} */
 	init_game(&game);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "Welcome to DOOOOOOOOOOOOOM!!!!!!!!!!!!!!!", false);
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
