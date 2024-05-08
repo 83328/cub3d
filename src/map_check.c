@@ -6,13 +6,18 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:30:36 by alimpens          #+#    #+#             */
-/*   Updated: 2024/04/25 11:31:22 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:54:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_map_validity(t_map *map)
+/* void	check_map_start(t_game *game, int fd)
+{
+
+} */
+
+/* int	check_map_validity(t_map *map)
 {
 	int		i;
 	int		j;
@@ -38,4 +43,4 @@ int	check_map_validity(t_map *map)
 	printf("Height: %d\n", map->height);
 	printf("Width: %d\n", map->width);
 	return (1);
-}
+} */

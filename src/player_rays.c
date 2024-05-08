@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_rays.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:23:15 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/06 18:12:45 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/08 12:17:02 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_player_middle_ray(t_game *game)
 	bresenham(line, game->image);
 }
 
-void cast_all_rays(void *param)
+void	cast_all_rays(void *param)
  {
 	t_game *game;
 	game = (t_game *)param;
@@ -33,5 +33,4 @@ void cast_all_rays(void *param)
 		 normalize_angle(&game->rays[i].ray_angle);
 		 horizontal_and_vertical_grid_intersection(game, i);
 	 }
-	
  }

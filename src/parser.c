@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/07 15:09:43 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/08 12:21:38 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int get_map_height(int fd)
+int	get_map_height(int fd)
 {
 	char	c;
 	int		map_height;
@@ -68,7 +68,6 @@ int get_map_height(int fd)
 	return -1;
 } */
 
-
 int get_max_line_length(int fd)
 {
 	char ch;
@@ -111,7 +110,7 @@ int	load_map(t_game *game, char *filename)
 		printf("Could not open file %s\n", filename);
 		return (0);
 	}
-	// Read the first character of the file, ust as a test, will remove later
+	// Read the first character of the file, used as a test, will remove later
 	if (read(fd, &first_char, 1) != 1)
 	{
 		printf("Could not read from file %s\n", filename);

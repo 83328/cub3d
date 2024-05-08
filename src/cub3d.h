@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/07 16:18:47 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/08 12:25:55 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 #define TWO_PI 6.28318530717958647692
 #define FOV_ANGLE (60 * (PI / 180))
 #define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
+
+# define ERR_INVALID_MAP_CHAR "Invalid file format: Invalid character in map\n"
+# define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not closed\n"
 
 typedef struct s_map
 {
@@ -94,6 +97,7 @@ typedef struct s_game
 	t_map						*map;
 	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;
+	int							map_start;
 	int							map_rows;
 	int							map_cols;
 	t_ray						rays[NUM_RAYS];
@@ -134,41 +138,41 @@ void	redraw_player(void *param);
 void	draw_player_middle_ray(t_game *game);
 void	cast_all_rays(void *param);
 // parser.c
-int	load_map(t_game *game, char *filename);
-int	get_map_height(int fd);
-int	get_max_line_length(int fd);
+int		load_map(t_game *game, char *filename);
+int		get_map_height(int fd);
+int		get_max_line_length(int fd);
 //map_check.c
-int	check_map_validity(t_map *map);
+//int		check_map_validity(t_map *map);
 // math_helper.c
-void normalize_angle(float *angle);
-float distance_between_points(float x1, float y1, float x2, float y2);
+void	normalize_angle(float *angle);
+float	distance_between_points(float x1, float y1, float x2, float y2);
 // map_helper.c
-bool has_wall_at(t_game game, float  x, float y);
-bool is_inside_map(float x, float y);
-int get_map_at(t_game game, int i, int j);
+bool	has_wall_at(t_game game, float  x, float y);
+bool	is_inside_map(float x, float y);
+int		get_map_at(t_game game, int i, int j);
 // test_draw_map.c
-void draw_vertical_line_left(t_game *game, int x, int y);
-void draw_vertical_line_right(t_game *game, int x, int y);
-void draw_horizontal_line_top(t_game *game, int x, int y);
-void draw_horizontal_line_bottom(t_game *game, int x, int y);
-void draw_rectangle(t_game *game, int x, int y);
-void fill_rectangle_white(t_game *game, int x, int y);
-void draw_map(void *param);
-void draw_minimap(void *param);
+void	draw_vertical_line_left(t_game *game, int x, int y);
+void	draw_vertical_line_right(t_game *game, int x, int y);
+void	draw_horizontal_line_top(t_game *game, int x, int y);
+void	draw_horizontal_line_bottom(t_game *game, int x, int y);
+void	draw_rectangle(t_game *game, int x, int y);
+void	fill_rectangle_white(t_game *game, int x, int y);
+void	draw_map(void *param);
+void	draw_minimap(void *param);
 // draw.c
-void clear_image(void *param);
-void draw_all_and_clear(void *param);
+void	clear_image(void *param);
+void	draw_all_and_clear(void *param);
 // DDA_helper.c
-int is_ray_facing_up(float angle);
-int is_ray_facing_down(float angle);
-int is_ray_facing_left(float angle);
-int is_ray_facing_right(float angle);
-void horizontal_and_vertical_grid_intersection(t_game *game, int i);
+int		is_ray_facing_up(float angle);
+int		is_ray_facing_down(float angle);
+int		is_ray_facing_left(float angle);
+int		is_ray_facing_right(float angle);
+void	horizontal_and_vertical_grid_intersection(t_game *game, int i);
 // wall_projection.c
-void draw_strip(int x, int y, int width, int height, int color, t_game *game);
-void wall_projection(t_game *game);
+void	draw_strip(int x, int y, int width, int height, int color, t_game *game);
+void	wall_projection(t_game *game);
 // minimap_helper.c
-void load_map_dimensions_from_file(t_game *game, char *argv);
-void allocate_map(t_game *game);
-void fill_2d_map_from_file(t_game *game, char argv[1]);
-void print_map_2d(t_game *game);
+void	load_map_dimensions_from_file(t_game *game, char *argv);
+void	allocate_map(t_game *game);
+void	fill_2d_map_from_file(t_game *game, char argv[1]);
+void	print_map_2d(t_game *game);

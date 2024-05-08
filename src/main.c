@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/07 16:24:53 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/05/08 12:28:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void load_map_from_file(t_game *game, char *argv)
 		printf("Failed to open file\n");
 		return;
 	}
-	int i = 0;
+	int i;
+	
+	game->map_start = 0;
+	i = game->map_start;
 	while (i < game->map_rows)
 	{
 		char *line = get_next_line(fd);
