@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/08 12:28:57 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:29:05 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	init_map(t_game *game)
 	int	j;
 
 	i = 0;
+//	read_map(char **argv, t_game *game);
 	while (i < game->map_rows)
 	{
 		j = 0;
@@ -162,6 +163,7 @@ int	main(int argc, char **argv)
 			game.map_grid[i][j] = test_map[i][j];
 		}
 	}; */
+	check_file(argc, argv);
 	init_map(&game);
 
 	//close(fd);

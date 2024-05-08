@@ -6,7 +6,7 @@
 #    By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/20 10:27:26 by alimpens          #+#    #+#              #
-#    Updated: 2024/04/22 16:00:26 by alimpens         ###   ########.fr        #
+#    Updated: 2024/05/08 15:22:25 by alimpens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRCS = ft_isalpha.c \
 	ft_strlcat.c \
 	ft_toupper.c \
 	ft_tolower.c \
-	ft_strchr.c \
 	ft_strrchr.c \
 	ft_strncmp.c \
 	ft_memchr.c \
@@ -46,7 +45,6 @@ SRCS = ft_isalpha.c \
 	ft_calloc.c \
 	ft_strdup.c \
 	ft_substr.c \
-	ft_strjoin.c \
 	ft_strtrim.c \
 	ft_split.c \
 	ft_itoa.c \

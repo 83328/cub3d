@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/08 12:25:55 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:20:23 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <fcntl.h>
 #include <MLX42/MLX42.h>
 #include "../lib/get_next_line/get_next_line.h"
+#include "../lib/libft/libft.h"
 
 #define WIDTH 1024
 #define HEIGHT 768
@@ -87,6 +88,9 @@ typedef struct ray
 
 typedef struct s_game
 {
+	char						char_read;//n
+	char						map_char;//n
+	int							total_chars_read;//n
 	mlx_t						*mlx;
 	mlx_image_t					*image;
 	float						player_x;
@@ -97,7 +101,8 @@ typedef struct s_game
 	t_map						*map;
 	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;
-	int							map_start;
+	int							map_start;//n
+	int							map_end;//n
 	int							map_rows;
 	int							map_cols;
 	t_ray						rays[NUM_RAYS];
@@ -143,6 +148,7 @@ int		get_map_height(int fd);
 int		get_max_line_length(int fd);
 //map_check.c
 //int		check_map_validity(t_map *map);
+void	check_file(int argc, char **argv);
 // math_helper.c
 void	normalize_angle(float *angle);
 float	distance_between_points(float x1, float y1, float x2, float y2);
