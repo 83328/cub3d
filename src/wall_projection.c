@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_projection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/06 18:28:18 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/04 14:20:27 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void draw_strip(int x, int y, int width, int height, int color, t_game *game)
 
 void wall_projection(t_game *game)
 {    
-    for (int x = 0; x < NUM_RAYS; x++) {
+    for (int x = 0; x < NUM_RAYS; x++)
+    {
         float perpDistance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
         float projectedWallHeight = (TILE_SIZE / perpDistance) * DIST_PROJ_PLANE;
 
@@ -47,7 +48,8 @@ void wall_projection(t_game *game)
         draw_strip(x * WALL_STRIP_WIDTH, wallTopPixel, WALL_STRIP_WIDTH, wallBottomPixel - wallTopPixel, color, game);
 
         // set the color of the ceiling
-        for (int y = 0; y < wallTopPixel; y++) {
+        for (int y = 0; y < wallTopPixel; y++)
+        {
            // drawPixel(x, y, 0xFF444444);
            mlx_put_pixel(game->image, x, y, 0xFF444444);
         }
@@ -81,7 +83,8 @@ void wall_projection(t_game *game)
        // }
 
       //   set the color of the floor to a light grey
-        for (int y = wallBottomPixel; y < WINDOW_HEIGHT; y++) {
+        for (int y = wallBottomPixel; y < WINDOW_HEIGHT; y++)
+        {
         //    drawPixel(x, y, 0xFF888888);
         // the color should be light grey
             mlx_put_pixel(game->image, x, y, 0xFF884288);

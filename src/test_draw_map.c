@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_draw_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:44:27 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/07 16:25:42 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/04 14:11:40 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,45 +73,58 @@ void fill_rectangle_white(t_game *game, int x, int y)
 
 void draw_map(void *param)
 {
-	t_game *game = (t_game *)param;	
-	for (int i = 0; i < MAP_NUM_ROWS; i++)
+	t_game *game;
+	int i;
+	int j;
+
+	game = (t_game *)param;
+	i = 0;
+	while (i < game->map_rows)
 	{
-		for (int j = 0; j < MAP_NUM_COLS; j++)
+		j = 0;
+		while (j < game->map_cols)
 		{
-			if (game->map_grid[i][j] == 0)
+			if (game->map_grid_2d[i][j] == 0)
 			{
 				draw_rectangle(game, j * TILE_SIZE, i * TILE_SIZE);
-                //printf("0");
+				//printf("0");
 			}
-			else if (game->map_grid[i][j] == 1)
+			else if (game->map_grid_2d[i][j] == 1)
 			{
 				fill_rectangle_white(game, j * TILE_SIZE, i * TILE_SIZE);
-                //printf("1");
+				//printf("1");
 			}
+			j++;
 		}
+		i++;
 	}
-	
 }
 
 void draw_minimap(void *param)
 {
-	t_game *game = (t_game *)param;
+	t_game *game;
+	int i;
+	int j;
 
-	for (int i = 0; i < game->map_rows; i++)
+	game = (t_game *)param;
+	i = 0;
+	while (i < game->map_rows)
 	{
-		for (int j = 0; j < game->map_cols; j++)
+		j = 0;
+		while (j < game->map_cols)
 		{
-			if (game->map_grid[i][j] == 0)
+			if (game->map_grid_2d[i][j] == 0)
 			{
 				draw_rectangle(game, j * TILE_SIZE, i * TILE_SIZE);
-			//	printf("0");
+				//printf("0");
 			}
-			else if (game->map_grid[i][j] == 1)
+			else if (game->map_grid_2d[i][j] == 1)
 			{
 				fill_rectangle_white(game, j * TILE_SIZE, i * TILE_SIZE);
-			//	printf("1");
+				//printf("1");
 			}
+			j++;
 		}
+		i++;
 	}
-	
 }

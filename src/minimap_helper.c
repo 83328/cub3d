@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/07 16:09:55 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/04 11:29:07 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,30 @@ void    load_map_dimensions_from_file(t_game *game, char *argv)
 
 void    allocate_map(t_game *game)
 {
+	int i;
+
 	game->map_grid_2d = malloc(sizeof(int *) * game->map_rows);
 	if (game->map_grid_2d == NULL)
 	{
 		printf("Failed to allocate memory for map\n");
-		return;
+		return ;
 	}
-	for (int i = 0; i < game->map_rows; i++)
+	i = 0;
+	while (i < game->map_rows)
 	{
 		game->map_grid_2d[i] = malloc(sizeof(int) * game->map_cols);
 		if (game->map_grid_2d[i] == NULL)
 		{
+			while (i >= 0)
+			{
+				free(game->map_grid_2d[i]);
+				i--;
+			}
+			free(game->map_grid_2d);
 			printf("Failed to allocate memory for map\n");
-			return;
+			return ;
 		}
+		i++;
 	}
 }
 

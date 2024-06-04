@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:23:15 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/08 12:17:02 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:20:46 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,4 @@ void	cast_all_rays(void *param)
 		 horizontal_and_vertical_grid_intersection(game, i);
 	 }
  }
+ 

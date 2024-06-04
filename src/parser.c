@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/05/08 17:41:26 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:51:40 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_map_height(int fd)
 		{
 			/*
 			this line checks the file and jumps to the sixth line of the file
-			there starts the actual map coordinates
+			the actual map coordinates start there
 			
 			if (non_empty_line && ++non_empty_line_count > 6)
 			
@@ -96,7 +96,7 @@ int get_max_line_length(int fd)
 	return (max_length);
 }
 
-int	load_map(t_game *game, char *filename)
+/* int	load_map(t_game *game, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -122,7 +122,7 @@ int	load_map(t_game *game, char *filename)
 	}
 	game->map_rows = get_map_height(fd);
 	game->map_cols = get_max_line_length(fd);
-	
+
 	map->height = get_map_height(fd);
  	map->width = get_max_line_length(fd);
 	//map->start = get_map_start(fd);
@@ -140,13 +140,14 @@ int	load_map(t_game *game, char *filename)
 		i++;
 	}
 	game->map = map;
-	//printf("Height: %d\n", map->height);
+	printf("Map start: %d\n", game->map_start);
+	printf("Map end: %d\n", game->map_end);
 	//printf("Width: %d\n", map->width);
 	printf("map_rows: %d\n", game->map_rows);
 	printf("map_cols: %d\n", game->map_cols);
 	close(fd);
 	return (1);
-}
+} */
 
 /* void	parse_cub_file(char *path, t_player *player, mlx_t *mlx)
 {

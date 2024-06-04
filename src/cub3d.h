@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/05/08 17:41:33 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:12:14 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_game
 	float						player_height;
 	float						player_rotation_angle;
 	t_map						*map;
-	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
+//	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;
 	int							map_start;//not used yet
 	int							map_end;//not used yet
@@ -158,7 +158,7 @@ void	normalize_angle(float *angle);
 float	distance_between_points(float x1, float y1, float x2, float y2);
 // map_helper.c
 bool	has_wall_at(t_game game, float  x, float y);
-bool	is_inside_map(float x, float y);
+bool	is_inside_map(t_game game, float x, float y);
 int		get_map_at(t_game game, int i, int j);
 // test_draw_map.c
 void	draw_vertical_line_left(t_game *game, int x, int y);
