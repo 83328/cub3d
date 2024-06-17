@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/04 11:43:36 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:28:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,13 +146,15 @@ int	main(int argc, char **argv)
 	printf("Map end: %d\n", game.map_end);
 	allocate_map(&game);
 	fill_2d_map_from_file(&game, argv[1]);
-	print_map_2d(&game);
+	//print_map_2d(&game);
+	print_map_grid_2d(&game);
 	load_map_from_file(&game, argv[1]);
 	//print_map(&game);
 /* 	if (!validate_input_and_load_map(argc, argv, &game))
 	{
 		return (EXIT_FAILURE);
 	} */
+	check_map_surrounded(&game);
 	init_game(&game);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "Welcome to DOOOOOOOOOOOOOM!!!!!!!!!!!!!!!", false);
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);

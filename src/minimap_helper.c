@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/04 11:29:07 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 11:51:38 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,26 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 	close(fd);
 }
 
-void    print_map_2d(t_game *game)
+void	print_map_grid_2d(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < game->map_rows)
+	{
+		j = 0;
+		while (j < game->map_cols)
+		{
+			printf("%d ", game->map_grid_2d[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+/* void    print_map_2d(t_game *game)
 {
 	for (int i = 0; i < game->map_rows; i++)
 	{
@@ -104,4 +123,4 @@ void    print_map_2d(t_game *game)
 		}
 		printf("\n");
 	}
-}
+} */

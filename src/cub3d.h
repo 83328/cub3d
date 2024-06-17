@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/04 14:12:14 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:26:04 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define ERR_ARGS "Error: Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
 # define ERR_FILETYPE "WError: Invalid file extension: use .cub for map files\n"
 # define ERR_INVALID_MAP_CHAR "Invalid file format: Invalid character in map\n"
-# define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not closed\n"
+# define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
 # define ERR_FILE "File not found\n"
 # define ERR_READ "Could not read from the file\n"
 
@@ -153,6 +153,8 @@ int		get_max_line_length(int fd);
 //map_check.c
 //int		check_map_validity(t_map *map);
 void	check_file(int argc, char **argv);
+void	check_map_surrounded(t_game *game);
+
 // math_helper.c
 void	normalize_angle(float *angle);
 float	distance_between_points(float x1, float y1, float x2, float y2);
@@ -185,7 +187,8 @@ void	wall_projection(t_game *game);
 void	load_map_dimensions_from_file(t_game *game, char *argv);
 void	allocate_map(t_game *game);
 void	fill_2d_map_from_file(t_game *game, char argv[1]);
-void	print_map_2d(t_game *game);
+//void	print_map_2d(t_game *game);
+void	print_map_grid_2d(t_game *game);
 //utils.c
 void	ft_error(char *str, t_game *game);
 void	free_game(t_game *game);

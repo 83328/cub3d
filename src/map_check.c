@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:30:36 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/03 15:40:48 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:25:41 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,35 @@ void	check_file(int argc, char **argv)
 	i = ft_strlen(argv[1]);
 	if (ft_strnstr(&argv[1][i - 4], ".cub", 4) == NULL)
 		ft_error(ERR_FILETYPE, NULL);
+}
+
+void check_map_surrounded(t_game *game)
+{
+	int i;
+
+	// Check top and bottom rows
+	i = 0;
+	while (i < game->map_cols)
+	{
+		if (game->map_grid_2d[0][i] != 1 || game->map_grid_2d[game->map_rows - 1][i] != 1)
+		{
+			ft_error(ERR_MAP_NOT_CLOSED, NULL);
+			return;
+		}
+		i++;
+	}
+	// Check left and right columns
+	i = 0;
+	while (i < game->map_rows)
+	{
+		if (game->map_grid_2d[i][0] != 1 || game->map_grid_2d[i][game->map_cols - 1] != 1)
+		{
+			ft_error(ERR_MAP_NOT_CLOSED, NULL);
+			return;
+		}
+		i++;
+	}
+	printf("The map is surrounded by 1's\n");
 }
 
 /* int	check_map_validity(t_map *map)
