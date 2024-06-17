@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/17 12:26:04 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:42:44 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 # define ERR_ARGS "Error: Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
 # define ERR_FILETYPE "WError: Invalid file extension: use .cub for map files\n"
-# define ERR_INVALID_MAP_CHAR "Invalid file format: Invalid character in map\n"
+# define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
 # define ERR_FILE "File not found\n"
 # define ERR_READ "Could not read from the file\n"

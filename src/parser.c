@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/17 11:06:41 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:42:14 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	get_map_height(int fd)
 	int		map_height;
 	int		non_empty_line_count;
 	int		non_empty_line;
+	//int		map_start;
 
 	map_height = 0;
 	non_empty_line_count = 0;
@@ -27,7 +28,7 @@ int	get_map_height(int fd)
 		if(c == '\n')
 		{
 			/*
-			this line checks the file and jumps to the sixth line of the file
+			this line checks the file and jumps to the seventh line of the file
 			the actual map coordinates start there
 			
 			if (non_empty_line && ++non_empty_line_count > 6)
@@ -95,92 +96,3 @@ int get_max_line_length(int fd)
 	lseek(fd, 0, SEEK_SET);
 	return (max_length);
 }
-
-/* int	load_map(t_game *game, char *filename)
-{
-	int		fd;
-	char	*line;
-	t_map	*map;
-	int		i;
-	char	first_char;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		ft_error(ERR_FILE, NULL);
-	if (read(fd, &first_char, 1) != 1)
-		ft_error(ERR_READ, NULL);
-	// Read the first character of the file, used as a test, will remove later
-	printf("First character of the file: %c\n", first_char);
-	// Move the file pointer back to the beginning of the file
-	lseek(fd, 0, SEEK_SET);
-
-	map = malloc(sizeof(t_map));
-	if (map == NULL)
-	{
-		close(fd);
-		return (0);
-	}
-	game->map_rows = get_map_height(fd);
-	game->map_cols = get_max_line_length(fd);
-
-	map->height = get_map_height(fd);
- 	map->width = get_max_line_length(fd);
-	//map->start = get_map_start(fd);
-	map->map = malloc(sizeof(char *) * map->height);
-	if (map->map == NULL)
-	{
-		free(map);
-		close(fd);
-		return (0);
-	}
-	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		map->map[i] = line;
-		i++;
-	}
-	game->map = map;
-	printf("Map start: %d\n", game->map_start);
-	printf("Map end: %d\n", game->map_end);
-	//printf("Width: %d\n", map->width);
-	printf("map_rows: %d\n", game->map_rows);
-	printf("map_cols: %d\n", game->map_cols);
-	close(fd);
-	return (1);
-} */
-
-/* void	parse_cub_file(char *path, t_player *player, mlx_t *mlx)
-{
-	int fd;
-	char *line;
-	char **words;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		// Handle error
-		return ;
-	}
-	while (get_next_line(fd, &line) > 0)
-	{
-		words = ft_split(line, ' ');
-		if (words[0][0] == 'N' && words[0][1] == 'O')
-			load_texture(mlx, player, words[1], 0);
-		else if (words[0][0] == 'S' && words[0][1] == 'O')
-			load_texture(mlx, player, words[1], 1);
-		else if (words[0][0] == 'W' && words[0][1] == 'E')
-			load_texture(mlx, player, words[1], 2);
-		else if (words[0][0] == 'E' && words[0][1] == 'A')
-			load_texture(mlx, player, words[1], 3);
-		else if (words[0][0] == 'F')
-			set_floor_color(ft_split(words[1], ','));
-		else if (words[0][0] == 'C')
-			set_ceiling_color(ft_split(words[1], ','));
-		else if (ft_strchr("012NSEW", words[0][0]))
-			add_map_line(words[0]);
-		free(line);
-		free(words);
-	}
-	validate_map();
-	close(fd);
-} */

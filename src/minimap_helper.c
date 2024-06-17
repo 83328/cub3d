@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/17 11:51:38 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:14:32 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 		printf("Failed to open file\n");
 		return;
 	}
-	int i = 0;
+	int i = game->map_start;
 	while (i < game->map_rows)
 	{
 		char *line = get_next_line(fd);
@@ -81,7 +81,8 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 				game->map_grid_2d[i][j] = 1;
 			else
 			{
-				printf("Invalid character in map. Only '0' and '1' are allowed.\n");
+				ft_error(ERR_INVALID_MAP_CHAR, NULL);
+				//printf("Invalid character in map. Only '0' and '1' are allowed.\n");
 				free(line);
 				close(fd);
 				return;

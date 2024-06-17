@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:30:36 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/17 12:25:41 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:48:19 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void check_map_surrounded(t_game *game)
 {
 	int i;
 
-	// Check top and bottom rows
-	i = 0;
+	i = game->map_start;
+	//i = 0;
 	while (i < game->map_cols)
 	{
 		if (game->map_grid_2d[0][i] != 1 || game->map_grid_2d[game->map_rows - 1][i] != 1)
@@ -38,7 +38,6 @@ void check_map_surrounded(t_game *game)
 		}
 		i++;
 	}
-	// Check left and right columns
 	i = 0;
 	while (i < game->map_rows)
 	{
@@ -49,7 +48,7 @@ void check_map_surrounded(t_game *game)
 		}
 		i++;
 	}
-	printf("The map is surrounded by 1's\n");
+	printf("The map is surrounded by walls\n");
 }
 
 /* int	check_map_validity(t_map *map)
