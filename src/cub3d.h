@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 16:17:21 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 16:59:37 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 #define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
 
 # define ERR_ARGS "Error: Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
+# define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
 # define ERR_FILETYPE "WError: Invalid file extension: use .cub for map files\n"
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
@@ -119,6 +120,10 @@ typedef struct s_game
 	int							map_end;
 	int							map_rows;
 	int							map_cols;
+	char						*file_path_no;
+	char						*file_path_so;
+	char						*file_path_we;
+	char						*file_path_ea;
 	t_ray						rays[NUM_RAYS];
 }	t_game;
 
@@ -158,6 +163,7 @@ void	draw_player_middle_ray(t_game *game);
 void	cast_all_rays(void *param);
 // parser.c
 int		load_map(t_game *game, char *filename);
+int		get_textures(int fd, t_game *game);
 int		get_map_height(int fd);
 int		get_max_line_length(int fd);
 //map_check.c
