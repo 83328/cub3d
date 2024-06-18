@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/18 11:56:49 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 15:50:32 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void load_map_from_file(t_game *game, char *argv)
 	}
 	int i;
 
-	//game->map_start = 0;
+	//game->map_start = 3;
 	i = game->map_start;
 	while (i < game->map_rows)
 	{
@@ -76,7 +76,7 @@ void load_map_from_file(t_game *game, char *argv)
 		int j = 0;
 		while (j < game->map_cols)
 		{
-			if (line[j] == '0')
+			if (line[j] == '0' || line[j] == 'N' || line[j] == 'W' || line[j] == 'E' || line[j] == 'S')
 				game->map_grid_2d[i][j] = 0;
 			else if (line[j] == '1')
 				game->map_grid_2d[i][j] = 1;

@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 15:57:31 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 16:10:08 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define ERR_FILETYPE "WError: Invalid file extension: use .cub for map files\n"
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
+# define ERR_START_POINT "Error: Map should contain exactly one 'N', 'W', 'E', or 'S'.\n"
 # define ERR_FILE "File not found\n"
 # define ERR_READ "Could not read from the file\n"
 
@@ -94,6 +95,7 @@ typedef struct s_game
 {
 	char						char_read;//not used yet
 	char						map_char;//not used yet
+	char						start_direction;
 	int							total_chars_read;//not used yet
 	mlx_t						*mlx;
 	mlx_image_t					*image;
@@ -107,8 +109,8 @@ typedef struct s_game
 	t_map						*map;
 //	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;
-	int							map_start;//not used yet
-	int							map_end;//not used yet
+	int							map_start;
+	int							map_end;
 	int							map_rows;
 	int							map_cols;
 	t_ray						rays[NUM_RAYS];

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 11:57:50 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:08:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void    load_map_dimensions_from_file(t_game *game, char *argv)
 	}
 	game->map_rows = get_map_height(fd);
 	game->map_cols = get_max_line_length(fd);
+	game->map_start = 0;
 	game->map_end = game->map_start + game->map_rows;
 	close(fd);
 }
@@ -58,6 +59,9 @@ void    allocate_map(t_game *game)
 void    fill_2d_map_from_file(t_game *game, char argv[1])
 {
 	int fd = open(argv, O_RDONLY);
+	int direction_count;
+	
+	direction_count = 0;
 	if (fd < 0)
 	{
 		printf("Failed to open file\n");
@@ -80,10 +84,15 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 				game->map_grid_2d[i][j] = 0;
 			else if (line[j] == '1')
 				game->map_grid_2d[i][j] = 1;
+			else if (line[j] == 'N' || line[j] == 'W' || line[j] == 'E' || line[j] == 'S')
+			{
+				game->map_grid_2d[i][j] = 2;
+				game->start_direction = line[j];
+				direction_count++;
+			}
 			else
 			{
 				ft_error(ERR_INVALID_MAP_CHAR, NULL);
-				//printf("Invalid character in map. Only '0' and '1' are allowed.\n");
 				free(line);
 				close(fd);
 				return;
@@ -94,6 +103,11 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 		i++;
 	}
 	close(fd);
+	if (direction_count != 1)
+	{
+		ft_error(ERR_START_POINT, NULL);
+		return;
+	}
 }
 
 void	print_map_grid_2d(t_game *game)
