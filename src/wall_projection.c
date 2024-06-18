@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 16:08:27 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 16:16:29 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,27 @@ void load_test_texture_north(t_game *game)
     game->north_texture = mlx_load_png("textures/32_tri.png");
     game->image_north_texture = mlx_texture_to_image(game->mlx, game->north_texture);
     printf("north texture loaded into image\n");
+}
+
+void load_test_texture_south(t_game *game)
+{
+    game->south_texture = mlx_load_png("textures/32_bronto.png");
+    game->image_south_texture = mlx_texture_to_image(game->mlx, game->south_texture);
+    printf("south texture loaded into image\n");
+}
+
+void load_test_texture_west(t_game *game)
+{
+    game->west_texture = mlx_load_png("textures/32_ptero.png");
+    game->image_west_texture = mlx_texture_to_image(game->mlx, game->west_texture);
+    printf("west texture loaded into image\n");
+}
+
+void load_test_texture_east(t_game *game)
+{
+    game->east_texture = mlx_load_png("textures/32_tyr.png");
+    game->image_east_texture = mlx_texture_to_image(game->mlx, game->east_texture);
+    printf("east texture loaded into image\n");
 }
 
 void reverse_bits(uint32_t *n)

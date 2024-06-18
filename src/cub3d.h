@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 16:10:08 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 16:17:21 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ typedef struct s_game
 	mlx_image_t					*image;
 	mlx_texture_t				*north_texture;
 	mlx_image_t					*image_north_texture;
+	mlx_texture_t				*south_texture;
+	mlx_image_t					*image_south_texture;
+	mlx_texture_t				*west_texture;
+	mlx_image_t					*image_west_texture;
+	mlx_texture_t				*east_texture;
+	mlx_image_t					*image_east_texture;
 	float						player_x;
 	float						player_y;
 	float						player_width;
@@ -188,6 +194,9 @@ void	horizontal_and_vertical_grid_intersection(t_game *game, int i);
 void	draw_strip(int x, int y, int width, int height, int color, t_game *game);
 void	wall_projection(t_game *game);
 void	load_test_texture_north(t_game *game);
+void	load_test_texture_east(t_game *game);
+void	load_test_texture_south(t_game *game);
+void	load_test_texture_west(t_game *game);
 void	project_test_texture_north(void *param);
 // minimap_helper.c
 void	load_map_dimensions_from_file(t_game *game, char *argv);
