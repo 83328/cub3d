@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/17 16:42:44 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:57:13 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct s_game
 	int							total_chars_read;//not used yet
 	mlx_t						*mlx;
 	mlx_image_t					*image;
+	mlx_texture_t				*north_texture;
+	mlx_image_t					*image_north_texture;
 	float						player_x;
 	float						player_y;
 	float						player_width;
@@ -183,6 +185,8 @@ void	horizontal_and_vertical_grid_intersection(t_game *game, int i);
 // wall_projection.c
 void	draw_strip(int x, int y, int width, int height, int color, t_game *game);
 void	wall_projection(t_game *game);
+void	load_test_texture_north(t_game *game);
+void	project_test_texture_north(void *param);
 // minimap_helper.c
 void	load_map_dimensions_from_file(t_game *game, char *argv);
 void	allocate_map(t_game *game);

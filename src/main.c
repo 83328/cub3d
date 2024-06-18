@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/17 16:29:04 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:56:49 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int	main(int argc, char **argv)
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	if (!game.image || (mlx_image_to_window(game.mlx, game.image, 0, 0) < 0))
 		printf("Failed to create image\n");
+	load_test_texture_north(&game);
 	mlx_key_hook(game.mlx, my_keyhook, &game);
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);
 	//mlx_loop_hook(game.mlx, draw_map, &game);
