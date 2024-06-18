@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 16:16:29 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 17:20:40 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,13 +198,13 @@ void wall_projection(t_game *game)
         if (game->rays[x].was_hit_vertical)
             textureOffsetX = (int)game->rays[x].wall_hit_y % TILE_SIZE;
         else
-            textureOffsetX = (int)game->rays[x].wall_hit_content % TILE_SIZE;
+          //  textureOffsetX = (int)game->rays[x].wall_hit_content % TILE_SIZE;
+            textureOffsetX = (int)game->rays[x].wall_hit_x % TILE_SIZE;
 
         // get the correct texture id number from the map content
-    //    int texNum = game->rays[x].wall_hit_content - 1;
-
+        int texNum = game->rays[x].wall_hit_content - 1;
        // int texture_width = wallTextures[texNum].width;
-      //  int texture_width = game->north_texture->width;
+        //int texture_width = game->north_texture->width;
         int texture_height = game->north_texture->height;
 
         // render the wall from wallTopPixel to wallBottomPixel
@@ -234,5 +234,8 @@ void wall_projection(t_game *game)
         // the color should be light grey
             mlx_put_pixel(game->image, x, y, 0xFF884288);
         }
+        // printf texnum
+     printf("texnum: %d\n", texNum);
     }
+
 }
