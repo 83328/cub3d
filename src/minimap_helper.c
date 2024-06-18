@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 14:23:24 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:08:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void    load_map_dimensions_from_file(t_game *game, char *argv)
 	}
 	game->map_rows = get_map_height(fd);
 	game->map_cols = get_max_line_length(fd);
+	game->map_start = 0;
 	game->map_end = game->map_start + game->map_rows;
 	close(fd);
 }
@@ -92,7 +93,6 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 			else
 			{
 				ft_error(ERR_INVALID_MAP_CHAR, NULL);
-				//printf("Invalid character in map. Only '0' and '1' are allowed.\n");
 				free(line);
 				close(fd);
 				return;

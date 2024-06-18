@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 14:20:55 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:43:56 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ typedef struct s_game
 	t_map						*map;
 //	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;
-	int							map_start;//not used yet
-	int							map_end;//not used yet
+	int							map_start;
+	int							map_end;
 	int							map_rows;
 	int							map_cols;
 	t_ray						rays[NUM_RAYS];

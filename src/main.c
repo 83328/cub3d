@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/18 14:16:56 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:50:32 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void load_map_from_file(t_game *game, char *argv)
 	}
 	int i;
 
-	//game->map_start = 0;
+	//game->map_start = 3;
 	i = game->map_start;
 	while (i < game->map_rows)
 	{
