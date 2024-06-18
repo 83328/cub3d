@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 12:03:22 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 16:08:27 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void our_mlx_draw_pixel(uint8_t* pixel, uint32_t color)
 
 void load_test_texture_north(t_game *game)
 {
-    game->north_texture = mlx_load_png("textures/walln.png");
+    game->north_texture = mlx_load_png("textures/32_tri.png");
     game->image_north_texture = mlx_texture_to_image(game->mlx, game->north_texture);
     printf("north texture loaded into image\n");
 }
@@ -183,6 +183,7 @@ void wall_projection(t_game *game)
     //    int texNum = game->rays[x].wall_hit_content - 1;
 
        // int texture_width = wallTextures[texNum].width;
+      //  int texture_width = game->north_texture->width;
         int texture_height = game->north_texture->height;
 
         // render the wall from wallTopPixel to wallBottomPixel
@@ -192,7 +193,10 @@ void wall_projection(t_game *game)
 
             // set the color of the wall based on the color from the texture
         //    color_t texelColor = wallTextures[texNum].texture_buffer[(texture_width * textureOffsetY) + textureOffsetX];
-            uint32_t texelColor = put_pixel_color(game->image_north_texture, textureOffsetX, textureOffsetY);
+        //    uint32_t texelColor = put_pixel_color(game->image_north_texture, texture_width * textureOffsetY, textureOffsetX);
+         uint32_t texelColor = put_pixel_color(game->image_north_texture, textureOffsetX ,textureOffsetY);
+            reverse_bits(&texelColor);
+        //    uint32_t texelColor = put_pixel_color(game->image_north_texture, textureOffsetX, textureOffsetY);
 			mlx_put_pixel(game->image, x, y, texelColor);
             // Make the pixel color darker if the ray hit was vertical
         //    if (rays[x].wasHitVertical) {
