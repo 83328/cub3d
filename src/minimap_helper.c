@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/17 16:14:32 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:57:50 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void    load_map_dimensions_from_file(t_game *game, char *argv)
 	}
 	game->map_rows = get_map_height(fd);
 	game->map_cols = get_max_line_length(fd);
+	game->map_end = game->map_start + game->map_rows;
 	close(fd);
 }
 
