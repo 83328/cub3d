@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 11:57:50 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:15:16 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void    allocate_map(t_game *game)
 void    fill_2d_map_from_file(t_game *game, char argv[1])
 {
 	int fd = open(argv, O_RDONLY);
+	int direction_count;
+	
+	direction_count = 0;
 	if (fd < 0)
 	{
 		printf("Failed to open file\n");
@@ -80,6 +83,11 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 				game->map_grid_2d[i][j] = 0;
 			else if (line[j] == '1')
 				game->map_grid_2d[i][j] = 1;
+			else if (line[j] == 'N' || line[j] == 'W' || line[j] == 'E' || line[j] == 'S')
+			{
+				game->map_grid_2d[i][j] = 2;  // assuming 2 represents 'N', 'W', 'E', 'S'
+				direction_count++;
+			}
 			else
 			{
 				ft_error(ERR_INVALID_MAP_CHAR, NULL);
@@ -94,6 +102,11 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 		i++;
 	}
 	close(fd);
+	if (direction_count != 1)
+	{
+		ft_error(ERR_START_POINT, NULL);
+		return;
+	}
 }
 
 void	print_map_grid_2d(t_game *game)
