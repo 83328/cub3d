@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 16:08:18 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:19:20 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void    load_map_dimensions_from_file(t_game *game, char *argv)
 	game->map_cols = get_max_line_length(fd);
 	game->map_start = 0;
 	game->map_end = game->map_start + game->map_rows;
+	//get_textures(fd, game);//check whether texture filepaths are present
 	close(fd);
 }
 

@@ -6,11 +6,35 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/18 11:27:43 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:59:36 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	get_textures(int fd, t_game *game)
+{
+	char *line;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		if (ft_strncmp(line, "NO ", 3) == 0)
+			game->file_path_no = ft_strdup(line + 3);
+		else if (ft_strncmp(line, "SO ", 3) == 0)
+			game->file_path_so = ft_strdup(line + 3);
+		else if (ft_strncmp(line, "WE ", 3) == 0)
+			game->file_path_we = ft_strdup(line + 3);
+		else if (ft_strncmp(line, "EA ", 3) == 0)
+			game->file_path_ea = ft_strdup(line + 3);
+		free(line);
+	}
+
+	if (!game->file_path_no || !game->file_path_so || !game->file_path_we || !game->file_path_ea)
+	{
+		ft_error(ERR_TEX, NULL);
+		return -1;
+	}
+	return 0;
+}
 
 int	get_map_height(int fd)
 {
