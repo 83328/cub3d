@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 14:12:23 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:20:55 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_game
 {
 	char						char_read;//not used yet
 	char						map_char;//not used yet
+	char						start_direction;
 	int							total_chars_read;//not used yet
 	mlx_t						*mlx;
 	mlx_image_t					*image;

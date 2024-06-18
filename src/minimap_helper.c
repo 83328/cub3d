@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 14:15:16 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:23:24 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void    fill_2d_map_from_file(t_game *game, char argv[1])
 				game->map_grid_2d[i][j] = 1;
 			else if (line[j] == 'N' || line[j] == 'W' || line[j] == 'E' || line[j] == 'S')
 			{
-				game->map_grid_2d[i][j] = 2;  // assuming 2 represents 'N', 'W', 'E', 'S'
+				game->map_grid_2d[i][j] = 2;
+				game->start_direction = line[j];
 				direction_count++;
 			}
 			else
