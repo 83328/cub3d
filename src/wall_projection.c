@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_projection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 17:30:07 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:21:26 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,49 @@ void load_test_texture_east(t_game *game)
     game->east_texture = mlx_load_png("textures/32_tyr.png");
     game->image_east_texture = mlx_texture_to_image(game->mlx, game->east_texture);
     printf("east texture loaded into image\n");
+}
+
+void	select_texture(t_ray *ray, t_game *game)
+{
+	float	angle;
+
+	angle = ray->ray_angle;
+	normalize_angle(&angle);
+	if (ray->was_hit_vertical)
+    {
+        if (angle >= M_PI / 2 && angle < 3 * M_PI / 2)
+        {
+            ray->current_texture = game->west_texture;
+            ray->current_texture_image = game->image_west_texture;
+            printf("west texture selected\n");
+        }
+        else
+        {
+            ray->current_texture = game->east_texture;
+            ray->current_texture_image = game->image_east_texture;
+            printf("east texture selected\n");
+        }
+    }
+    else
+    {
+        if (angle >= 0 && angle < M_PI)
+        {
+            ray->current_texture = game->south_texture;
+            ray->current_texture_image = game->image_south_texture;
+            printf("south texture selected\n");
+        }
+        else
+        {
+            ray->current_texture = game->north_texture;
+            ray->current_texture_image = game->image_north_texture;
+            printf("north texture selected\n");
+        }
+    }
+}
+
+mlx_image_t *return_texture_image(t_ray *ray)
+{
+    return (ray->current_texture_image);
 }
 
 void reverse_bits(uint32_t *n)
@@ -198,8 +241,9 @@ void wall_projection(t_game *game)
         if (game->rays[x].was_hit_vertical)
             textureOffsetX = (int)game->rays[x].wall_hit_y % TILE_SIZE;
         else
-          //  textureOffsetX = (int)game->rays[x].wall_hit_content % TILE_SIZE;
-            textureOffsetX = (int)game->rays[x].wall_hit_x % TILE_SIZE;
+            textureOffsetX = (int)game->rays[x].wall_hit_x % TILE_SIZE;game->image_north_texture
+        
+        select_texture(&game->rays[x], game);
 
         // get the correct texture id number from the map content
         //int texNum = game->rays[x].wall_hit_content - 1;
@@ -215,7 +259,10 @@ void wall_projection(t_game *game)
             // set the color of the wall based on the color from the texture
         //    color_t texelColor = wallTextures[texNum].texture_buffer[(texture_width * textureOffsetY) + textureOffsetX];
         //    uint32_t texelColor = put_pixel_color(game->image_north_texture, texture_width * textureOffsetY, textureOffsetX);
-         uint32_t texelColor = put_pixel_color(game->image_north_texture, textureOffsetX ,textureOffsetY);
+        game->rays[x].current_texture_image = return_texture_image(&game->rays[x]);
+        // uint32_t texelColor = put_pixel_color(game->image_south_texture, textureOffsetX ,textureOffsetY);
+          uint32_t texelColor = put_pixel_color(game->rays[x].current_texture_image, textureOffsetX ,textureOffsetY);
+
             reverse_bits(&texelColor);
         //    uint32_t texelColor = put_pixel_color(game->image_north_texture, textureOffsetX, textureOffsetY);
 			mlx_put_pixel(game->image, x, y, texelColor);

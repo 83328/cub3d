@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 17:23:28 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/18 18:09:17 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #define TILE_SIZE 32
 #define MAP_NUM_ROWS 10
 #define MAP_NUM_COLS 14
+#define M_PI 3.14159265358979323846
 #define PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489661923
 #define TWO_PI 6.28318530717958647692
@@ -90,6 +91,8 @@ typedef struct ray
 	bool	is_ray_facing_left;
 	bool	is_ray_facing_right;
 	bool	wall_hit_content;
+	mlx_texture_t	*current_texture;
+	mlx_image_t		*current_texture_image;
 }	t_ray;
 
 typedef struct s_game
