@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/20 15:21:26 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/20 15:53:46 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ void our_mlx_draw_pixel(uint8_t* pixel, uint32_t color)
 //       pixel[2] = (uint8_t)(color >> 8);  // Grün
 //       pixel[3] = (uint8_t)(color & 0xFF);// Blau
 //  }
+
+void our_mlx_put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)
+{
+	
+	uint8_t* pixelstart = &image->pixels[(y * image->width + x) * sizeof(int32_t)];
+	our_mlx_draw_pixel(pixelstart, color);
+}
 
 void load_test_texture_north(t_game *game)
 {
@@ -234,14 +241,14 @@ void wall_projection(t_game *game)
         for (int y = 0; y < wallTopPixel; y++)
         {
            // drawPixel(x, y, 0xFF444444);
-           mlx_put_pixel(game->image, x, y, 0xFF444444);
+           our_mlx_put_pixel(game->image, x, y, 0xFF444444);
         }
 
         int textureOffsetX;
         if (game->rays[x].was_hit_vertical)
             textureOffsetX = (int)game->rays[x].wall_hit_y % TILE_SIZE;
         else
-            textureOffsetX = (int)game->rays[x].wall_hit_x % TILE_SIZE;game->image_north_texture
+            textureOffsetX = (int)game->rays[x].wall_hit_x % TILE_SIZE;
         
         select_texture(&game->rays[x], game);
 
@@ -265,7 +272,7 @@ void wall_projection(t_game *game)
 
             reverse_bits(&texelColor);
         //    uint32_t texelColor = put_pixel_color(game->image_north_texture, textureOffsetX, textureOffsetY);
-			mlx_put_pixel(game->image, x, y, texelColor);
+			our_mlx_put_pixel(game->image, x, y, texelColor);
             // Make the pixel color darker if the ray hit was vertical
         //    if (rays[x].wasHitVertical) {
         //        changeColorIntensity(&texelColor, 0.7);
@@ -279,7 +286,7 @@ void wall_projection(t_game *game)
         {
         //    drawPixel(x, y, 0xFF888888);
         // the color should be light grey
-            mlx_put_pixel(game->image, x, y, 0xFF884288);
+            our_mlx_put_pixel(game->image, x, y, 0xFF884288);
         }
         // printf texnum
      //printf("texnum: %d\n", texNum);
