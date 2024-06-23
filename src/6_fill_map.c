@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:01:43 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/23 16:19:37 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/23 18:19:23 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,27 @@ void	fill_2d_map_from_file(t_game *game, char argv[1])
 				game->start_direction = line[j];
 				direction_count++;
 			}
-			else
+			else if (line[j] == '\n' || line[j] == '\0')
+				{
+					while (j < game->map_cols)
+					{
+						game->map_grid_2d[i][j] = 1;
+						j++;
+					}
+					// WARNING: This break statement is not in the original code
+					break;
+					// WARNING: \n might not be needed
+					//line[j] = '\n';
+				}
+				
+			/* else
 			{
 				ft_error(ERR_INVALID_MAP_CHAR, NULL);
 				free(line);
 				close(fd);
 				return ;
-			}
+			} */
+			printf("%c", line[j]);
 			j++;
 		}
 		free(line);
