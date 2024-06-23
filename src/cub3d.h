@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/18 18:09:17 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/23 15:03:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@
 #define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
 
 # define ERR_ARGS "Error: Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
+# define ERR_FILETYPE "Error: Invalid file extension: use .cub for map files\n"
+# define ERR_OPEN "Error: Failed to open the file\n"
+# define ERR_MEM "Failed to allocate memory for the map\n"
+
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
-# define ERR_FILETYPE "WError: Invalid file extension: use .cub for map files\n"
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
 # define ERR_START_POINT "Error: Map should contain exactly one 'N', 'W', 'E', or 'S'.\n"
@@ -138,6 +141,27 @@ typedef struct line
 	int32_t	y1;
 }	t_line;
 
+//2_file_check.c
+void	check_file(int argc, char **argv);
+
+// 3_load_map.c
+void	load_map_dimensions_from_file(t_game *game, char *argv);
+void	allocate_map(t_game *game);
+
+
+// 4_parser.c
+int		load_map(t_game *game, char *filename);
+int		get_textures(int fd, t_game *game);
+int		get_map_height(int fd);
+int		get_max_line_length(int fd);
+
+// 5_map_check.c
+void	check_map_surrounded(t_game *game);
+void	print_map_grid_2d(t_game *game);
+
+//6_fill_map.c
+void	fill_2d_map_from_file(t_game *game, char argv[1]);
+
 // key_commands.c
 void	handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game);
 void	update_player_position(t_game *game, float dx, float dy);
@@ -164,15 +188,8 @@ void	redraw_player(void *param);
 // player_rays.c
 void	draw_player_middle_ray(t_game *game);
 void	cast_all_rays(void *param);
-// parser.c
-int		load_map(t_game *game, char *filename);
-int		get_textures(int fd, t_game *game);
-int		get_map_height(int fd);
-int		get_max_line_length(int fd);
-//map_check.c
-//int		check_map_validity(t_map *map);
-void	check_file(int argc, char **argv);
-void	check_map_surrounded(t_game *game);
+
+
 
 // math_helper.c
 void	normalize_angle(float *angle);
@@ -207,12 +224,7 @@ void	load_test_texture_east(t_game *game);
 void	load_test_texture_south(t_game *game);
 void	load_test_texture_west(t_game *game);
 void	project_test_texture_north(void *param);
-// minimap_helper.c
-void	load_map_dimensions_from_file(t_game *game, char *argv);
-void	allocate_map(t_game *game);
-void	fill_2d_map_from_file(t_game *game, char argv[1]);
-//void	print_map_2d(t_game *game);
-void	print_map_grid_2d(t_game *game);
+
 //utils.c
 void	ft_error(char *str, t_game *game);
 void	free_game(t_game *game);

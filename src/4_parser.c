@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   4_parser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/18 16:59:36 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:37:00 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	get_textures(int fd, t_game *game)
 {
-	char *line;
+	char	*line;
+
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (ft_strncmp(line, "NO ", 3) == 0)
@@ -27,13 +28,12 @@ int	get_textures(int fd, t_game *game)
 			game->file_path_ea = ft_strdup(line + 3);
 		free(line);
 	}
-
 	if (!game->file_path_no || !game->file_path_so || !game->file_path_we || !game->file_path_ea)
 	{
 		ft_error(ERR_TEX, NULL);
-		return -1;
+		return (-1);
 	}
-	return 0;
+	return (0);
 }
 
 int	get_map_height(int fd)
@@ -49,7 +49,7 @@ int	get_map_height(int fd)
 	non_empty_line = 0;
 	while (read(fd, &c, 1) > 0)
 	{
-		if(c == '\n')
+		if (c == '\n')
 		{
 			/*
 			this line checks the file and jumps to the seventh line of the file
@@ -121,29 +121,29 @@ int	get_map_height(int fd)
 	return (max_length);
 } */
 
-int get_max_line_length(int fd)
+int	get_max_line_length(int fd)
 {
-	char ch;
-	int max_length;
-	int current_length;
+	char	ch;
+	int		max_length;
+	int		current_length;
 
 	max_length = 0;
 	current_length = 0;
 	lseek(fd, 0, SEEK_SET);
-	while(read(fd, &ch, 1) > 0)
+	while (read(fd, &ch, 1) > 0)
 	{
-		if(ch == '\n')
+		if (ch == '\n')
 		{
-			if(current_length > max_length)
+			if (current_length > max_length)
 			{
 				max_length = current_length;
 			}
 			current_length = 0;
 		}
-		else if (ch != ' ')  // ignore spaces
+		else if (ch != ' ')
 			current_length++;
 	}
-	if(current_length > max_length)
+	if (current_length > max_length)
 		max_length = current_length;
 	lseek(fd, 0, SEEK_SET);
 	return (max_length);

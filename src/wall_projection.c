@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_projection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/20 15:53:46 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/21 16:30:34 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,28 +85,28 @@ void load_test_texture_north(t_game *game)
 {
     game->north_texture = mlx_load_png("textures/32_tri.png");
     game->image_north_texture = mlx_texture_to_image(game->mlx, game->north_texture);
-    printf("north texture loaded into image\n");
+    //printf("north texture loaded into image\n");
 }
 
 void load_test_texture_south(t_game *game)
 {
     game->south_texture = mlx_load_png("textures/32_bronto.png");
     game->image_south_texture = mlx_texture_to_image(game->mlx, game->south_texture);
-    printf("south texture loaded into image\n");
+    //printf("south texture loaded into image\n");
 }
 
 void load_test_texture_west(t_game *game)
 {
     game->west_texture = mlx_load_png("textures/32_ptero.png");
     game->image_west_texture = mlx_texture_to_image(game->mlx, game->west_texture);
-    printf("west texture loaded into image\n");
+    //printf("west texture loaded into image\n");
 }
 
 void load_test_texture_east(t_game *game)
 {
     game->east_texture = mlx_load_png("textures/32_tyr.png");
     game->image_east_texture = mlx_texture_to_image(game->mlx, game->east_texture);
-    printf("east texture loaded into image\n");
+    //printf("east texture loaded into image\n");
 }
 
 void	select_texture(t_ray *ray, t_game *game)
@@ -121,13 +121,13 @@ void	select_texture(t_ray *ray, t_game *game)
         {
             ray->current_texture = game->west_texture;
             ray->current_texture_image = game->image_west_texture;
-            printf("west texture selected\n");
+            //printf("west texture selected\n");
         }
         else
         {
             ray->current_texture = game->east_texture;
             ray->current_texture_image = game->image_east_texture;
-            printf("east texture selected\n");
+            //printf("east texture selected\n");
         }
     }
     else
@@ -136,13 +136,13 @@ void	select_texture(t_ray *ray, t_game *game)
         {
             ray->current_texture = game->south_texture;
             ray->current_texture_image = game->image_south_texture;
-            printf("south texture selected\n");
+            //printf("south texture selected\n");
         }
         else
         {
             ray->current_texture = game->north_texture;
             ray->current_texture_image = game->image_north_texture;
-            printf("north texture selected\n");
+            //printf("north texture selected\n");
         }
     }
 }

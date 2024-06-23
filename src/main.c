@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/18 16:16:44 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/23 15:07:02 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,6 @@ void	init_test_line(t_line *line)
 	line->x1 = 200;
 	line->y1 = 200;
 }
-
-/* int	validate_input_and_load_map(int argc, char **argv, t_game *game)
-{
-	if (argc != 2)
-	{
-		printf("Usage: ./cub3d ./maps/mapfile.cub\n");
-		return (0);
-	}
-	if (!load_map(game, argv[1]))
-	{
-		printf("Failed to load map\n");
-		return (0);
-	}
- 	if (!check_map_validity(game->map))
-	{
-		printf("Invalid map\n");
-		return (0);
-	}
-	return (1);
-} */
 
 void load_map_from_file(t_game *game, char *argv)
 {
@@ -136,10 +116,7 @@ int	main(int argc, char **argv)
 {
 	t_game game;
 
-	//t_map map;
-	check_file(argc, argv);
-	//init_map(argc, argv, &game);
-	//close(fd);
+	check_file(argc, argv);//OK
 	load_map_dimensions_from_file(&game, argv[1]);
 	printf("Map Dimensions: %d x %d\n", game.map_rows, game.map_cols);
 	printf("Map start 1: %d\n", game.map_start);
@@ -151,11 +128,6 @@ int	main(int argc, char **argv)
 	print_map_grid_2d(&game);
 
 	load_map_from_file(&game, argv[1]);
-	//print_map(&game);
-/* 	if (!validate_input_and_load_map(argc, argv, &game))
-	{
-		return (EXIT_FAILURE);
-	} */
 	init_game(&game);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "Welcome to DOOOOOOOOOOOOOM!!!!!!!!!!!!!!!", false);
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
