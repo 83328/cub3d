@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/23 15:07:02 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:21:27 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_test_line(t_line *line)
 	line->y1 = 200;
 }
 
-void load_map_from_file(t_game *game, char *argv)
+/* void load_map_from_file(t_game *game, char *argv)
 {
 	int fd = open(argv, O_RDONLY);
 	printf("Loading map from file...\n");
@@ -73,7 +73,7 @@ void load_map_from_file(t_game *game, char *argv)
 		i++;
 	}
 	close(fd);
-}
+} */
 
 void	print_map(t_game *game)
 {
@@ -127,7 +127,7 @@ int	main(int argc, char **argv)
 	//print_map_2d(&game);
 	print_map_grid_2d(&game);
 
-	load_map_from_file(&game, argv[1]);
+	//load_map_from_file(&game, argv[1]);
 	init_game(&game);
 	game.mlx = mlx_init(WIDTH, HEIGHT, "Welcome to DOOOOOOOOOOOOOM!!!!!!!!!!!!!!!", false);
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
