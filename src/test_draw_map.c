@@ -6,13 +6,13 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:44:27 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 10:46:48 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:25:14 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void draw_vertical_line_left(t_game *game, int x, int y)
+void	draw_vertical_line_left(t_game *game, int x, int y)
 {
 	t_line line;
 	line.x0 = x;
@@ -22,7 +22,7 @@ void draw_vertical_line_left(t_game *game, int x, int y)
 	bresenham(line, game->image);
 }
 
-void draw_vertical_line_right(t_game *game, int x, int y)
+void	draw_vertical_line_right(t_game *game, int x, int y)
 {
 	t_line line;
 	line.x0 = x + TILE_SIZE;
@@ -32,7 +32,7 @@ void draw_vertical_line_right(t_game *game, int x, int y)
 	bresenham(line, game->image);
 }
 
-void draw_horizontal_line_top(t_game *game, int x, int y)
+void	draw_horizontal_line_top(t_game *game, int x, int y)
 {
 	t_line line;
 	line.x0 = x;
@@ -42,7 +42,7 @@ void draw_horizontal_line_top(t_game *game, int x, int y)
 	bresenham(line, game->image);
 }
 
-void draw_horizontal_line_bottom(t_game *game, int x, int y)
+void	draw_horizontal_line_bottom(t_game *game, int x, int y)
 {
 	t_line line;
 	line.x0 = x;
@@ -52,7 +52,7 @@ void draw_horizontal_line_bottom(t_game *game, int x, int y)
 	bresenham(line, game->image);
 }
 
-void draw_rectangle(t_game *game, int x, int y)
+void	draw_rectangle(t_game *game, int x, int y)
 {
 	draw_vertical_line_left(game, x, y);
 	draw_vertical_line_right(game, x, y);
@@ -60,7 +60,7 @@ void draw_rectangle(t_game *game, int x, int y)
 	draw_horizontal_line_bottom(game, x, y);
 }
 
-void fill_rectangle_white(t_game *game, int x, int y)
+void	fill_rectangle_white(t_game *game, int x, int y)
 {
 	for (int i = 0; i < TILE_SIZE; i++)
 	{
@@ -71,7 +71,7 @@ void fill_rectangle_white(t_game *game, int x, int y)
 	}
 }
 
-void draw_map(void *param)
+void	draw_map(void *param)
 {
 	t_game *game;
 	int i;
@@ -100,7 +100,7 @@ void draw_map(void *param)
 	}
 }
 
-void draw_minimap(void *param)
+void	draw_minimap(void *param)
 {
 	t_game *game;
 	int i;

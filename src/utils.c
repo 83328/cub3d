@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:02:49 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/04 14:20:34 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:22:32 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_error(char *str, t_game *game)
 	exit(EXIT_FAILURE);
 }
 
-void free_game(t_game *game)
+void	free_game(t_game *game)
 {
-	int i;
+	int	i;
 
 	if (game)
 	{

@@ -6,13 +6,13 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/24 11:24:43 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:06:30 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_game(t_game *game)
+void	init_game(t_game *game)
 {
 	game->mlx = NULL;
 	game->image = NULL;
@@ -31,89 +31,21 @@ void	init_test_line(t_line *line)
 	line->y1 = 200;
 }
 
-/* void load_map_from_file(t_game *game, char *argv)
-{
-	int fd = open(argv, O_RDONLY);
-	printf("Loading map from file...\n");
-	if (fd < 0)
-	{
-		printf("Failed to open file\n");
-		return;
-	}
-	int i;
-
-	//game->map_start = 3;
-	i = game->map_start;
-	while (i < game->map_rows)
-	{
-		char *line = get_next_line(fd);
-		if (line == NULL)
-		{
-			printf("Failed to read line\n");
-			close(fd);
-			return;
-		}
-		int j = 0;
-		while (j < game->map_cols)
-		{
-			if (line[j] == '0' || line[j] == 'N' || line[j] == 'W' || line[j] == 'E' || line[j] == 'S')
-				game->map_grid_2d[i][j] = 0;
-			else if (line[j] == '1')
-				game->map_grid_2d[i][j] = 1;
-			else
-			{
-				ft_error(ERR_INVALID_MAP_CHAR, NULL);
-				free(line);
-				close(fd);
-				return;
-			}
-			j++;
-		}
-		free(line);
-		i++;
-	}
-	close(fd);
-} */
-
-/* void	print_map(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < game->map_rows)
-	{
-		j = 0;
-		while (j < game->map_cols)
-		{
-			printf("%d", game->map_grid_2d[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-} */
-
 int	main(int argc, char **argv)
 {
-	t_game game;
+	t_game	game;
 
-	check_file(argc, argv);//OK
+	check_file(argc, argv);
 	load_map_dimensions_from_file(&game, argv[1]);
 	printf("Map Dimensions: %d x %d\n", game.map_rows, game.map_cols);
 	printf("Map start 1: %d\n", game.map_start);
 	printf("Map end 1: %d\n", game.map_end);
 	allocate_map(&game);
-	printf("*****************Toedeloedoki 1\n");
 	fill_2d_map_from_file(&game, argv[1]);
 	print_map_grid_2d(&game);
-	printf("******************Toedeloedoki 2\n");
 	check_map_surrounded(&game);
-	//print_map_grid_2d(&game);
-
-	//load_map_from_file(&game, argv[1]);
 	init_game(&game);
-	game.mlx = mlx_init(WIDTH, HEIGHT, "Welcome to DOOOOOOOOOOOOOM!!!!!!!!!!!!!!!", false);
+	game.mlx = mlx_init(WIDTH, HEIGHT, "Welcome to DOOOOOOOOM!!!!!!", false);
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	if (!game.image || (mlx_image_to_window(game.mlx, game.image, 0, 0) < 0))
 		printf("Failed to create image\n");
@@ -123,10 +55,6 @@ int	main(int argc, char **argv)
 	load_test_texture_west(&game);
 	mlx_key_hook(game.mlx, my_keyhook, &game);
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);
-	//mlx_loop_hook(game.mlx, draw_map, &game);
-	//mlx_loop_hook(game.mlx, redraw_player, &game);
-	//mlx_loop_hook(game.mlx, clear_image, &game);
-	//mlx_loop_hook(game.mlx, cast_all_rays, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
