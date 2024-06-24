@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/23 16:21:27 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/24 11:24:43 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_test_line(t_line *line)
 	close(fd);
 } */
 
-void	print_map(t_game *game)
+/* void	print_map(t_game *game)
 {
 	int	i;
 	int	j;
@@ -92,24 +92,6 @@ void	print_map(t_game *game)
 		printf("\n");
 		i++;
 	}
-}
-
-/* void	init_map(int ac, char **argv, t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < game->map_rows)
-	{
-		j = 0;
-		while (j < game->map_cols)
-		{
-			game->map_grid[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
 } */
 
 int	main(int argc, char **argv)
@@ -122,10 +104,12 @@ int	main(int argc, char **argv)
 	printf("Map start 1: %d\n", game.map_start);
 	printf("Map end 1: %d\n", game.map_end);
 	allocate_map(&game);
+	printf("*****************Toedeloedoki 1\n");
 	fill_2d_map_from_file(&game, argv[1]);
-	check_map_surrounded(&game);
-	//print_map_2d(&game);
 	print_map_grid_2d(&game);
+	printf("******************Toedeloedoki 2\n");
+	check_map_surrounded(&game);
+	//print_map_grid_2d(&game);
 
 	//load_map_from_file(&game, argv[1]);
 	init_game(&game);
