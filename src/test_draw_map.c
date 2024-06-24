@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:44:27 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/04 14:11:40 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/24 10:46:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void draw_map(void *param)
 		j = 0;
 		while (j < game->map_cols)
 		{
-			if (game->map_grid_2d[i][j] == 0)
+			if (game->map_grid_2d[i][j] == 0 || game->map_grid_2d[i][j] == 2)
 			{
 				draw_rectangle(game, j * TILE_SIZE, i * TILE_SIZE);
 				//printf("0");
@@ -113,7 +113,7 @@ void draw_minimap(void *param)
 		j = 0;
 		while (j < game->map_cols)
 		{
-			if (game->map_grid_2d[i][j] == 0)
+			if (game->map_grid_2d[i][j] == 0 || game->map_grid_2d[i][j] == 2)
 			{
 				draw_rectangle(game, j * TILE_SIZE, i * TILE_SIZE);
 				//printf("0");

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:06:07 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/14 16:06:10 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/24 10:52:54 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ bool has_wall_at(t_game game, float  x, float y)
 	}
 	int map_grid_index_x = floor(x / TILE_SIZE);
 	int map_grid_index_y = floor(y / TILE_SIZE);
-	return (game.map_grid_2d[map_grid_index_y][map_grid_index_x] != 0);
+	int value;
+
+	value = game.map_grid_2d[map_grid_index_y][map_grid_index_x];
+	return (value != 0 && value != 2);
 }
 
 bool is_inside_map(t_game game, float x, float y)

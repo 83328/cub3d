@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/23 15:37:00 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/24 10:59:54 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,34 +93,6 @@ int	get_map_height(int fd)
 	return -1;
 } */
 
-/* int get_max_line_length(int fd)
-{
-	char ch;
-	int max_length;
-	int current_length;
-
-	max_length = 0;
-	current_length = 0;
-	lseek(fd, 0, SEEK_SET);
-	while(read(fd, &ch, 1) > 0)
-	{
-		if(ch == '\n')
-		{
-			if(current_length > max_length)
-			{
-				max_length = current_length;
-			}
-			current_length = 0;
-		}
-		else
-			current_length++;
-	}
-	if(current_length > max_length)
-		max_length = current_length;
-	lseek(fd, 0, SEEK_SET);
-	return (max_length);
-} */
-
 int	get_max_line_length(int fd)
 {
 	char	ch;
@@ -140,7 +112,7 @@ int	get_max_line_length(int fd)
 			}
 			current_length = 0;
 		}
-		else if (ch != ' ')
+		else if (ch != ' '&& ch != '\t')
 			current_length++;
 	}
 	if (current_length > max_length)
