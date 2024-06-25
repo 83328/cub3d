@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 17:07:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:17:51 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,8 @@ int		get_map_start(int fd);
 int		get_textures(int fd, t_game *game);
 //int		get_map_height(int fd);
 int		get_map_height(int fd, int map_start);
-int		get_max_line_length(int fd);
+//int		get_max_line_length(int fd);
+int		get_max_line_length(int fd, int map_start);
 
 // 5_map_check.c
 void	check_map_surrounded(t_game *game);
