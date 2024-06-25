@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:02:49 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/24 15:22:32 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:07:09 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(char *str, t_game *game)
 {
-	write(2, "Error\n", 6);
+	write(2, "Error: \n", 8);
 	write(2, str, (int)ft_strlen(str));
 	if (game)
 		free_game(game);

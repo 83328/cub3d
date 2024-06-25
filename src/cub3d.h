@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/25 15:21:28 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:06:25 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@
 #define FOV_ANGLE (60 * (PI / 180))
 #define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
 
-# define ERR_ARGS "Error: Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
-# define ERR_FILETYPE "Error: Invalid file extension: use .cub for map files\n"
-# define ERR_OPEN "Error: Failed to open the file\n"
+# define ERR_ARGS "Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
+# define ERR_FILETYPE "Invalid file extension: use .cub for map files\n"
+# define ERR_OPEN "Failed to open the file\n"
 # define ERR_MEM "Failed to allocate memory for the map\n"
 
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
-# define ERR_START_POINT "Error: Map should contain exactly one 'N', 'W', 'E', or 'S'.\n"
+# define ERR_START_POINT "Map should contain exactly one 'N', 'W', 'E', or 'S'.\n"
 # define ERR_FILE "File not found\n"
 # define ERR_READ "Could not read from the file\n"
 
