@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:01:43 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/25 11:21:47 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:02:05 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ void	fill_2d_map_from_file(t_game *game, char argv[1])
 		free(line);
 		i++;
 	}
-	close(fd);
 	if (direction_count != 1)
+	{
 		printf("Invalid map: there should be exactly one starting direction\n");
+		close(fd);
+		return;
+	}
+	close(fd);
 }
 
 
