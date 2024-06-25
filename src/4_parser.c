@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/25 15:25:03 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:49:52 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,6 @@ int	get_textures(int fd, t_game *game)
 	}
 	return (0);
 }
-
-/* int	get_map_height(int fd, int map_start)
-{
-	char	c;
-	int		map_height;
-	int		non_empty_line_count;
-	int		non_empty_line;
-
-	map_height = 0;
-	non_empty_line_count = 0;
-	non_empty_line = 0;
-	while (read(fd, &c, 1) > 0)
-	{
-		if (c == '\n')
-		{
-			if (non_empty_line && non_empty_line_count >= map_start)
-				map_height++;
-			non_empty_line = 0;
-		}
-		else if (c != ' ' && c != '\t')
-			non_empty_line = 1;
-		non_empty_line_count++;
-	}
-	if (non_empty_line && non_empty_line_count >= map_start)
-		map_height++;
-	return (map_height);
-} */
 
 int	get_map_height(int fd, int map_start)
 {
@@ -120,9 +93,7 @@ int	get_map_start(int fd)
 					return (i);
 				}
 				else
-				{
 					break;
-				}
 			}
 			j++;
 		}
@@ -131,65 +102,6 @@ int	get_map_start(int fd)
 	}
 	return (-1);
 }
-
-/* int	get_max_line_length(int fd)
-{
-	char	ch;
-	int		max_length;
-	int		current_length;
-
-	max_length = 0;
-	current_length = 0;
-	lseek(fd, 0, SEEK_SET);
-	while (read(fd, &ch, 1) > 0)
-	{
-		if (ch == '\n')
-		{
-			if (current_length > max_length)
-			{
-				max_length = current_length;
-			}
-			current_length = 0;
-		}
-		else if (ch != ' ' && ch != '\t')
-			current_length++;
-	}
-	if (current_length > max_length)
-		max_length = current_length;
-	lseek(fd, 0, SEEK_SET);
-	return (max_length);
-} */
-
-/* int	get_max_line_length(int fd, int map_start)
-{
-	char	ch;
-	int		max_length;
-	int		current_length;
-	int		line_count;
-
-	max_length = 0;
-	current_length = 0;
-	line_count = 0;
-	lseek(fd, 0, SEEK_SET);
-	while (read(fd, &ch, 1) > 0)
-	{
-		if (ch == '\n')
-		{
-			if (line_count >= map_start && current_length > max_length)
-			{
-				max_length = current_length;
-			}
-			current_length = 0;
-			line_count++;
-		}
-		else if (ch != ' ' && ch != '\t' && line_count >= map_start)
-			current_length++;
-	}
-	if (line_count >= map_start && current_length > max_length)
-		max_length = current_length;
-	lseek(fd, 0, SEEK_SET);
-	return (max_length);
-} */
 
 int	get_max_line_length(int fd, int map_start, int map_rows)
 {
@@ -207,13 +119,11 @@ int	get_max_line_length(int fd, int map_start, int map_rows)
 		if (ch == '\n')
 		{
 			if (line_count >= map_start && line_count < map_start + map_rows && current_length > max_length)
-			{
 				max_length = current_length;
-			}
 			current_length = 0;
 			line_count++;
 			if (line_count >= map_start + map_rows)
-				break;
+				break ;
 		}
 		else if (ch != ' ' && ch != '\t' && line_count >= map_start)
 			current_length++;

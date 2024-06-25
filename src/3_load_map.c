@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/25 15:21:44 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:26:00 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	load_map_dimensions_from_file(t_game *game, char *argv)
 	}
 	game->map_start = get_map_start(fd);
 	// IMPORTANT: lseek might not be needed
-	lseek(fd, 0, SEEK_SET); // reset the file descriptor to the start of the file
+	lseek(fd, 0, SEEK_SET);
 	game->map_rows = get_map_height(fd, game->map_start);
 	game->map_cols = get_max_line_length(fd, game->map_start, game->map_rows);
 	game->map_end = game->map_start + game->map_rows;

@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 15:23:27 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:53:29 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,6 @@ void	draw_wall_strip_green(int x, int y, int width, int height, t_game *game)
 		i++;
 	}
 }
-
 
 void	draw_strip(int x, int y, int width, int height, int color, t_game *game)
 {

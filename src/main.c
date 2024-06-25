@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/24 17:05:08 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:54:57 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	load_map_dimensions_from_file(&game, argv[1]);
 	printf("Map Dimensions: %d x %d\n", game.map_rows, game.map_cols);
-	printf("Map start 1: %d\n", game.map_start);
-	printf("Map end 1: %d\n", game.map_end);
-	printf("Map height 1: %d\n", game.map_rows);
+	printf("Map start: %d\n", game.map_start);
+	printf("Map end: %d\n", game.map_end);
+	printf("Map height: %d\n", game.map_rows);
 	allocate_map(&game);
 	fill_2d_map_from_file(&game, argv[1]);
 	print_map_grid_2d(&game);

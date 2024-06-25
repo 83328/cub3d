@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/25 15:03:27 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/25 16:55:50 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	update_player_position(t_game *game, float dx, float dy)
 			//	printf("player_y: %f\n", game->player_y);
 			//	game->player_y += dy;
 			//	game->player_x += dx;
-				
-			
 }
 
 void	update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
