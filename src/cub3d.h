@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 10:12:20 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:07:15 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ typedef struct s_game
 //	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;
 	int							map_start;
-	int							map_end;
 	int							map_rows;
 	int							map_cols;
+	int							map_end;
 	char						*file_path_no;
 	char						*file_path_so;
 	char						*file_path_we;
@@ -151,8 +151,10 @@ void	allocate_map(t_game *game);
 
 // 4_parser.c
 int		load_map(t_game *game, char *filename);
+int		get_map_start(int fd);
 int		get_textures(int fd, t_game *game);
-int		get_map_height(int fd);
+//int		get_map_height(int fd);
+int		get_map_height(int fd, int map_start);
 int		get_max_line_length(int fd);
 
 // 5_map_check.c

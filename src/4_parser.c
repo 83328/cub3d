@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:53:50 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/24 14:58:24 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 10:11:13 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ int	get_textures(int fd, t_game *game)
 	return (0);
 }
 
-int	get_map_height(int fd)
+/* int	get_map_height(int fd, int map_start)
 {
 	char	c;
 	int		map_height;
 	int		non_empty_line_count;
 	int		non_empty_line;
-	//int		map_start;
 
 	map_height = 0;
 	non_empty_line_count = 0;
@@ -52,47 +51,86 @@ int	get_map_height(int fd)
 	{
 		if (c == '\n')
 		{
-			/*
-			this line checks the file and jumps to the seventh line of the file
-			the actual map coordinates start there
-			
-			if (non_empty_line && ++non_empty_line_count > 6)
-			
-			*/
-			if (non_empty_line && non_empty_line_count >= 0)
+			if (non_empty_line && non_empty_line_count >= map_start)
 				map_height++;
 			non_empty_line = 0;
 		}
 		else if (c != ' ' && c != '\t')
 			non_empty_line = 1;
+		non_empty_line_count++;
 	}
-	if (non_empty_line && non_empty_line_count >= 6)
+	if (non_empty_line && non_empty_line_count >= map_start)
 		map_height++;
-	return (map_height + 1);
+	return (map_height);
+} */
+
+int	get_map_height(int fd, int map_start)
+{
+	char	c;
+	int		map_height;
+	int		line_count;
+	int		non_empty_line;
+
+	map_height = 0;
+	line_count = 0;
+	non_empty_line = 0;
+	while (read(fd, &c, 1) > 0)
+	{
+		if (c == '\n')
+		{
+			if (non_empty_line && line_count >= map_start)
+				map_height++;
+			non_empty_line = 0;
+			line_count++;
+		}
+		else if (c != ' ' && c != '\t')
+			non_empty_line = 1;
+	}
+	if (non_empty_line && line_count >= map_start)
+		map_height++;
+	return (map_height);
 }
 
-/* int	get_map_start(int fd)
+int	get_map_start(int fd)
 {
 	char	*line;
-	int		total_line_count;
-	int		non_empty_line_count;
+	int		i;
+	int		consecutive_ones;
 
-	total_line_count = 0;
-	non_empty_line_count = 0;
-	while(read(fd, &line, 1) > 0)
+	i = 0;
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		total_line_count++;
-		if(line[0] != '\0' && ++non_empty_line_count == 7)
+		int j = 0;
+		int valid_line = 1;
+		consecutive_ones = 0;
+		while (line[j])
 		{
-			free(line);
-			return (total_line_count);
+			if (line[j] == '1')
+				consecutive_ones++;
+			else if (line[j] != ' ' && line[j] != '\t')
+			{
+				valid_line = 0;
+				break;
+			}
+			if (consecutive_ones == 3)
+			{
+				if (valid_line)
+				{
+					free(line);
+					return (i);
+				}
+				else
+				{
+					break;
+				}
+			}
+			j++;
 		}
 		free(line);
+		i++;
 	}
-	if(non_empty_line_count == 6)
-		return (total_line_count + 1);
-	return -1;
-} */
+	return (-1);
+}
 
 int	get_max_line_length(int fd)
 {
