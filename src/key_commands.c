@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 15:19:44 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:03:27 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,20 @@
 
 void	update_player_position(t_game *game, float dx, float dy)
 {
-	game->player_x += dx;
-	game->player_y += dy;
+			
+				if (game->player_y + dy > TILE_SIZE && game->player_y + dy < ((game->map_rows - 1) * TILE_SIZE) )
+				{
+					game->player_y += dy;
+				}
+				if (game->player_x + dx > TILE_SIZE && game->player_x + dx < ((game->map_cols - 1) * TILE_SIZE))
+				{
+					game->player_x += dx;
+				}
+			//	printf("player_y: %f\n", game->player_y);
+			//	game->player_y += dy;
+			//	game->player_x += dx;
+				
+			
 }
 
 void	update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
