@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 18:26:04 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/26 18:32:20 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ERR_OPEN "Failed to open the file\n"
 # define ERR_MEM "Failed to allocate memory for the map\n"
 
+# define ERR_COLOR "Error in color. Provide a color in the format F or C 255,255,255\n"
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
 # define ERR_TEX_ID "Error in texture. Provide  NO, SO, WE and EA "
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
@@ -184,6 +185,8 @@ typedef struct line
 	int32_t	y1;
 }	t_line;
 
+void color_check(char *line, t_validation *validation);
+void line_check_textures(char *line, t_validation *validation);
 void validate_file(char *file, t_validation *validation);
 
 //2_file_check.c
