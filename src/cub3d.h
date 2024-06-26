@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/25 16:06:25 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 10:11:23 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ typedef struct s_map
 	//int start;
 	char **map;
 } t_map;
+
+typedef struct s_max_length
+{
+    int line_count;
+    int map_start;
+    int map_rows;
+    int current_length;
+    int max_length;
+}	t_max_length;
 
 typedef struct s_dda
 {

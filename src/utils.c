@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:02:49 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/25 16:07:09 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 09:50:17 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,53 @@ void	ft_error(char *str, t_game *game)
 	exit(EXIT_FAILURE);
 }
 
+void	free_map(t_game *game)
+{
+	int	i;
+
+	if (game->map)
+	{
+		i = 0;
+		while (i < game->map->height)
+		{
+			free(game->map->map[i]);
+			i++;
+		}
+		free(game->map);
+	}
+}
+
+void	free_map_grid_2d(t_game *game)
+{
+	int	i;
+
+	if (game->map_grid_2d)
+	{
+		i = 0;
+		while (i < game->map_rows)
+		{
+			free(game->map_grid_2d[i]);
+			i++;
+		}
+		free(game->map_grid_2d);
+	}
+}
+
 void	free_game(t_game *game)
+{
+	if (game)
+	{
+		free_map(game);
+		if (game->mlx)
+			free(game->mlx);
+		if (game->image)
+			free(game->image);
+		free_map_grid_2d(game);
+		free(game);
+	}
+}
+
+/* void	free_game(t_game *game)
 {
 	int	i;
 
@@ -53,4 +99,4 @@ void	free_game(t_game *game)
 		}
 		free(game);
 	}
-}
+} */
