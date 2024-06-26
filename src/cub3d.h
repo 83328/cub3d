@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 18:18:44 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/26 18:26:04 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ typedef struct line
 	int32_t	y1;
 }	t_line;
 
-void validate_file(char *file);
+void validate_file(char *file, t_validation *validation);
 
 //2_file_check.c
 void	check_file(int argc, char **argv);

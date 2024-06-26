@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 18:22:10 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/26 18:27:56 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,23 @@ void line_check_textures(char *line, t_validation *validation)
         validation->ceiling_color = 1;        
 }
 
-void	validate_file(char *file)
+void	validate_file(char *file, t_validation *validation)
 {
-    t_validation validation;
-    validation.north_texture = 0;
-    validation.south_texture = 0;
-    validation.west_texture = 0;
-    validation.east_texture = 0;
+    validation->north_texture = 0;
+    validation->south_texture = 0;
+    validation->west_texture = 0;
+    validation->east_texture = 0;
     
     int fd = open(file, O_RDONLY);
     char *line = get_next_line(fd);
     while (line)
     {
-        line_check_textures(line, &validation);
+        line_check_textures(line, validation);
         free(line);
         line = get_next_line(fd);
     }
     close(fd);
-    if (validation.north_texture == 0 || validation.south_texture == 0 || validation.west_texture == 0 || validation.east_texture == 0)
+    if (validation->north_texture == 0 || validation->south_texture == 0 || validation->west_texture == 0 || validation->east_texture == 0)
     {
         printf(ERR_TEX_ID);
         exit(1);
