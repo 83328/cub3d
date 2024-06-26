@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_projection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 14:44:22 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:00:11 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,9 @@ void	wall_projection(t_game *game)
 		wallBottomPixel = wallBottomPixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wallBottomPixel;
 		for (int y = 0; y < wallTopPixel; y++)
 		{
-		   our_mlx_put_pixel(game->image, x, y, 0xFF444444);
+			 int color = get_rgba(68, 68, 68, 255);
+          reverse_bits((uint32_t *)&color);
+		   our_mlx_put_pixel(game->image, x, y, color);
 		}
 		int textureOffsetX;
 		if (game->rays[x].was_hit_vertical)
@@ -232,7 +234,9 @@ void	wall_projection(t_game *game)
 		}
 		for (int y = wallBottomPixel; y < WINDOW_HEIGHT; y++)
 		{
-			our_mlx_put_pixel(game->image, x, y, 0xFF884288);
+			int floor_color = get_rgba(136, 66, 136, 255);
+        reverse_bits((uint32_t *)&floor_color);
+			our_mlx_put_pixel(game->image, x, y, floor_color);
 		}
 	}
 }
