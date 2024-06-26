@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 17:26:06 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:39:07 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 #define M_PI 3.14159265358979323846
 #define PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489661923
+#define THREE_PI_2 4.71238898038468985769
 #define TWO_PI 6.28318530717958647692
 #define FOV_ANGLE (60 * (PI / 180))
 #define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
