@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:44:27 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 15:25:14 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:55:11 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	draw_vertical_line_left(t_game *game, int x, int y)
 {
-	t_line line;
+	t_line	line;
+
 	line.x0 = x;
 	line.y0 = y;
 	line.x1 = x;
@@ -24,7 +25,8 @@ void	draw_vertical_line_left(t_game *game, int x, int y)
 
 void	draw_vertical_line_right(t_game *game, int x, int y)
 {
-	t_line line;
+	t_line	line;
+
 	line.x0 = x + TILE_SIZE;
 	line.y0 = y;
 	line.x1 = x + TILE_SIZE;
@@ -34,7 +36,8 @@ void	draw_vertical_line_right(t_game *game, int x, int y)
 
 void	draw_horizontal_line_top(t_game *game, int x, int y)
 {
-	t_line line;
+	t_line	line;
+
 	line.x0 = x;
 	line.y0 = y;
 	line.x1 = x + TILE_SIZE;
@@ -44,7 +47,8 @@ void	draw_horizontal_line_top(t_game *game, int x, int y)
 
 void	draw_horizontal_line_bottom(t_game *game, int x, int y)
 {
-	t_line line;
+	t_line	line;
+
 	line.x0 = x;
 	line.y0 = y + TILE_SIZE;
 	line.x1 = x + TILE_SIZE;
@@ -62,20 +66,26 @@ void	draw_rectangle(t_game *game, int x, int y)
 
 void	fill_rectangle_white(t_game *game, int x, int y)
 {
-	for (int i = 0; i < TILE_SIZE; i++)
+	int	i;
+
+	i = 0;
+	while (i < TILE_SIZE)
 	{
-		for (int j = 0; j < TILE_SIZE; j++)
+		int j = 0;
+		while (j < TILE_SIZE)
 		{
 			mlx_put_pixel(game->image, x + i, y + j, 0xFFFFFFFF);
+			j++;
 		}
+		i++;
 	}
 }
 
 void	draw_map(void *param)
 {
-	t_game *game;
-	int i;
-	int j;
+	t_game	*game;
+	int		i;
+	int		j;
 
 	game = (t_game *)param;
 	i = 0;
@@ -87,12 +97,10 @@ void	draw_map(void *param)
 			if (game->map_grid_2d[i][j] == 0 || game->map_grid_2d[i][j] == 2)
 			{
 				draw_rectangle(game, j * TILE_SIZE, i * TILE_SIZE);
-				//printf("0");
 			}
 			else if (game->map_grid_2d[i][j] == 1)
 			{
 				fill_rectangle_white(game, j * TILE_SIZE, i * TILE_SIZE);
-				//printf("1");
 			}
 			j++;
 		}
@@ -102,9 +110,9 @@ void	draw_map(void *param)
 
 void	draw_minimap(void *param)
 {
-	t_game *game;
-	int i;
-	int j;
+	t_game	*game;
+	int		i;
+	int		j;
 
 	game = (t_game *)param;
 	i = 0;
@@ -116,12 +124,10 @@ void	draw_minimap(void *param)
 			if (game->map_grid_2d[i][j] == 0 || game->map_grid_2d[i][j] == 2)
 			{
 				draw_rectangle(game, j * TILE_SIZE, i * TILE_SIZE);
-				//printf("0");
 			}
 			else if (game->map_grid_2d[i][j] == 1)
 			{
 				fill_rectangle_white(game, j * TILE_SIZE, i * TILE_SIZE);
-				//printf("1");
 			}
 			j++;
 		}

@@ -6,48 +6,11 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:08:39 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/25 16:26:00 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:59:44 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* void	load_map_dimensions_from_file(t_game *game, char *argv)
-{
-	int	fd;
-
-	fd = open(argv, O_RDONLY);
-	if (fd < 0)
-	{
-		ft_error(ERR_OPEN, NULL);
-		return ;
-	}
-	game->map_start = get_map_start(fd);
-	game->map_rows = get_map_height(fd);
-	game->map_cols = get_max_line_length(fd);
-//	game->map_start = 0;
-	game->map_end = game->map_start + game->map_rows;
-	//get_textures(fd, game);//check whether texture filepaths are present
-	close(fd);
-} */
-
-/* void	load_map_dimensions_from_file(t_game *game, char *argv)
-{
-	int	fd;
-
-	fd = open(argv, O_RDONLY);
-	if (fd < 0)
-	{
-		ft_error(ERR_OPEN, NULL);
-		return ;
-	}
-	game->map_start = get_map_start(fd);
-	lseek(fd, 0, SEEK_SET); // reset the file descriptor to the start of the file
-	game->map_rows = get_map_height(fd);
-	game->map_cols = get_max_line_length(fd);
-	game->map_end = game->map_start + game->map_rows;
-	close(fd);
-} */
 
 void	load_map_dimensions_from_file(t_game *game, char *argv)
 {

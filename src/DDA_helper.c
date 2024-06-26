@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:35:09 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 14:31:59 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:35:01 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	handle_wall_hit(t_game *game, t_dda *dda,
 {
 	if (has_wall_at(*game, x_to_check, y_to_check))
 	{
-		// Found a wall hit
 		dda->horz_wall_hit_x = dda->next_horz_touch_x;
 		dda->horz_wall_hit_y = dda->next_horz_touch_y;
 		dda->horz_wall_content = game->map_grid_2d[(int)floor(y_to_check / 
@@ -147,7 +146,6 @@ void	handle_vertical_wall_hit(t_game *game, t_dda *dda,
 {
 	if (has_wall_at(*game, x_to_check, y_to_check))
 	{
-		// Found a wall hit
 		dda->vert_wall_hit_x = dda->next_vert_touch_x;
 		dda->vert_wall_hit_y = dda->next_vert_touch_y;
 		dda->vert_wall_content = game->map_grid_2d[(int)floor(y_to_check / 

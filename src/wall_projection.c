@@ -6,45 +6,45 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 11:02:45 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:44:22 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-uint32_t put_pixel_color(mlx_image_t *img, int x, int y)
+uint32_t	put_pixel_color(mlx_image_t *img, int x, int y)
 {
 	uint32_t *px;
 	px = (uint32_t *)(img->pixels + (img->width * y + x) * sizeof(uint32_t));
 	return(*px);
 }
 
-int get_rgba(int r, int g, int b, int a)
+int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int get_r(int rgba)
+int	get_r(int rgba)
 {
 	return ((rgba >> 24) & 0xFF);
 }
 
-int get_g(int rgba)
+int	get_g(int rgba)
 {
 	return ((rgba >> 16) & 0xFF);
 }
 
-int get_b(int rgba)
+int	get_b(int rgba)
 {
 	return ((rgba >> 8) & 0xFF);
 }
 
-int get_a(int rgba)
+int	get_a(int rgba)
 {
 	return (rgba & 0xFF);
 }
 
-void convert_rgba_to_abgr(uint32_t *color)
+void	convert_rgba_to_abgr(uint32_t *color)
 {
 	*color = (*color >> 24) | 
 		 ((*color << 8) & 0x00FF0000) |
@@ -52,7 +52,7 @@ void convert_rgba_to_abgr(uint32_t *color)
 		 (*color << 24);
 }
 
-void our_mlx_draw_pixel(uint8_t* pixel, uint32_t color)
+void	our_mlx_draw_pixel(uint8_t* pixel, uint32_t color)
 {
 	*(pixel++) = (uint8_t)(color >> 24);
 	*(pixel++) = (uint8_t)(color >> 16);
@@ -139,12 +139,14 @@ void	reverse_bits(uint32_t *n)
 
 void	project_test_texture_north(void *param)
 {
-	t_game *game;
+	t_game		*game;
+	uint32_t	x;
+	uint32_t	y;
+	uint32_t	color;
+
 	game = (t_game *)param;
-	uint32_t x = 0;
-	uint32_t y = 0;
-	uint32_t color;
-	  
+	x = 0;
+	y = 0;
 	while (y < game->image_north_texture->width)
 	{
 		while (x < game->image_north_texture->height)
@@ -161,8 +163,9 @@ void	project_test_texture_north(void *param)
 
 void	draw_wall_strip_green(int x, int y, int width, int height, t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+
 	i = 0;
 	while (i < height)
 	{
@@ -178,8 +181,8 @@ void	draw_wall_strip_green(int x, int y, int width, int height, t_game *game)
 
 void	draw_strip(int x, int y, int width, int height, int color, t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < height)
@@ -195,7 +198,7 @@ void	draw_strip(int x, int y, int width, int height, int color, t_game *game)
 }
 
 void	wall_projection(t_game *game)
-{    
+{
 	for (int x = 0; x < NUM_RAYS; x++)
 	{
 		float perpDistance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
