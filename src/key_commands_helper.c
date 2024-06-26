@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 19:43:29 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 15:21:16 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 10:58:25 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,40 @@ void	update_rotation(t_game *game, mlx_key_data_t keydata)
 
 void	move_forward(t_game *game, float move_speed)
 {
-	float dy = -move_speed * sinf(game->player_rotation_angle);
-	float dx = -move_speed * cosf(game->player_rotation_angle);
+	float	dy;
+	float	dx;
+
+	dy = -move_speed * sinf(game->player_rotation_angle);
+	dx = -move_speed * cosf(game->player_rotation_angle);
 	update_player_position(game, dx, dy);
 }
 
 void	move_backward(t_game *game, float move_speed)
 {
-	float dy = move_speed * sinf(game->player_rotation_angle);
-	float dx = move_speed * cosf(game->player_rotation_angle);
+	float	dy;
+	float	dx;
+
+	dy = move_speed * sinf(game->player_rotation_angle);
+	dx = move_speed * cosf(game->player_rotation_angle);
 	update_player_position(game, dx, dy);
 }
 
 void	move_left(t_game *game, float move_speed)
 {
-	float dx = move_speed * cosf(game->player_rotation_angle + M_PI_2);
-	float dy = move_speed * sinf(game->player_rotation_angle + M_PI_2);
+	float	dx;
+	float	dy;
+
+	dx = move_speed * cosf(game->player_rotation_angle + M_PI_2);
+	dy = move_speed * sinf(game->player_rotation_angle + M_PI_2);
 	update_player_position(game, dx, dy);
 }
 
 void	move_right(t_game *game, float move_speed)
 {
-	float dx = -move_speed * cosf(game->player_rotation_angle + M_PI_2);
-	float dy = -move_speed * sinf(game->player_rotation_angle + M_PI_2);
+	float	dx;
+	float	dy;
+
+	dx = -move_speed * cosf(game->player_rotation_angle + M_PI_2);
+	dy = -move_speed * sinf(game->player_rotation_angle + M_PI_2);
 	update_player_position(game, dx, dy);
 }

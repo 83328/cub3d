@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/25 16:55:50 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 10:53:55 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 void	update_player_position(t_game *game, float dx, float dy)
 {
-			
-				if (game->player_y + dy > TILE_SIZE && game->player_y + dy < ((game->map_rows - 1) * TILE_SIZE) )
-				{
-					game->player_y += dy;
-				}
-				if (game->player_x + dx > TILE_SIZE && game->player_x + dx < ((game->map_cols - 1) * TILE_SIZE))
-				{
-					game->player_x += dx;
-				}
-			//	printf("player_y: %f\n", game->player_y);
-			//	game->player_y += dy;
-			//	game->player_x += dx;
+	if (game->player_y + dy > TILE_SIZE && game->player_y + 
+		dy < ((game->map_rows - 1) * TILE_SIZE))
+	{
+		game->player_y += dy;
+	}
+	if (game->player_x + dx > TILE_SIZE && game->player_x + 
+		dx < ((game->map_cols - 1) * TILE_SIZE))
+	{
+		game->player_x += dx;
+	}
 }
 
 void	update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
@@ -70,19 +68,23 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	handle_movement_and_rotation_keys(keydata, game);
 	handle_escape_key(keydata);
 }
-/* 
+/*
 #if 0
 OLD CODE: kept for learning reasons
 
 void update_movement(t_game *game, float move_speed, mlx_key_data_t keydata)
 {
-	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS || 
+		keydata.action == MLX_REPEAT))
 		move_forward(game, move_speed);
-	if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS || 
+		keydata.action == MLX_REPEAT))
 		move_backward(game, move_speed);
-	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || 
+		keydata.action == MLX_REPEAT))
 		move_left(game, move_speed);
-	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || 
+		keydata.action == MLX_REPEAT))
 		move_right(game, move_speed);
 }
 
@@ -176,10 +178,12 @@ void handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game)
 		dy -= move_speed * sinf(game->player_rotation_angle + M_PI_2);
 	}
 
-	// Aktualisiere die Spielerposition basierend auf der kombinierten Bewegung
+	// Aktualisiere die Spielerposition basierend auf 
+	der kombinierten Bewegung
 	game->player_x += dx;
 	game->player_y += dy;
 
 }
 
-#endif */
+#endif 
+*/

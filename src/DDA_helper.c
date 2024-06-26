@@ -6,42 +6,41 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:35:09 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/04 14:03:28 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 11:38:17 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int is_ray_facing_down(float angle)
+int	is_ray_facing_down(float angle)
 {
 	return (angle > 0 && angle < PI);
 }
 
-int is_ray_facing_up(float angle)
+int	is_ray_facing_up(float angle)
 {
 	return (angle > PI && angle < TWO_PI);
 }
 
-int is_ray_facing_right(float angle)
+int	is_ray_facing_right(float angle)
 {
 	return (angle < 0.5 * PI || angle > 1.5 * PI);
 }
 
-int is_ray_facing_left(float angle)
+int	is_ray_facing_left(float angle)
 {
 	return (angle > 0.5 * PI && angle < 1.5 * PI);
 }
 
-void dda_init(t_dda *dda, t_game *game, int i)
+void	dda_init(t_dda *dda, t_game *game, int i)
 {
 	dda->is_ray_facing_down = is_ray_facing_down(game->rays[i].ray_angle);
 	dda->is_ray_facing_up = is_ray_facing_up(game->rays[i].ray_angle);
 	dda->is_ray_facing_right = is_ray_facing_right(game->rays[i].ray_angle);
 	dda->is_ray_facing_left = is_ray_facing_left(game->rays[i].ray_angle);
-
 }
 
-void dda_init_for_horizontal(t_dda *dda, t_game *game, int i)
+void	dda_init_for_horizontal(t_dda *dda, t_game *game, int i)
 {
 	dda->found_horz_wall_hit = false;
 	dda->horz_wall_hit_x = 0;
@@ -59,7 +58,7 @@ void dda_init_for_horizontal(t_dda *dda, t_game *game, int i)
 	dda->next_horz_touch_y = dda->yintercept;
 }
 
-void dda_init_for_vertical(t_dda *dda, t_game *game, int i)
+void	dda_init_for_vertical(t_dda *dda, t_game *game, int i)
 {
 	dda->found_vert_wall_hit = false;
 	dda->vert_wall_hit_x = 0;
@@ -77,21 +76,21 @@ void dda_init_for_vertical(t_dda *dda, t_game *game, int i)
 	dda->next_vert_touch_y = dda->yintercept;
 }
 
-void dda_loop_horizontal(t_game *game, t_dda *dda)
+void	dda_loop_horizontal(t_game *game, t_dda *dda)
 {
 while (dda->next_horz_touch_x >= 0 && dda->next_horz_touch_x <= game->map_cols * TILE_SIZE && dda->next_horz_touch_y >= 0 && dda->next_horz_touch_y <= game->map_rows * TILE_SIZE)
 	{
-		float xToCheck = dda->next_horz_touch_x;
-		float yToCheck = dda->next_horz_touch_y + (dda->is_ray_facing_up ? -1 : 0);
+		float x_to_check = dda->next_horz_touch_x;
+		float y_to_check = dda->next_horz_touch_y + (dda->is_ray_facing_up ? -1 : 0);
 
-		if (has_wall_at(*game, xToCheck, yToCheck))
+		if (has_wall_at(*game, x_to_check, y_to_check))
 		{
 			// found a wall hit
 			dda->horz_wall_hit_x = dda->next_horz_touch_x;
 			dda->horz_wall_hit_y = dda->next_horz_touch_y;
-			dda->horz_wall_content = game->map_grid_2d[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+			dda->horz_wall_content = game->map_grid_2d[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)];
 			dda->found_horz_wall_hit = true;
-			break;
+			break ;
 		}
 		else
 		{
@@ -101,21 +100,21 @@ while (dda->next_horz_touch_x >= 0 && dda->next_horz_touch_x <= game->map_cols *
 	}
 }
 
-void dda_loop_vertical(t_game *game, t_dda *dda)
+void	dda_loop_vertical(t_game *game, t_dda *dda)
 {
 while (dda->next_vert_touch_x >= 0 && dda->next_vert_touch_x <= game->map_cols * TILE_SIZE && dda->next_vert_touch_y >= 0 && dda->next_vert_touch_y <= game->map_rows * TILE_SIZE)
 	{
-		float xToCheck = dda->next_vert_touch_x + (dda->is_ray_facing_left ? -1 : 0);
-		float yToCheck = dda->next_vert_touch_y;
+		float x_to_check = dda->next_vert_touch_x + (dda->is_ray_facing_left ? -1 : 0);
+		float y_to_check = dda->next_vert_touch_y;
 
-		if (has_wall_at(*game, xToCheck, yToCheck))
+		if (has_wall_at(*game, x_to_check, y_to_check))
 		{
 			// found a wall hit
 			dda->vert_wall_hit_x = dda->next_vert_touch_x;
 			dda->vert_wall_hit_y = dda->next_vert_touch_y;
-			dda->vert_wall_content = game->map_grid_2d[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+			dda->vert_wall_content = game->map_grid_2d[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)];
 			dda->found_vert_wall_hit = true;
-			break;
+			break ;
 		}
 		else
 		{
@@ -125,23 +124,26 @@ while (dda->next_vert_touch_x >= 0 && dda->next_vert_touch_x <= game->map_cols *
 	}
 }
 
-void calculate_nearest_intersection(t_game *game, t_dda *dda, int i)
+void	calculate_nearest_intersection(t_game *game, t_dda *dda, int i)
 {
-	float horzHitDistance = dda->found_horz_wall_hit
+	float horz_hit_distance = dda->found_horz_wall_hit
 		? distance_between_points(game->player_x, game->player_y, dda->horz_wall_hit_x, dda->horz_wall_hit_y)
 		: FLT_MAX;
-	float vertHitDistance = dda->found_vert_wall_hit
+	float vert_hit_distance = dda->found_vert_wall_hit
 		? distance_between_points(game->player_x, game->player_y, dda->vert_wall_hit_x, dda->vert_wall_hit_y)
 		: FLT_MAX;
 
-	if (vertHitDistance < horzHitDistance) {
-		game->rays[i].distance = vertHitDistance;
+	if (vert_hit_distance < horz_hit_distance)
+	{
+		game->rays[i].distance = vert_hit_distance;
 		game->rays[i].wall_hit_x = dda->vert_wall_hit_x;
 		game->rays[i].wall_hit_y = dda->vert_wall_hit_y;
 		game->rays[i].wall_hit_content = dda->vert_wall_content;
 		game->rays[i].was_hit_vertical = true;
-	} else {
-		game->rays[i].distance = horzHitDistance;
+	}
+	else
+	{
+		game->rays[i].distance = horz_hit_distance;
 		game->rays[i].wall_hit_x = dda->horz_wall_hit_x;
 		game->rays[i].wall_hit_y = dda->horz_wall_hit_y;
 		game->rays[i].wall_hit_content = dda->horz_wall_content;
@@ -149,7 +151,7 @@ void calculate_nearest_intersection(t_game *game, t_dda *dda, int i)
 	}
 }
 
-void draw_this_ray(t_game *game, int i)
+void	draw_this_ray(t_game *game, int i)
 {
 	t_line line;
 	line.x0 = game->player_x;
@@ -159,9 +161,9 @@ void draw_this_ray(t_game *game, int i)
 	bresenham(line, game->image);
 }
 
-void horizontal_and_vertical_grid_intersection(t_game *game, int i)
+void	horizontal_and_vertical_grid_intersection(t_game *game, int i)
 {
-	t_dda dda;
+	t_dda	dda;
 	
 	dda_init(&dda, game, i);
 	dda_init_for_horizontal(&dda, game, i);
