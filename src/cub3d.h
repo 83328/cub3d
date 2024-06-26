@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 17:39:07 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/26 18:18:44 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,23 @@
 # define ERR_MEM "Failed to allocate memory for the map\n"
 
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
+# define ERR_TEX_ID "Error in texture. Provide  NO, SO, WE and EA "
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
 # define ERR_START_POINT "Map should contain exactly one 'N', 'W', 'E', or 'S'.\n"
 # define ERR_FILE "File not found\n"
 # define ERR_READ "Could not read from the file\n"
+
+typedef struct s_validation
+{
+	int		north_texture;
+	int		south_texture;
+	int		west_texture;
+	int		east_texture;
+	int		floor_color;
+	int		ceiling_color;
+	int		map;
+}	t_validation;
 
 typedef struct s_map
 {
@@ -171,6 +183,8 @@ typedef struct line
 	int32_t	x1;
 	int32_t	y1;
 }	t_line;
+
+void validate_file(char *file);
 
 //2_file_check.c
 void	check_file(int argc, char **argv);

@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/26 17:39:26 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:49:08 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	check_file(argc, argv);
+	validate_file(argv[1]);
 	load_map_dimensions_from_file(&game, argv[1]);
 	printf("Map Dimensions: %d x %d\n", game.map_rows, game.map_cols);
 	printf("Map start: %d\n", game.map_start);
