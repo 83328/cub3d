@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:35:09 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 14:11:26 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:31:59 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,44 +188,35 @@ void	dda_loop_vertical(t_game *game, t_dda *dda)
 	}
 }
 
-/* void	dda_loop_vertical(t_game *game, t_dda *dda)
+void	calculate_distances(t_game *game, t_dda *dda, 
+	float *horz_hit_distance, float *vert_hit_distance)
 {
-	while (dda->next_vert_touch_x >= 0 && 
-		dda->next_vert_touch_x <= game->map_cols * TILE_SIZE && 
-			dda->next_vert_touch_y >= 0 && dda->next_vert_touch_y <= game->map_rows * TILE_SIZE)
+	if (dda->found_horz_wall_hit)
 	{
-		float x_to_check = dda->next_vert_touch_x + (dda->is_ray_facing_left ? -1 : 0);
-		float y_to_check = dda->next_vert_touch_y;
-
-		if (has_wall_at(*game, x_to_check, y_to_check))
-		{
-			// found a wall hit
-			dda->vert_wall_hit_x = dda->next_vert_touch_x;
-			dda->vert_wall_hit_y = dda->next_vert_touch_y;
-			dda->vert_wall_content = game->map_grid_2d[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)];
-			dda->found_vert_wall_hit = true;
-			break ;
-		}
-		else
-		{
-			dda->next_vert_touch_x += dda->xstep;
-			dda->next_vert_touch_y += dda->ystep;
-		}
+		*horz_hit_distance = distance_between_points(game->player_x, 
+				game->player_y, dda->horz_wall_hit_x, dda->horz_wall_hit_y);
 	}
-} */
-
-void	calculate_nearest_intersection(t_game *game, t_dda *dda, int i)
-{
-	float horz_hit_distance = dda->found_horz_wall_hit
-		? distance_between_points(game->player_x, game->player_y, dda->horz_wall_hit_x, dda->horz_wall_hit_y)
-		: FLT_MAX;
-	float vert_hit_distance = dda->found_vert_wall_hit
-		? distance_between_points(game->player_x, game->player_y, dda->vert_wall_hit_x, dda->vert_wall_hit_y)
-		: FLT_MAX;
-
-	if (vert_hit_distance < horz_hit_distance)
+	else
 	{
-		game->rays[i].distance = vert_hit_distance;
+		*horz_hit_distance = FLT_MAX;
+	}
+	if (dda->found_vert_wall_hit)
+	{
+		*vert_hit_distance = distance_between_points(game->player_x, 
+				game->player_y, dda->vert_wall_hit_x, dda->vert_wall_hit_y);
+	}
+	else
+	{
+		*vert_hit_distance = FLT_MAX;
+	}
+}
+
+void	assign_ray_values(t_game *game, t_dda *dda, int i, 
+	t_distances *distances)
+{
+	if (distances->vert_hit_distance < distances->horz_hit_distance)
+	{
+		game->rays[i].distance = distances->vert_hit_distance;
 		game->rays[i].wall_hit_x = dda->vert_wall_hit_x;
 		game->rays[i].wall_hit_y = dda->vert_wall_hit_y;
 		game->rays[i].wall_hit_content = dda->vert_wall_content;
@@ -233,7 +224,7 @@ void	calculate_nearest_intersection(t_game *game, t_dda *dda, int i)
 	}
 	else
 	{
-		game->rays[i].distance = horz_hit_distance;
+		game->rays[i].distance = distances->horz_hit_distance;
 		game->rays[i].wall_hit_x = dda->horz_wall_hit_x;
 		game->rays[i].wall_hit_y = dda->horz_wall_hit_y;
 		game->rays[i].wall_hit_content = dda->horz_wall_content;
@@ -241,9 +232,19 @@ void	calculate_nearest_intersection(t_game *game, t_dda *dda, int i)
 	}
 }
 
+void	calculate_nearest_intersection(t_game *game, t_dda *dda, int i)
+{
+	t_distances	distances;
+
+	calculate_distances(game, dda, &distances.horz_hit_distance, 
+		&distances.vert_hit_distance);
+	assign_ray_values(game, dda, i, &distances);
+}
+
 void	draw_this_ray(t_game *game, int i)
 {
-	t_line line;
+	t_line	line;
+
 	line.x0 = game->player_x;
 	line.y0 = game->player_y;
 	line.x1 = game->rays[i].wall_hit_x;
@@ -254,7 +255,7 @@ void	draw_this_ray(t_game *game, int i)
 void	horizontal_and_vertical_grid_intersection(t_game *game, int i)
 {
 	t_dda	dda;
-	
+
 	dda_init(&dda, game, i);
 	dda_init_for_horizontal(&dda, game, i);
 	dda_loop_horizontal(game, &dda);

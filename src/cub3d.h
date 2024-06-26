@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 10:11:23 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:22:06 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,12 @@ typedef struct s_dda
 	float next_vert_touch_y;
 	
 } t_dda;
+
+typedef struct	s_distances
+{
+    float	horz_hit_distance;
+    float	vert_hit_distance;
+}				t_distances;
 
 typedef struct ray
 {
