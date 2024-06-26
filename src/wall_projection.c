@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 17:05:24 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:24:42 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,23 +169,23 @@ void	project_test_texture_north(void *param)
 	}
 }
 
-void	draw_wall_strip_green(int x, int y, int width, int height, t_game *game)
+/* void	draw_wall_strip_green(t_wall_strip *ws, t_game *game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < height)
+	while (i < ws->height)
 	{
 		j = 0;
-		while (j < width)
+		while (j < ws->width)
 		{
-			mlx_put_pixel(game->image, x + j, y + i, 0x00FF00);
+			mlx_put_pixel(game->image, ws->x + j, ws->y + i, 0x00FF00);
 			j++;
 		}
 		i++;
 	}
-}
+} */
 
 void	draw_strip(int x, int y, int width, int height, int color, t_game *game)
 {
@@ -221,9 +221,8 @@ void	calculate_wall_projection(t_game *game, int x, t_wall_projection *wp)
 	{
 		wp->wall_top_pixel = 0;
 	}
-
-	wp->wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wp->wall_strip_height / 2);
-
+	wp->wall_bottom_pixel = (WINDOW_HEIGHT / 2) 
+		+ (wp->wall_strip_height / 2);
 	if (wp->wall_bottom_pixel > WINDOW_HEIGHT)
 	{
 		wp->wall_bottom_pixel = WINDOW_HEIGHT;
@@ -245,37 +244,39 @@ void	draw_ceiling(t_game *game, int x, int wall_top_pixel)
 	}
 }
 
-void	draw_wall(t_game *game, int x, int wall_top_pixel, int wall_bottom_pixel, int wall_strip_height)
+void	draw_wall(t_game *game, int x, t_wall_projection *wp)
 {
-	int			y;
-	int			texture_offset_x;
-	int			texture_height;
-	int			distance_from_top;
-	int			texture_offset_y;
-	uint32_t	texel_color;
+	t_wall_draw	wd;
 
-	y = wall_top_pixel;
-	texture_offset_x = game->rays[x].was_hit_vertical ? (int)game->rays[x].wall_hit_y % TILE_SIZE : (int)game->rays[x].wall_hit_x % TILE_SIZE;
+	wd.y = wp->wall_top_pixel;
+	if (game->rays[x].was_hit_vertical)
+		wd.texture_offset_x = (int)game->rays[x].wall_hit_y % TILE_SIZE;
+	else
+		wd.texture_offset_x = (int)game->rays[x].wall_hit_x % TILE_SIZE;
 	select_texture(&game->rays[x], game);
-	texture_height = game->north_texture->height;
-
-	while (y < wall_bottom_pixel)
+	wd.texture_height = game->north_texture->height;
+	while (wd.y < wp->wall_bottom_pixel)
 	{
-		distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
-		texture_offset_y = distance_from_top * ((float)texture_height / wall_strip_height);
-		game->rays[x].current_texture_image = return_texture_image(&game->rays[x]);
-		texel_color = put_pixel_color(game->rays[x].current_texture_image, texture_offset_x, texture_offset_y);
-		reverse_bits(&texel_color);
-		our_mlx_put_pixel(game->image, x, y, texel_color);
-		y++;
+		wd.distance_from_top = wd.y + (wp->wall_strip_height / 2) 
+			- (WINDOW_HEIGHT / 2);
+		wd.texture_offset_y = wd.distance_from_top 
+			* ((float)wd.texture_height / wp->wall_strip_height);
+		game->rays[x].current_texture_image 
+			= return_texture_image(&game->rays[x]);
+		wd.texel_color = put_pixel_color(game->rays[x].current_texture_image, 
+				wd.texture_offset_x, wd.texture_offset_y);
+		reverse_bits(&wd.texel_color);
+		our_mlx_put_pixel(game->image, x, wd.y, wd.texel_color);
+		wd.y++;
 	}
 }
 
 void	draw_floor(t_game *game, int x, int wall_bottom_pixel)
 {
-	int	y = wall_bottom_pixel;
+	int	y;
 	int	floor_color;
 
+	y = wall_bottom_pixel;
 	while (y < WINDOW_HEIGHT)
 	{
 		floor_color = get_rgba(136, 66, 136, 255);
@@ -295,70 +296,8 @@ void	wall_projection(t_game *game)
 	{
 		calculate_wall_projection(game, x, &wp);
 		draw_ceiling(game, x, wp.wall_top_pixel);
-		draw_wall(game, x, wp.wall_top_pixel, wp.wall_bottom_pixel, wp.wall_strip_height);
+		draw_wall(game, x, &wp);
 		draw_floor(game, x, wp.wall_bottom_pixel);
 		x++;
 	}
 }
-
-/* void	wall_projection(t_game *game)
-{
-	int			x;
-	int			y;
-	float		perp_distance;
-	float		projected_wall_height;
-	int			wall_strip_height;
-	int			wall_top_pixel;
-	int			wall_bottom_pixel;
-	int			texture_offset_x;
-	int			texture_height;
-	int			distance_from_top;
-	int			texture_offset_y;
-	uint32_t	texel_color;
-	int			color;
-	int			floor_color;
-
-	x = 0;
-	while (x < NUM_RAYS)
-	{
-		perp_distance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
-		projected_wall_height = (TILE_SIZE / perp_distance) * DIST_PROJ_PLANE;
-		wall_strip_height = (int)projected_wall_height;
-		wall_top_pixel = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
-		wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
-		wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
-		wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
-		y = 0;
-		while (y < wall_top_pixel)
-		{
-			color = get_rgba(68, 68, 68, 255);
-			reverse_bits((uint32_t *)&color);
-			our_mlx_put_pixel(game->image, x, y, color);
-			y++;
-		}
-		if (game->rays[x].was_hit_vertical)
-			texture_offset_x = (int)game->rays[x].wall_hit_y % TILE_SIZE;
-		else
-			texture_offset_x = (int)game->rays[x].wall_hit_x % TILE_SIZE;
-		select_texture(&game->rays[x], game);
-		texture_height = game->north_texture->height;
-		while (y < wall_bottom_pixel)
-		{
-			distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
-			texture_offset_y = distance_from_top * ((float)texture_height / wall_strip_height);
-			game->rays[x].current_texture_image = return_texture_image(&game->rays[x]);
-			texel_color = put_pixel_color(game->rays[x].current_texture_image, texture_offset_x, texture_offset_y);
-			reverse_bits(&texel_color);
-			our_mlx_put_pixel(game->image, x, y, texel_color);
-			y++;
-		}
-		while (y < WINDOW_HEIGHT)
-		{
-			floor_color = get_rgba(136, 66, 136, 255);
-			reverse_bits((uint32_t *)&floor_color);
-			our_mlx_put_pixel(game->image, x, y, floor_color);
-			y++;
-		}
-		x++;
-	}
-} */

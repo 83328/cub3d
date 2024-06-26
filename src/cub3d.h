@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 17:03:18 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:26:06 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,15 @@ typedef struct s_wall_projection {
 	int wall_bottom_pixel;
 	int wall_strip_height;
 } t_wall_projection;
+
+typedef struct s_wall_draw {
+	int y;
+	int texture_offset_x;
+	int texture_height;
+	int distance_from_top;
+	int texture_offset_y;
+	uint32_t texel_color;
+} t_wall_draw;
 
 typedef struct ray
 {
