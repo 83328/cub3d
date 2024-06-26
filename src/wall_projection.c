@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 16:26:21 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:41:36 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,10 @@ void	project_test_texture_north(void *param)
 	{
 		while (x < game->image_north_texture->height)
 		{
-			 color = put_pixel_color(game->image_north_texture, x, y);
-				reverse_bits(&color);
-			 mlx_put_pixel(game->image, x, y, color);
-			 x++;
+			color = put_pixel_color(game->image_north_texture, x, y);
+			reverse_bits(&color);
+			mlx_put_pixel(game->image, x, y, color);
+			x++;
 		}
 		x = 0;
 		y++;
@@ -209,61 +209,53 @@ void	wall_projection(t_game *game)
 {
 	int			x;
 	int			y;
-	float		perpDistance;
-	float		projectedWallHeight;
-	int			wallStripHeight;
-	int			wallTopPixel;
-	int			wallBottomPixel;
-	int			textureOffsetX;
+	float		perp_distance;
+	float		projected_wall_height;
+	int			wall_strip_height;
+	int			wall_top_pixel;
+	int			wall_bottom_pixel;
+	int			texture_offset_x;
 	int			texture_height;
-	int			distanceFromTop;
-	int			textureOffsetY;
-	uint32_t	texelColor;
+	int			distance_from_top;
+	int			texture_offset_y;
+	uint32_t	texel_color;
 	int			color;
 	int			floor_color;
 
 	x = 0;
 	while (x < NUM_RAYS)
 	{
-		perpDistance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
-		projectedWallHeight = (TILE_SIZE / perpDistance) * DIST_PROJ_PLANE;
-
-		wallStripHeight = (int)projectedWallHeight;
-
-		wallTopPixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
-		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-
-		wallBottomPixel = (WINDOW_HEIGHT / 2) + (wallStripHeight / 2);
-		wallBottomPixel = wallBottomPixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wallBottomPixel;
-
+		perp_distance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
+		projected_wall_height = (TILE_SIZE / perp_distance) * DIST_PROJ_PLANE;
+		wall_strip_height = (int)projected_wall_height;
+		wall_top_pixel = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
+		wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
+		wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
+		wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
 		y = 0;
-		while (y < wallTopPixel)
+		while (y < wall_top_pixel)
 		{
 			color = get_rgba(68, 68, 68, 255);
 			reverse_bits((uint32_t *)&color);
 			our_mlx_put_pixel(game->image, x, y, color);
 			y++;
 		}
-
 		if (game->rays[x].was_hit_vertical)
-			textureOffsetX = (int)game->rays[x].wall_hit_y % TILE_SIZE;
+			texture_offset_x = (int)game->rays[x].wall_hit_y % TILE_SIZE;
 		else
-			textureOffsetX = (int)game->rays[x].wall_hit_x % TILE_SIZE;
-
+			texture_offset_x = (int)game->rays[x].wall_hit_x % TILE_SIZE;
 		select_texture(&game->rays[x], game);
 		texture_height = game->north_texture->height;
-
-		while (y < wallBottomPixel)
+		while (y < wall_bottom_pixel)
 		{
-			distanceFromTop = y + (wallStripHeight / 2) - (WINDOW_HEIGHT / 2);
-			textureOffsetY = distanceFromTop * ((float)texture_height / wallStripHeight);
+			distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+			texture_offset_y = distance_from_top * ((float)texture_height / wall_strip_height);
 			game->rays[x].current_texture_image = return_texture_image(&game->rays[x]);
-			texelColor = put_pixel_color(game->rays[x].current_texture_image, textureOffsetX ,textureOffsetY);
-			reverse_bits(&texelColor);
-			our_mlx_put_pixel(game->image, x, y, texelColor);
+			texel_color = put_pixel_color(game->rays[x].current_texture_image, texture_offset_x, texture_offset_y);
+			reverse_bits(&texel_color);
+			our_mlx_put_pixel(game->image, x, y, texel_color);
 			y++;
 		}
-
 		while (y < WINDOW_HEIGHT)
 		{
 			floor_color = get_rgba(136, 66, 136, 255);
@@ -271,7 +263,6 @@ void	wall_projection(t_game *game)
 			our_mlx_put_pixel(game->image, x, y, floor_color);
 			y++;
 		}
-
 		x++;
 	}
 }
@@ -280,38 +271,38 @@ void	wall_projection(t_game *game)
 {
 	for (int x = 0; x < NUM_RAYS; x++)
 	{
-		float perpDistance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
-		float projectedWallHeight = (TILE_SIZE / perpDistance) * DIST_PROJ_PLANE;
+		float perp_distance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
+		float projected_wall_height = (TILE_SIZE / perp_distance) * DIST_PROJ_PLANE;
 
-		int wallStripHeight = (int)projectedWallHeight;
+		int wall_strip_height = (int)projected_wall_height;
 
-		int wallTopPixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
-		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
+		int wall_top_pixel = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
+		wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
 
-		int wallBottomPixel = (WINDOW_HEIGHT / 2) + (wallStripHeight / 2);
-		wallBottomPixel = wallBottomPixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wallBottomPixel;
-		for (int y = 0; y < wallTopPixel; y++)
+		int wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
+		wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
+		for (int y = 0; y < wall_top_pixel; y++)
 		{
 			 int color = get_rgba(68, 68, 68, 255);
 		  reverse_bits((uint32_t *)&color);
 		   our_mlx_put_pixel(game->image, x, y, color);
 		}
-		int textureOffsetX;
+		int texture_offset_x;
 		if (game->rays[x].was_hit_vertical)
-			textureOffsetX = (int)game->rays[x].wall_hit_y % TILE_SIZE;
+			texture_offset_x = (int)game->rays[x].wall_hit_y % TILE_SIZE;
 		else
-			textureOffsetX = (int)game->rays[x].wall_hit_x % TILE_SIZE;
+			texture_offset_x = (int)game->rays[x].wall_hit_x % TILE_SIZE;
 		select_texture(&game->rays[x], game);
 		int texture_height = game->north_texture->height;
-		for (int y = wallTopPixel; y < wallBottomPixel; y++) {
-			int distanceFromTop = y + (wallStripHeight / 2) - (WINDOW_HEIGHT / 2);
-			int textureOffsetY = distanceFromTop * ((float)texture_height / wallStripHeight);
+		for (int y = wall_top_pixel; y < wall_bottom_pixel; y++) {
+			int distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+			int texture_offset_y = distance_from_top * ((float)texture_height / wall_strip_height);
 		game->rays[x].current_texture_image = return_texture_image(&game->rays[x]);
-		  uint32_t texelColor = put_pixel_color(game->rays[x].current_texture_image, textureOffsetX ,textureOffsetY);
-			reverse_bits(&texelColor);
-			our_mlx_put_pixel(game->image, x, y, texelColor);
+		  uint32_t texel_color = put_pixel_color(game->rays[x].current_texture_image, texture_offset_x ,texture_offset_y);
+			reverse_bits(&texel_color);
+			our_mlx_put_pixel(game->image, x, y, texel_color);
 		}
-		for (int y = wallBottomPixel; y < WINDOW_HEIGHT; y++)
+		for (int y = wall_bottom_pixel; y < WINDOW_HEIGHT; y++)
 		{
 			int floor_color = get_rgba(136, 66, 136, 255);
 		reverse_bits((uint32_t *)&floor_color);
