@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 14:22:06 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:03:18 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ typedef struct s_map
 
 typedef struct s_max_length
 {
-    int line_count;
-    int map_start;
-    int map_rows;
-    int current_length;
-    int max_length;
+	int line_count;
+	int map_start;
+	int map_rows;
+	int current_length;
+	int max_length;
 }	t_max_length;
 
 typedef struct s_dda
@@ -93,9 +93,15 @@ typedef struct s_dda
 
 typedef struct	s_distances
 {
-    float	horz_hit_distance;
-    float	vert_hit_distance;
+	float	horz_hit_distance;
+	float	vert_hit_distance;
 }				t_distances;
+
+typedef struct s_wall_projection {
+	int wall_top_pixel;
+	int wall_bottom_pixel;
+	int wall_strip_height;
+} t_wall_projection;
 
 typedef struct ray
 {

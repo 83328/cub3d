@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 16:41:36 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:05:24 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,103 @@ void	draw_strip(int x, int y, int width, int height, int color, t_game *game)
 	}
 }
 
+void	calculate_wall_projection(t_game *game, int x, t_wall_projection *wp)
+{
+	float	perp_distance;
+	float	projected_wall_height;
+
+	perp_distance = game->rays[x].distance * 
+		cos(game->rays[x].ray_angle - game->player_rotation_angle);
+	projected_wall_height = (TILE_SIZE / perp_distance) * 
+		DIST_PROJ_PLANE;
+	wp->wall_strip_height = (int)projected_wall_height;
+	wp->wall_top_pixel = (WINDOW_HEIGHT / 2) 
+		- (wp->wall_strip_height / 2);
+	if (wp->wall_top_pixel < 0)
+	{
+		wp->wall_top_pixel = 0;
+	}
+
+	wp->wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wp->wall_strip_height / 2);
+
+	if (wp->wall_bottom_pixel > WINDOW_HEIGHT)
+	{
+		wp->wall_bottom_pixel = WINDOW_HEIGHT;
+	}
+}
+
+void	draw_ceiling(t_game *game, int x, int wall_top_pixel)
+{
+	int	y;
+	int	color;
+
+	y = 0;
+	while (y < wall_top_pixel)
+	{
+		color = get_rgba(68, 68, 68, 255);
+		reverse_bits((uint32_t *)&color);
+		our_mlx_put_pixel(game->image, x, y, color);
+		y++;
+	}
+}
+
+void	draw_wall(t_game *game, int x, int wall_top_pixel, int wall_bottom_pixel, int wall_strip_height)
+{
+	int			y;
+	int			texture_offset_x;
+	int			texture_height;
+	int			distance_from_top;
+	int			texture_offset_y;
+	uint32_t	texel_color;
+
+	y = wall_top_pixel;
+	texture_offset_x = game->rays[x].was_hit_vertical ? (int)game->rays[x].wall_hit_y % TILE_SIZE : (int)game->rays[x].wall_hit_x % TILE_SIZE;
+	select_texture(&game->rays[x], game);
+	texture_height = game->north_texture->height;
+
+	while (y < wall_bottom_pixel)
+	{
+		distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+		texture_offset_y = distance_from_top * ((float)texture_height / wall_strip_height);
+		game->rays[x].current_texture_image = return_texture_image(&game->rays[x]);
+		texel_color = put_pixel_color(game->rays[x].current_texture_image, texture_offset_x, texture_offset_y);
+		reverse_bits(&texel_color);
+		our_mlx_put_pixel(game->image, x, y, texel_color);
+		y++;
+	}
+}
+
+void	draw_floor(t_game *game, int x, int wall_bottom_pixel)
+{
+	int	y = wall_bottom_pixel;
+	int	floor_color;
+
+	while (y < WINDOW_HEIGHT)
+	{
+		floor_color = get_rgba(136, 66, 136, 255);
+		reverse_bits((uint32_t *)&floor_color);
+		our_mlx_put_pixel(game->image, x, y, floor_color);
+		y++;
+	}
+}
+
 void	wall_projection(t_game *game)
+{
+	int					x;
+	t_wall_projection	wp;
+
+	x = 0;
+	while (x < NUM_RAYS)
+	{
+		calculate_wall_projection(game, x, &wp);
+		draw_ceiling(game, x, wp.wall_top_pixel);
+		draw_wall(game, x, wp.wall_top_pixel, wp.wall_bottom_pixel, wp.wall_strip_height);
+		draw_floor(game, x, wp.wall_bottom_pixel);
+		x++;
+	}
+}
+
+/* void	wall_projection(t_game *game)
 {
 	int			x;
 	int			y;
@@ -264,49 +360,5 @@ void	wall_projection(t_game *game)
 			y++;
 		}
 		x++;
-	}
-}
-
-/* void	wall_projection(t_game *game)
-{
-	for (int x = 0; x < NUM_RAYS; x++)
-	{
-		float perp_distance = game->rays[x].distance * cos(game->rays[x].ray_angle - game->player_rotation_angle);
-		float projected_wall_height = (TILE_SIZE / perp_distance) * DIST_PROJ_PLANE;
-
-		int wall_strip_height = (int)projected_wall_height;
-
-		int wall_top_pixel = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
-		wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
-
-		int wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
-		wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
-		for (int y = 0; y < wall_top_pixel; y++)
-		{
-			 int color = get_rgba(68, 68, 68, 255);
-		  reverse_bits((uint32_t *)&color);
-		   our_mlx_put_pixel(game->image, x, y, color);
-		}
-		int texture_offset_x;
-		if (game->rays[x].was_hit_vertical)
-			texture_offset_x = (int)game->rays[x].wall_hit_y % TILE_SIZE;
-		else
-			texture_offset_x = (int)game->rays[x].wall_hit_x % TILE_SIZE;
-		select_texture(&game->rays[x], game);
-		int texture_height = game->north_texture->height;
-		for (int y = wall_top_pixel; y < wall_bottom_pixel; y++) {
-			int distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
-			int texture_offset_y = distance_from_top * ((float)texture_height / wall_strip_height);
-		game->rays[x].current_texture_image = return_texture_image(&game->rays[x]);
-		  uint32_t texel_color = put_pixel_color(game->rays[x].current_texture_image, texture_offset_x ,texture_offset_y);
-			reverse_bits(&texel_color);
-			our_mlx_put_pixel(game->image, x, y, texel_color);
-		}
-		for (int y = wall_bottom_pixel; y < WINDOW_HEIGHT; y++)
-		{
-			int floor_color = get_rgba(136, 66, 136, 255);
-		reverse_bits((uint32_t *)&floor_color);
-			our_mlx_put_pixel(game->image, x, y, floor_color);
-		}
 	}
 } */
