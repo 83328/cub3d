@@ -6,30 +6,54 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 18:34:09 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/26 19:10:26 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void check_rgba_format(char *line)
+{
+    // there should be 2 commas in the line
+    // it starts with a
+    (void)line;
+    char rgb[3] = "123";
+    int temp = 0;
+    temp = atoi(rgb);
+    printf("temp: %d\n", temp);
+}
+
 void color_check(char *line, t_validation *validation)
 {
     if (line[0] == 'F')
+    {
         validation->floor_color = 1;
+        check_rgba_format(line);
+    }    
     else if (line[0] == 'C')
+    {
         validation->ceiling_color = 1;
+        check_rgba_format(line);
+    }
 }
 
 void line_check_textures(char *line, t_validation *validation)
 {
-    if (line[0] == 'N' && line[1] == 'O')
-        validation->north_texture = 1;
-    else if (line[0] == 'S' && line[1] == 'O')
-        validation->south_texture = 1;
-    else if (line[0] == 'W' && line[1] == 'E')
-        validation->west_texture = 1;
-    else if (line[0] == 'E' && line[1] == 'A')
-        validation->east_texture = 1;  
+    int i = 0;
+    while(line[i] != '\n' && line[i] != '\0')
+    {  
+        if (line[i] == ' ')
+            i++;
+        if (line[i] == 'N' && line[i+1] == 'O')
+           validation->north_texture = 1;
+        else if (line[i] == 'S' && line[i+1] == 'O')
+            validation->south_texture = 1;
+        else if (line[i] == 'W' && line[i+1] == 'E')
+            validation->west_texture = 1;
+        else if (line[i] == 'E' && line[i+1] == 'A')
+            validation->east_texture = 1;
+        i++;  
+    } 
 }
 
 void	validate_file(char *file, t_validation *validation)
