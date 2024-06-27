@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/27 10:45:48 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:48:23 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init(WIDTH, HEIGHT, "Welcome to DOOOOOOOOM!!!!!!", false);
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	if (!game.image || (mlx_image_to_window(game.mlx, game.image, 0, 0) < 0))
-		printf("Failed to create image\n");
+		ft_error(ERR_IMG, NULL);
 	load_test_texture_north(&game);
 	load_test_texture_east(&game);
 	load_test_texture_south(&game);

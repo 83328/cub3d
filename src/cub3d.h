@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/27 12:20:11 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:45:49 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // FLT_MAX and FLT_MIN are defined in float.h
 #include <float.h>
 #include <fcntl.h>
-#include <MLX42/MLX42.h>
+#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/get_next_line/get_next_line.h"
 #include "../lib/libft/libft.h"
 
@@ -42,7 +42,7 @@
 # define ERR_FILETYPE "Invalid file extension: use .cub for map files\n"
 # define ERR_OPEN "Failed to open the file\n"
 # define ERR_MEM "Failed to allocate memory for the map\n"
-
+# define ERR_IMG "Failed to create image\n"
 # define ERR_COLOR "Error in color. Provide a color in the format F or C 255,255,255\n"
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
 # define ERR_TEX_ID "Error in texture. Provide  NO, SO, WE and EA\n"
