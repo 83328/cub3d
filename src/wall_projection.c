@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 17:24:42 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 10:41:35 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,34 @@ void	load_test_texture_east(t_game *game)
 		mlx_texture_to_image(game->mlx, game->east_texture);
 }
 
+void	select_texture_vertical(t_ray *ray, t_game *game, float angle)
+{
+	if (angle >= M_PI / 2 && angle < 3 * M_PI / 2)
+	{
+		ray->current_texture = game->west_texture;
+		ray->current_texture_image = game->image_west_texture;
+	}
+	else
+	{
+		ray->current_texture = game->east_texture;
+		ray->current_texture_image = game->image_east_texture;
+	}
+}
+
+void	select_texture_horizontal(t_ray *ray, t_game *game, float angle)
+{
+	if (angle >= 0 && angle < M_PI)
+	{
+		ray->current_texture = game->south_texture;
+		ray->current_texture_image = game->image_south_texture;
+	}
+	else
+	{
+		ray->current_texture = game->north_texture;
+		ray->current_texture_image = game->image_north_texture;
+	}
+}
+
 void	select_texture(t_ray *ray, t_game *game)
 {
 	float	angle;
@@ -105,31 +133,9 @@ void	select_texture(t_ray *ray, t_game *game)
 	angle = ray->ray_angle;
 	normalize_angle(&angle);
 	if (ray->was_hit_vertical)
-	{
-		if (angle >= M_PI / 2 && angle < 3 * M_PI / 2)
-		{
-			ray->current_texture = game->west_texture;
-			ray->current_texture_image = game->image_west_texture;
-		}
-		else
-		{
-			ray->current_texture = game->east_texture;
-			ray->current_texture_image = game->image_east_texture;
-		}
-	}
+		select_texture_vertical(ray, game, angle);
 	else
-	{
-		if (angle >= 0 && angle < M_PI)
-		{
-			ray->current_texture = game->south_texture;
-			ray->current_texture_image = game->image_south_texture;
-		}
-		else
-		{
-			ray->current_texture = game->north_texture;
-			ray->current_texture_image = game->image_north_texture;
-		}
-	}
+		select_texture_horizontal(ray, game, angle);
 }
 
 mlx_image_t	*return_texture_image(t_ray *ray)
@@ -166,42 +172,6 @@ void	project_test_texture_north(void *param)
 		}
 		x = 0;
 		y++;
-	}
-}
-
-/* void	draw_wall_strip_green(t_wall_strip *ws, t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < ws->height)
-	{
-		j = 0;
-		while (j < ws->width)
-		{
-			mlx_put_pixel(game->image, ws->x + j, ws->y + i, 0x00FF00);
-			j++;
-		}
-		i++;
-	}
-} */
-
-void	draw_strip(int x, int y, int width, int height, int color, t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < height)
-	{
-		j = 0;
-		while (j < width)
-		{
-			mlx_put_pixel(game->image, x + j, y + i, color);
-			j++;
-		}
-		i++;
 	}
 }
 

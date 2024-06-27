@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/26 18:27:47 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/27 10:45:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float init_direction(char direction)
+float	init_direction(char direction)
 {
-    if (direction == 'W')
-        return M_PI;	
-    else if (direction == 'S')
-        return M_PI_2;
-    else if (direction == 'N')
-        return THREE_PI_2; 
-    else if (direction == 'E')
-        return TWO_PI;
-    else
-        return -1; 
+	if (direction == 'W')
+		return (M_PI);
+	else if (direction == 'S')
+		return (M_PI_2);
+	else if (direction == 'N')
+		return (THREE_PI_2); 
+	else if (direction == 'E')
+		return (TWO_PI);
+	else
+		return (-1); 
 }
 
 void	init_game(t_game *game)
@@ -47,8 +47,8 @@ void	init_test_line(t_line *line)
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
-	t_validation validation;
+	t_game			game;
+	t_validation	validation;
 
 	check_file(argc, argv);
 	validate_file(argv[1], &validation);
