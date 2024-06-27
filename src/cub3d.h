@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/27 13:45:49 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:12:52 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define ERR_ARGS "Not enough arguments. \nUsage: ./cub3d ./maps/mapfile.cub\n"
 # define ERR_FILETYPE "Invalid file extension: use .cub for map files\n"
 # define ERR_OPEN "Failed to open the file\n"
+# define ERR_READ_LINE "Failed to read line\n"
 # define ERR_MEM "Failed to allocate memory for the map\n"
 # define ERR_IMG "Failed to create image\n"
 # define ERR_COLOR "Error in color. Provide a color in the format F or C 255,255,255\n"

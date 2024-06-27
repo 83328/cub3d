@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:01:43 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/25 16:20:22 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:13:29 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	skip_lines_before_map(int fd, t_game *game)
 		line = get_next_line(fd);
 		if (line == NULL)
 		{
-			printf("Failed to read line\n");
+			ft_error(ERR_READ_LINE, NULL);
 			close(fd);
 			exit(1);
 		}
@@ -48,9 +48,12 @@ void	process_line(char *line, t_game *game, int i, int *direction_count)
 		else if (line[j] == 'N' || line[j] == 'W' || 
 			line[j] == 'E' || line[j] == 'S')
 		{
-			game->map_grid_2d[i][k++] = 2;
+			game->map_grid_2d[i][k] = 2;
 			game->start_direction = line[j];
+			game->player_x = k * TILE_SIZE + (TILE_SIZE / 2);
+			game->player_y = i * TILE_SIZE + (TILE_SIZE / 2);
 			(*direction_count)++;
+			k++;
 		}
 		j++;
 	}
@@ -69,7 +72,7 @@ void	fill_map_grid(int fd, t_game *game)
 		line = get_next_line(fd);
 		if (line == NULL)
 		{
-			printf("Failed to read line\n");
+			ft_error(ERR_READ_LINE, NULL);
 			close(fd);
 			exit(1);
 		}
@@ -92,7 +95,7 @@ void	fill_2d_map_from_file(t_game *game, char argv[1])
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Failed to open file\n");
+		ft_error(ERR_OPEN, NULL);
 		return ;
 	}
 	skip_lines_before_map(fd, game);

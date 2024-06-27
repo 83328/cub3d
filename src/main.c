@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/27 13:48:23 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:06:40 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	init_game(t_game *game)
 {
 	game->mlx = NULL;
 	game->image = NULL;
-	game->player_x = 100;
-	game->player_y = 100;
 	game->player_width = 1;
 	game->player_height = 1;
 	game->player_rotation_angle = init_direction(game->start_direction);

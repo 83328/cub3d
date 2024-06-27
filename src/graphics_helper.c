@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:59:32 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/27 12:19:25 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:11:36 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	put_pixel(int32_t x, int32_t y, mlx_image_t *image)
 	mlx_put_pixel(image, x, y, color);
 }
 
-// erase pixel
 void	erase_pixel(int32_t x, int32_t y, mlx_image_t *image)
 {
 	uint32_t	color;
