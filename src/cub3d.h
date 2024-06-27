@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 18:32:20 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/27 09:42:40 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # define ERR_COLOR "Error in color. Provide a color in the format F or C 255,255,255\n"
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
-# define ERR_TEX_ID "Error in texture. Provide  NO, SO, WE and EA "
+# define ERR_TEX_ID "Error in texture. Provide  NO, SO, WE and EA\n"
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
 # define ERR_MAP_NOT_CLOSED "Invalid file format: Map is not surrounded by walls\n"
 # define ERR_START_POINT "Map should contain exactly one 'N', 'W', 'E', or 'S'.\n"
