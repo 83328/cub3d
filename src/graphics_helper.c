@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:59:32 by ohoro             #+#    #+#             */
-/*   Updated: 2024/04/20 19:18:46 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/06/27 12:19:25 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ int32_t	get_step(int32_t start, int32_t end)
 		return (1);
 	else
 		return (-1);
-}
-
-int32_t	get_error(int32_t dx, int32_t dy)
-{
-	if (dx > dy)
-		return (dx / 2);
-	else
-		return (-dy / 2);
 }
 
 void	bresenham(t_line line, mlx_image_t *image)

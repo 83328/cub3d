@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:02:49 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/26 09:50:17 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 12:19:37 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ void	ft_error(char *str, t_game *game)
 	if (game)
 		free_game(game);
 	exit(EXIT_FAILURE);
+}
+
+int32_t	get_error(int32_t dx, int32_t dy)
+{
+	if (dx > dy)
+		return (dx / 2);
+	else
+		return (-dy / 2);
 }
 
 void	free_map(t_game *game)

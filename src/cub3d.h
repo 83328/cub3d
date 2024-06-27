@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/27 10:41:24 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/06/27 12:20:11 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,15 @@ void	print_map_grid_2d(t_game *game);
 //6_fill_map.c
 void	fill_2d_map_from_file(t_game *game, char argv[1]);
 
+//color_1.c
+uint32_t	put_pixel_color(mlx_image_t *img, int x, int y);
+void		our_mlx_put_pixel(mlx_image_t *image, uint32_t x, 
+	uint32_t y, uint32_t color);
+void	reverse_bits(uint32_t *color);
+
+//color_2.c
+int		get_rgba(int r, int g, int b, int a);
+
 // key_commands.c
 void	handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game);
 void	update_player_position(t_game *game, float dx, float dy);
@@ -232,8 +241,8 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void	put_pixel(int32_t x, int32_t y, mlx_image_t *image);
 void	erase_pixel(int32_t x, int32_t y, mlx_image_t *image);
 int32_t	get_step(int32_t start, int32_t end);
-int32_t	get_error(int32_t dx, int32_t dy);
 void	bresenham(t_line line, mlx_image_t *image);
+
 // player_movements.c
 void	draw_new_player(t_game *game);
 void	redraw_player(void *param);
@@ -246,37 +255,53 @@ void	cast_all_rays(void *param);
 // math_helper.c
 void	normalize_angle(float *angle);
 float	distance_between_points(float x1, float y1, float x2, float y2);
+
 // map_helper.c
 bool	has_wall_at(t_game game, float  x, float y);
 bool	is_inside_map(t_game game, float x, float y);
 int		get_map_at(t_game game, int i, int j);
-// test_draw_map.c
-void	draw_vertical_line_left(t_game *game, int x, int y);
-void	draw_vertical_line_right(t_game *game, int x, int y);
-void	draw_horizontal_line_top(t_game *game, int x, int y);
-void	draw_horizontal_line_bottom(t_game *game, int x, int y);
-void	draw_rectangle(t_game *game, int x, int y);
-void	fill_rectangle_white(t_game *game, int x, int y);
+
+// draw_map.c
 void	draw_map(void *param);
 void	draw_minimap(void *param);
+
+//draw_minimap.c
+void	draw_rectangle(t_game *game, int x, int y);
+
 // draw.c
 void	clear_image(void *param);
 void	draw_all_and_clear(void *param);
-// DDA_helper.c
-int		is_ray_facing_up(float angle);
-int		is_ray_facing_down(float angle);
-int		is_ray_facing_left(float angle);
-int		is_ray_facing_right(float angle);
+
+// DDA_1_rays.c
+void	dda_init(t_dda *dda, t_game *game, int i);
+
+// DDA_2_horizontal.c
+void	dda_init_for_horizontal(t_dda *dda, t_game *game, int i);
+void	dda_loop_horizontal(t_game *game, t_dda *dda);
+
+//DDA_3_vertical.c
+void	dda_init_for_vertical(t_dda *dda, t_game *game, int i);
+void	dda_loop_vertical(t_game *game, t_dda *dda);
+
+//DDA_4_helper.c
 void	horizontal_and_vertical_grid_intersection(t_game *game, int i);
+
 // wall_projection.c
 void	draw_strip(int x, int y, int width, int height, int color, t_game *game);
 void	wall_projection(t_game *game);
+
+// wall_1_tex.c
 void	load_test_texture_north(t_game *game);
 void	load_test_texture_east(t_game *game);
 void	load_test_texture_south(t_game *game);
 void	load_test_texture_west(t_game *game);
 void	project_test_texture_north(void *param);
 
+// wall_2_tex.c
+void		select_texture(t_ray *ray, t_game *game);
+mlx_image_t	*return_texture_image(t_ray *ray);
+
 //utils.c
 void	ft_error(char *str, t_game *game);
+int32_t	get_error(int32_t dx, int32_t dy);
 void	free_game(t_game *game);
