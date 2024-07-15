@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/27 17:12:52 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:43:19 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define ERR_START_POINT "Map should contain exactly one 'N', 'W', 'E', or 'S'.\n"
 # define ERR_FILE "File not found\n"
 # define ERR_READ "Could not read from the file\n"
+# define ERR_FLOOR_COLOR "Floor color is not a valid RGB value\n"
+# define ERR_CEILING_COLOR "Ceiling color is not a valid RGB value\n"
 
 typedef struct s_validation
 {
@@ -164,6 +166,7 @@ typedef struct s_game
 	float						player_width;
 	float						player_height;
 	float						player_rotation_angle;
+//	char						*floor_color_str;
 	t_map						*map;
 //	int							map_grid[MAP_NUM_ROWS][MAP_NUM_COLS];
 	int							**map_grid_2d;

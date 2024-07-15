@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/27 12:09:38 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:43:07 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,36 @@ void	draw_wall(t_game *game, int x, t_wall_projection *wp)
 	}
 }
 
+/* int parse_rgb_from_string(const char *color_str, int *r, int *g, int *b)
+{
+	return sscanf(color_str, "%d,%d,%d", r, g, b) == 3;
+}
+
+void draw_floor(t_game *game, int x, int wall_bottom_pixel)
+{
+	int y;
+	int floor_color;
+	int r, g, b;
+
+	if (parse_rgb_from_string(game->floor_color_str, &r, &g, &b))
+	{
+		floor_color = get_rgba(r, g, b, 255);
+	}
+	else
+	{
+		//floor_color = get_rgba(220, 100, 0, 255);
+		floor_color = get_rgba(220, 100, 0, 255);
+		ft_error(ERR_FLOOR_COLOR, NULL);
+	}
+	y = wall_bottom_pixel;
+	while (y < WINDOW_HEIGHT)
+	{
+		reverse_bits((uint32_t *)&floor_color);
+		our_mlx_put_pixel(game->image, x, y, floor_color);
+		y++;
+	}
+} */
+
 void	draw_floor(t_game *game, int x, int wall_bottom_pixel)
 {
 	int	y;
@@ -86,7 +116,8 @@ void	draw_floor(t_game *game, int x, int wall_bottom_pixel)
 	y = wall_bottom_pixel;
 	while (y < WINDOW_HEIGHT)
 	{
-		floor_color = get_rgba(136, 66, 136, 255);
+		//floor_color = get_rgba(136, 66, 136, 255);
+		floor_color = get_rgba(220, 100, 0, 255);
 		reverse_bits((uint32_t *)&floor_color);
 		our_mlx_put_pixel(game->image, x, y, floor_color);
 		y++;
