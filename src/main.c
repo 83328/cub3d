@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/27 17:06:40 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:03:41 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 float	init_direction(char direction)
 {
-	if (direction == 'W')
-		return (M_PI);
-	else if (direction == 'S')
-		return (M_PI_2);
-	else if (direction == 'N')
-		return (THREE_PI_2); 
-	else if (direction == 'E')
-		return (TWO_PI);
-	else
-		return (-1); 
+		if (direction == 'W')
+			return (3.10);
+		else if (direction == 'S')
+			return (1.50);
+		else if (direction == 'N')
+			return (4.70);
+		else if (direction == 'E')
+			return (6.20);
+		else
+			return (-1);
 }
 
 void	init_game(t_game *game)
@@ -33,6 +33,7 @@ void	init_game(t_game *game)
 	game->player_width = 1;
 	game->player_height = 1;
 	game->player_rotation_angle = init_direction(game->start_direction);
+	
 }
 
 void	init_test_line(t_line *line)
