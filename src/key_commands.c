@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/26 10:53:55 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:21:53 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,13 @@ void	handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game)
 // this might not be the best way,
 // maybe we should use the MLX_CLOSE_WINDOW event
 // this causes a possible memory leak
-void	handle_escape_key(mlx_key_data_t keydata)
+void	handle_escape_key(mlx_key_data_t keydata, t_game *game)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		free_game(game);
 		exit(0);
+	}
 }
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
@@ -66,7 +69,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	handle_movement_and_rotation_keys(keydata, game);
-	handle_escape_key(keydata);
+	handle_escape_key(keydata, game);
 }
 /*
 #if 0

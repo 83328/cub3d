@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/16 14:03:41 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:06:10 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	init_game(t_game *game)
 	game->player_width = 1;
 	game->player_height = 1;
 	game->player_rotation_angle = init_direction(game->start_direction);
-	
 }
 
 void	init_test_line(t_line *line)

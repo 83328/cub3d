@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/15 14:43:19 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:23:13 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ int		get_rgba(int r, int g, int b, int a);
 void	handle_movement_and_rotation_keys(mlx_key_data_t keydata, t_game *game);
 void	update_player_position(t_game *game, float dx, float dy);
 void	update_movement(t_game *game, float move_speed, mlx_key_data_t keydata);
-void	handle_escape_key(mlx_key_data_t keydata);
+void	handle_escape_key(mlx_key_data_t keydata, t_game *game);
 void	my_keyhook(mlx_key_data_t keydata, void	*param);
 // key_commands_helper.c
 void	update_rotation(t_game *game, mlx_key_data_t keydata);
