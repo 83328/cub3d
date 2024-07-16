@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/16 15:01:03 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:39:39 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void	init_test_line(t_line *line)
 	line->y1 = 200;
 }
 
+void close_callback(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	mlx_terminate(game->mlx);
+	exit(0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game			game;
@@ -69,6 +78,7 @@ int	main(int argc, char **argv)
 	load_test_texture_south(&game);
 	load_test_texture_west(&game);
 	mlx_key_hook(game.mlx, my_keyhook, &game);
+	mlx_close_hook(game.mlx, close_callback, &game);
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
