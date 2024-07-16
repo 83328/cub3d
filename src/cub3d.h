@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/16 14:23:13 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:51:26 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,3 +309,4 @@ mlx_image_t	*return_texture_image(t_ray *ray);
 void	ft_error(char *str, t_game *game);
 int32_t	get_error(int32_t dx, int32_t dy);
 void	free_game(t_game *game);
+void	free_map_grid_2d(t_game *game);

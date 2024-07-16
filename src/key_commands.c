@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:55:55 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/16 14:21:53 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:45:49 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	handle_escape_key(mlx_key_data_t keydata, t_game *game)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
-		free_game(game);
+		//free_game(game);
+		mlx_close_window(game->mlx);
+		mlx_terminate(game->mlx);
 		exit(0);
 	}
 }

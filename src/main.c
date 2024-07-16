@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/16 14:06:10 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:01:03 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 float	init_direction(char direction)
 {
-		if (direction == 'W')
-			return (3.10);
-		else if (direction == 'S')
-			return (1.50);
-		else if (direction == 'N')
-			return (4.70);
-		else if (direction == 'E')
-			return (6.20);
-		else
-			return (-1);
+	if (direction == 'W')
+		return (3.10);
+	else if (direction == 'S')
+		return (1.50);
+	else if (direction == 'N')
+		return (4.70);
+	else if (direction == 'E')
+		return (6.20);
+	else
+		return (-1);
 }
 
 void	init_game(t_game *game)
@@ -72,5 +72,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
+	free_map_grid_2d(&game);
 	return (EXIT_SUCCESS);
 }

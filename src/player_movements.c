@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:08:58 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/24 15:13:26 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:36:53 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	redraw_player(void *param)
 
 	game = (t_game *)param;
 	draw_new_player(game);
-	draw_player_middle_ray(game);
+	//draw_player_middle_ray(game);
 }
