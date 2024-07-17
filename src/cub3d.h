@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/16 14:51:26 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:14:15 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define WINDOW_HEIGHT HEIGHT
 #define NUM_RAYS WIDTH
 #define WALL_STRIP_WIDTH 1
-#define TILE_SIZE 32
+#define TILE_SIZE 16
 #define MAP_NUM_ROWS 10
 #define MAP_NUM_COLS 14
 #define M_PI 3.14159265358979323846
