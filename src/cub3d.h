@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/17 11:14:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:51:05 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <math.h>
-// FLT_MAX and FLT_MIN are defined in float.h
 #include <float.h>
 #include <fcntl.h>
 #include "../lib/MLX42/include/MLX42/MLX42.h"
@@ -54,6 +53,7 @@
 # define ERR_READ "Could not read from the file\n"
 # define ERR_FLOOR_COLOR "Floor color is not a valid RGB value\n"
 # define ERR_CEILING_COLOR "Ceiling color is not a valid RGB value\n"
+# define ERR_MAP_SIZE "The map is too large\n"
 
 typedef struct s_validation
 {

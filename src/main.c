@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/16 16:39:39 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:52:15 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_test_line(t_line *line)
 	line->y1 = 200;
 }
 
-void close_callback(void *param)
+void	close_callback(void *param)
 {
 	t_game	*game;
 

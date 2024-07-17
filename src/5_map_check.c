@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:30:46 by alimpens          #+#    #+#             */
-/*   Updated: 2024/06/24 11:33:34 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:49:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	print_map_grid_2d(t_game *game)
 	int	j;
 
 	i = 0;
+	if (game->map_rows > 40 || game->map_cols > 60)
+		ft_error(ERR_MAP_SIZE, NULL);
 	while (i < game->map_rows)
 	{
 		j = 0;
