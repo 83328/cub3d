@@ -6,13 +6,13 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 12:09:50 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:14:48 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int line_contains_only_one_f(char *line)
+int	line_contains_only_one_f(char *line)
 {
 	int i = 0;
 	int count = 0;
@@ -29,7 +29,7 @@ int line_contains_only_one_f(char *line)
 	return (0);
 }
 
-int line_contains_only_one_c(char *line)
+int	line_contains_only_one_c(char *line)
 {
 	int i = 0;
 	int count = 0;
@@ -44,32 +44,28 @@ int line_contains_only_one_c(char *line)
 	return (0);
 }
 
-
-
-
-
-int is_digit(char c)
+int	is_digit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-int is_double_digit(char *line, int i)
+int	is_double_digit(char *line, int i)
 {
 	if (is_digit(line[i]) && is_digit(line[i + 1]))
 		return (1);
 	return (0);
 }
 
-int is_triple_digit(char *line, int i)
+int	is_triple_digit(char *line, int i)
 {
 	if (is_digit(line[i]) && is_digit(line[i + 1]) && is_digit(line[i + 2]))
 		return (1);
 	return (0);
 }
 
-int is_quadruple_digit(char *line, int i)
+int	is_quadruple_digit(char *line, int i)
 {
 	if (is_digit(line[i]) && is_digit(line[i + 1]) && is_digit(line[i + 2]) && is_digit(line[i + 3]))
 		return (1);
@@ -77,22 +73,22 @@ int is_quadruple_digit(char *line, int i)
 }
 
 
-void assign_rgb(char *line, int i, char *rgb) {
-    size_t length = ft_strlen(line + i); // Länge der verbleibenden Zeichenkette ab Index `i`
+void	assign_rgb(char *line, int i, char *rgb) {
+	size_t length = ft_strlen(line + i); // Länge der verbleibenden Zeichenkette ab Index `i`
 
-    if (length >= 3 && is_triple_digit(line, i)) {
-        rgb[0] = line[i];
-        rgb[1] = line[i + 1];
-        rgb[2] = line[i + 2];
-    } else if (length >= 2 && is_double_digit(line, i)) {
-        rgb[0] = '0';
-        rgb[1] = line[i];
-        rgb[2] = line[i + 1];
-    } else if (length >= 1 && is_digit(line[i])){
-        rgb[0] = '0';
-        rgb[1] = '0';
-        rgb[2] = line[i];
-    }
+	if (length >= 3 && is_triple_digit(line, i)) {
+		rgb[0] = line[i];
+		rgb[1] = line[i + 1];
+		rgb[2] = line[i + 2];
+	} else if (length >= 2 && is_double_digit(line, i)) {
+		rgb[0] = '0';
+		rgb[1] = line[i];
+		rgb[2] = line[i + 1];
+	} else if (length >= 1 && is_digit(line[i])){
+		rgb[0] = '0';
+		rgb[1] = '0';
+		rgb[2] = line[i];
+	}
 }
 void	check_rgba_format(char *line)
 {
@@ -113,7 +109,7 @@ void	check_rgba_format(char *line)
 	printf("temp: %d\n", temp);
 }
 
-int is_only_valid_color_tokens(char *line, int i)
+int	is_only_valid_color_tokens(char *line, int i)
 {
 	if (line [i] == 'C' || line[i] == 'F' || line[i] == ',' || is_digit(line[i]))
 		return (1);
@@ -121,26 +117,26 @@ int is_only_valid_color_tokens(char *line, int i)
 }
 
 /* void color_check(char *line, t_validation *validation) {
-    int i = 0;
-    skip_spaces(line, &i);
+	int i = 0;
+	skip_spaces(line, &i);
 
-    if (line[i] == 'F') {
-        i++;
-        skip_spaces(line, &i);
-        
-        validation->red = atoi(&line[i]);
-        while (isdigit(line[i])) i++;
-        
-        if (line[i] == ',') i++;
-        validation->green = atoi(&line[i]);
-        while (isdigit(line[i])) i++;
-        
-        if (line[i] == ',') i++;
-        validation->blue = atoi(&line[i]);
-        while (isdigit(line[i])) i++;
-    }
-    
-    printf("Red: %d, Green: %d, Blue: %d\n", validation->red, validation->green, validation->blue);
+	if (line[i] == 'F') {
+		i++;
+		skip_spaces(line, &i);
+		
+		validation->red = atoi(&line[i]);
+		while (isdigit(line[i])) i++;
+		
+		if (line[i] == ',') i++;
+		validation->green = atoi(&line[i]);
+		while (isdigit(line[i])) i++;
+		
+		if (line[i] == ',') i++;
+		validation->blue = atoi(&line[i]);
+		while (isdigit(line[i])) i++;
+	}
+	
+	printf("Red: %d, Green: %d, Blue: %d\n", validation->red, validation->green, validation->blue);
 } */
 
 void	color_check(char *line, t_validation *validation)
@@ -150,26 +146,26 @@ void	color_check(char *line, t_validation *validation)
 	int red = 0;
 	int green = 0;
 	int blue = 0;
-    ft_skip_spaces(line, &i);
+	ft_skip_spaces(line, &i);
 
-    if (line[i] == 'F')
+	if (line[i] == 'F')
 	{
-        i++;
-        ft_skip_spaces(line, &i);
-        
-         red = ft_atoi(&line[i]);
-        while (ft_isdigit(line[i])) i++;
-        
-        if (line[i] == ',') i++;
-         green = ft_atoi(&line[i]);
-        while (ft_isdigit(line[i])) i++;
-        
-        if (line[i] == ',') i++;
-         blue = ft_atoi(&line[i]);
-        while (ft_isdigit(line[i])) i++;
-    }
-    
-    printf("Red: %d, Green: %d, Blue: %d\n", red, green, blue);
+		i++;
+		ft_skip_spaces(line, &i);
+		
+		 red = ft_atoi(&line[i]);
+		while (ft_isdigit(line[i])) i++;
+		
+		if (line[i] == ',') i++;
+		 green = ft_atoi(&line[i]);
+		while (ft_isdigit(line[i])) i++;
+		
+		if (line[i] == ',') i++;
+		 blue = ft_atoi(&line[i]);
+		while (ft_isdigit(line[i])) i++;
+	}
+	
+	printf("Red: %d, Green: %d, Blue: %d\n", red, green, blue);
 }
 
 void	line_check_textures(char *line, t_validation *validation)
