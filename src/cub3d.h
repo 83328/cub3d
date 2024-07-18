@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 10:51:00 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 11:55:45 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,3 +311,6 @@ void	ft_error(char *str, t_game *game);
 int32_t	get_error(int32_t dx, int32_t dy);
 void	free_game(t_game *game);
 void	free_map_grid_2d(t_game *game);
+
+//utils_b.c
+void ft_skip_spaces(char *line, int *i);

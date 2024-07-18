@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 11:13:11 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 12:09:50 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,6 @@ int is_quadruple_digit(char *line, int i)
 }
 
 
-int is_only_valid_color_tokens(char *line, int i)
-{
-	if (line [i] == 'C' || line[i] == 'F' || line[i] == ',' || is_digit(line[i]))
-		return (1);
-	return (0);
-}
 void assign_rgb(char *line, int i, char *rgb) {
     size_t length = ft_strlen(line + i); // Länge der verbleibenden Zeichenkette ab Index `i`
 
@@ -113,41 +107,69 @@ void	check_rgba_format(char *line)
 	{
 		ft_error(ERR_COLOR_FORMAT, NULL);
 	}
-	/* else if (is_triple_digit(line, i))
-	{
-		rgb[0] = line[i];
-		rgb[1] = line[i + 1];
-		rgb[2] = line[i + 2];
-	}
-	else if (is_double_digit(line, i))
-	{
-		rgb[0] = '0';
-		rgb[1] = line[i];
-		rgb[2] = line[i + 1];
-	}
-	else
-	{
-		rgb[0] = '0';
-		rgb[1] = '0';
-		rgb[2] = line[i];
-	} */
 	else
 		assign_rgb(line, i, rgb);
 	temp = atoi(rgb);
 	printf("temp: %d\n", temp);
 }
 
+int is_only_valid_color_tokens(char *line, int i)
+{
+	if (line [i] == 'C' || line[i] == 'F' || line[i] == ',' || is_digit(line[i]))
+		return (1);
+	return (0);
+}
+
+/* void color_check(char *line, t_validation *validation) {
+    int i = 0;
+    skip_spaces(line, &i);
+
+    if (line[i] == 'F') {
+        i++;
+        skip_spaces(line, &i);
+        
+        validation->red = atoi(&line[i]);
+        while (isdigit(line[i])) i++;
+        
+        if (line[i] == ',') i++;
+        validation->green = atoi(&line[i]);
+        while (isdigit(line[i])) i++;
+        
+        if (line[i] == ',') i++;
+        validation->blue = atoi(&line[i]);
+        while (isdigit(line[i])) i++;
+    }
+    
+    printf("Red: %d, Green: %d, Blue: %d\n", validation->red, validation->green, validation->blue);
+} */
 
 void	color_check(char *line, t_validation *validation)
 {
 	(void)validation;
 	int i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
+	int red = 0;
+	int green = 0;
+	int blue = 0;
+    ft_skip_spaces(line, &i);
+
+    if (line[i] == 'F')
 	{
-		int x = is_only_valid_color_tokens(line, i);
-		printf("x: %d\n", x);
-		i++;	
-	}
+        i++;
+        ft_skip_spaces(line, &i);
+        
+         red = ft_atoi(&line[i]);
+        while (ft_isdigit(line[i])) i++;
+        
+        if (line[i] == ',') i++;
+         green = ft_atoi(&line[i]);
+        while (ft_isdigit(line[i])) i++;
+        
+        if (line[i] == ',') i++;
+         blue = ft_atoi(&line[i]);
+        while (ft_isdigit(line[i])) i++;
+    }
+    
+    printf("Red: %d, Green: %d, Blue: %d\n", red, green, blue);
 }
 
 void	line_check_textures(char *line, t_validation *validation)
@@ -199,7 +221,7 @@ void	validate_file(t_game *game, char *file, t_validation *validation)
 	while (line && i)
 	{
 		line_check_textures(line, validation);
-	//	color_check(line, validation);
+		color_check(line, validation);
 		free(line);
 		line = get_next_line(fd);
 		i--;
@@ -211,7 +233,7 @@ void	validate_file(t_game *game, char *file, t_validation *validation)
 			printf("YES XXX ITS AN ERROR\n");
 		ft_error(ERR_TEX, NULL);
 		}
-	 if (validation->floor_color == 0 || validation->ceiling_color == 0)
+	 if (validation->floor_color != 1 || validation->ceiling_color != 1)
 		ft_error(ERR_COLOR, NULL); 
 
 	printf("huhu from the VALIDATE FILE\n");
