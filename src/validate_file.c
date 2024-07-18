@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 14:22:35 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:27:40 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	validate_file(t_game *game, char *file, t_validation *validation)
 	validation->south_texture = 0;
 	validation->west_texture = 0;
 	validation->east_texture = 0;
-	validation->floor_color = 0;
-	validation->ceiling_color = 0;
+	validation->floor_color_num = 0;
+	validation->ceiling_color_num = 0;
 	validation->f_red = 0;
 	validation->f_green = 0;
 	validation->f_blue = 0;
@@ -49,7 +49,7 @@ void	validate_file(t_game *game, char *file, t_validation *validation)
 			printf("YES XXX ITS AN ERROR\n");
 		ft_error(ERR_TEX, NULL);
 		}
-	 if (validation->floor_color != 1 || validation->ceiling_color != 1)
+	 if (validation->floor_color_num != 1 || validation->ceiling_color_num != 1)
 		ft_error(ERR_COLOR, NULL); 
 
 	printf("huhu from the VALIDATE FILE\n");

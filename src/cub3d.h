@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 14:34:11 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:27:13 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ typedef struct s_validation
 	int		south_texture;
 	int		west_texture;
 	int		east_texture;
-	int		floor_color;
+	int		floor_color_num;
 	int		f_red;
 	int		f_green;
 	int		f_blue;
-	int		ceiling_color;
+	int		ceiling_color_num;
 	int		c_red;
 	int		c_green;
 	int		c_blue;

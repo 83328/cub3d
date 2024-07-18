@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:51:53 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 14:35:29 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:27:55 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ void	line_check_textures(char *line, t_validation *validation)
 		else if (line[i] == 'F')
 		{
 			//color_check(line, validation);
-			validation->floor_color = 1;
+			validation->floor_color_num = 1;
 		}
 		else if (line[i] == 'C')
 		{
-			validation->ceiling_color = 1;
+			validation->ceiling_color_num = 1;
 		}
 		i++;
 	}
