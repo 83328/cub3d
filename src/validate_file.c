@@ -6,102 +6,11 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 12:19:40 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 14:22:35 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	line_contains_only_one_f(char *line)
-{
-	int i = 0;
-	int count = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-	{
-		if (line[i] == 'F')
-			count++;
-		i++;
-	}
-	if (count == 1)
-	{	printf("count: %d\n only one F", count);
-		return (1);
-	}
-	return (0);
-}
-
-int	line_contains_only_one_c(char *line)
-{
-	int i = 0;
-	int count = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-	{
-		if (line[i] == 'C')
-			count++;
-		i++;
-	}
-	if (count == 1)
-		return (1);
-	return (0);
-}
-
-void	color_check(char *line, t_validation *validation)
-{
-	(void)validation;
-	int i = 0;
-	int red = 0;
-	int green = 0;
-	int blue = 0;
-	ft_skip_spaces(line, &i);
-
-	if (line[i] == 'F')
-	{
-		i++;
-		ft_skip_spaces(line, &i);
-		
-		 red = ft_atoi(&line[i]);
-		while (ft_isdigit(line[i])) i++;
-		
-		if (line[i] == ',') i++;
-		 green = ft_atoi(&line[i]);
-		while (ft_isdigit(line[i])) i++;
-		
-		if (line[i] == ',') i++;
-		 blue = ft_atoi(&line[i]);
-		while (ft_isdigit(line[i])) i++;
-	}
-	
-	printf("Red: %d, Green: %d, Blue: %d\n", red, green, blue);
-}
-
-void	line_check_textures(char *line, t_validation *validation)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-	{
-		if (line[i] == ' ' || line[i] == '\t')
-			i++;
-		if ((line[i] == 'N' && line[i +1] == 'O'))
-			validation->north_texture += 1;
-		else if (line[i] == 'S' && line[i +1] == 'O')
-			validation->south_texture += 1;
-		else if (line[i] == 'W' && line[i +1] == 'E')
-			validation->west_texture += 1;
-		else if (line[i] == 'E' && line[i +1] == 'A')
-			validation->east_texture += 1;
-		else if (line[i] == 'F')
-		{
-			//color_check(line, validation);
-			validation->floor_color = 1;
-		}
-		else if (line[i] == 'C')
-		{
-			validation->ceiling_color = 1;
-		}
-		i++;
-	}
-}
 
 void	validate_file(t_game *game, char *file, t_validation *validation)
 {
@@ -112,6 +21,12 @@ void	validate_file(t_game *game, char *file, t_validation *validation)
 	validation->east_texture = 0;
 	validation->floor_color = 0;
 	validation->ceiling_color = 0;
+	validation->f_red = 0;
+	validation->f_green = 0;
+	validation->f_blue = 0;
+	validation->c_red = 0;
+	validation->c_green = 0;
+	validation->c_blue = 0;
 	
 	int		fd;
 	char	*line = NULL;
@@ -138,4 +53,8 @@ void	validate_file(t_game *game, char *file, t_validation *validation)
 		ft_error(ERR_COLOR, NULL); 
 
 	printf("huhu from the VALIDATE FILE\n");
+	// printf red green blue
+	printf("f_red: %d\n", validation->f_red);
+	printf("f_green: %d\n", validation->f_green);
+	printf("f_blue: %d\n", validation->f_blue);
 }

@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 11:55:45 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 14:34:11 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 # define ERR_IMG "Failed to create image\n"
 # define ERR_COLOR_FORMAT "Error in color. Provide a color in the format F or C 255,255,255\n"
 # define ERR_COLOR "Error in color. Provide a color in the format F or C 255,255,255\n"
+# define ERR_COLOR_VAL "Error in color. The color value needs to be between 0-255\n"
+# define ERR_COLOR_NUM "Too many color values, only r,g,b allowed\n"
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
 # define ERR_TEX_ID "Error in texture. Provide  NO, SO, WE and EA\n"
 # define ERR_INVALID_MAP_CHAR "Invalid character in map\n"
@@ -63,7 +65,13 @@ typedef struct s_validation
 	int		west_texture;
 	int		east_texture;
 	int		floor_color;
+	int		f_red;
+	int		f_green;
+	int		f_blue;
 	int		ceiling_color;
+	int		c_red;
+	int		c_green;
+	int		c_blue;
 	int		map_start_line;
 }	t_validation;
 
@@ -190,10 +198,6 @@ typedef struct line
 	int32_t	y1;
 }	t_line;
 
-void color_check(char *line, t_validation *validation);
-void line_check_textures(char *line, t_validation *validation);
-void	validate_file(t_game *game, char *file, t_validation *validation);
-
 //2_file_check.c
 void	check_file(int argc, char **argv);
 
@@ -313,4 +317,14 @@ void	free_game(t_game *game);
 void	free_map_grid_2d(t_game *game);
 
 //utils_b.c
-void ft_skip_spaces(char *line, int *i);
+void	ft_skip_spaces(char *line, int *i);
+
+//validate_file.c
+void	validate_file(t_game *game, char *file, t_validation *validation);
+
+//validate_file_b.c
+int		parse_color_value(char *line, int *i);
+void	parse_color_line_f(char *line, int *i, t_validation *v);
+void	parse_color_line_c(char *line, int *i, t_validation *v);
+void	color_check(char *line, t_validation *v);
+void	line_check_textures(char *line, t_validation *validation);
