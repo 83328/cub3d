@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/17 11:52:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/18 11:01:53 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	main(int argc, char **argv)
 	t_validation	validation;
 
 	check_file(argc, argv);
-	validate_file(argv[1], &validation);
 	load_map_dimensions_from_file(&game, argv[1]);
+	validate_file(&game, argv[1], &validation);
 	printf("Map Dimensions: %d x %d\n", game.map_rows, game.map_cols);
 	printf("Map start: %d\n", game.map_start);
 	printf("Map end: %d\n", game.map_end);

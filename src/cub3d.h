@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/17 11:51:05 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/18 10:51:00 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ERR_READ_LINE "Failed to read line\n"
 # define ERR_MEM "Failed to allocate memory for the map\n"
 # define ERR_IMG "Failed to create image\n"
+# define ERR_COLOR_FORMAT "Error in color. Provide a color in the format F or C 255,255,255\n"
 # define ERR_COLOR "Error in color. Provide a color in the format F or C 255,255,255\n"
 # define ERR_TEX "Error in texture path. Provide a path to the NO, SO, WE and EA images\n"
 # define ERR_TEX_ID "Error in texture. Provide  NO, SO, WE and EA\n"
@@ -63,7 +64,7 @@ typedef struct s_validation
 	int		east_texture;
 	int		floor_color;
 	int		ceiling_color;
-	int		map;
+	int		map_start_line;
 }	t_validation;
 
 typedef struct s_map
@@ -191,7 +192,7 @@ typedef struct line
 
 void color_check(char *line, t_validation *validation);
 void line_check_textures(char *line, t_validation *validation);
-void validate_file(char *file, t_validation *validation);
+void	validate_file(t_game *game, char *file, t_validation *validation);
 
 //2_file_check.c
 void	check_file(int argc, char **argv);
