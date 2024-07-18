@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 12:14:48 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:19:40 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,101 +43,6 @@ int	line_contains_only_one_c(char *line)
 		return (1);
 	return (0);
 }
-
-int	is_digit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	is_double_digit(char *line, int i)
-{
-	if (is_digit(line[i]) && is_digit(line[i + 1]))
-		return (1);
-	return (0);
-}
-
-int	is_triple_digit(char *line, int i)
-{
-	if (is_digit(line[i]) && is_digit(line[i + 1]) && is_digit(line[i + 2]))
-		return (1);
-	return (0);
-}
-
-int	is_quadruple_digit(char *line, int i)
-{
-	if (is_digit(line[i]) && is_digit(line[i + 1]) && is_digit(line[i + 2]) && is_digit(line[i + 3]))
-		return (1);
-	return (0);
-}
-
-
-void	assign_rgb(char *line, int i, char *rgb) {
-	size_t length = ft_strlen(line + i); // Länge der verbleibenden Zeichenkette ab Index `i`
-
-	if (length >= 3 && is_triple_digit(line, i)) {
-		rgb[0] = line[i];
-		rgb[1] = line[i + 1];
-		rgb[2] = line[i + 2];
-	} else if (length >= 2 && is_double_digit(line, i)) {
-		rgb[0] = '0';
-		rgb[1] = line[i];
-		rgb[2] = line[i + 1];
-	} else if (length >= 1 && is_digit(line[i])){
-		rgb[0] = '0';
-		rgb[1] = '0';
-		rgb[2] = line[i];
-	}
-}
-void	check_rgba_format(char *line)
-{
-	char	rgb[3] = "000";
-	int		temp = 0;
-	int		i = 0;
-	while(line[i] == 'F' || line[i] == 'C' || line[i] == ' ')
-		i++;
-	while(line[i] == ' ')
-		i++;
-	if (is_quadruple_digit(line, i))
-	{
-		ft_error(ERR_COLOR_FORMAT, NULL);
-	}
-	else
-		assign_rgb(line, i, rgb);
-	temp = atoi(rgb);
-	printf("temp: %d\n", temp);
-}
-
-int	is_only_valid_color_tokens(char *line, int i)
-{
-	if (line [i] == 'C' || line[i] == 'F' || line[i] == ',' || is_digit(line[i]))
-		return (1);
-	return (0);
-}
-
-/* void color_check(char *line, t_validation *validation) {
-	int i = 0;
-	skip_spaces(line, &i);
-
-	if (line[i] == 'F') {
-		i++;
-		skip_spaces(line, &i);
-		
-		validation->red = atoi(&line[i]);
-		while (isdigit(line[i])) i++;
-		
-		if (line[i] == ',') i++;
-		validation->green = atoi(&line[i]);
-		while (isdigit(line[i])) i++;
-		
-		if (line[i] == ',') i++;
-		validation->blue = atoi(&line[i]);
-		while (isdigit(line[i])) i++;
-	}
-	
-	printf("Red: %d, Green: %d, Blue: %d\n", validation->red, validation->green, validation->blue);
-} */
 
 void	color_check(char *line, t_validation *validation)
 {
