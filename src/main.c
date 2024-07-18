@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/18 15:26:21 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:32:38 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	init_game(t_game *game)
 	game->player_width = 1;
 	game->player_height = 1;
 	game->player_rotation_angle = init_direction(game->start_direction);
+	game->floor_color = 0;
+	game->ceiling_color = 0;
 }
 
 void	init_test_line(t_line *line)
@@ -84,6 +86,13 @@ int	main(int argc, char **argv)
 	printf("c_red: %d\n", validation.c_red);
 	printf("c_green: %d\n", validation.c_green);
 	printf("c_blue: %d\n", validation.c_blue);
+	// printf game colors
+	printf("floor color: %d\n", game.floor_color);
+	printf("ceiling color: %d\n", game.ceiling_color);
+	game.ceiling_color = get_rgba(42, 42, 42, 42);
+	game.floor_color = get_rgba(42, 42, 42, 42);
+	printf("floor color: %d\n", game.floor_color);
+	printf("ceiling color: %d\n", game.ceiling_color);
 	mlx_key_hook(game.mlx, my_keyhook, &game);
 	mlx_close_hook(game.mlx, close_callback, &game);
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);

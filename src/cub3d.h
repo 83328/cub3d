@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 15:27:13 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:29:15 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ typedef struct s_game
 	mlx_image_t					*image_west_texture;
 	mlx_texture_t				*east_texture;
 	mlx_image_t					*image_east_texture;
+	int							floor_color;
+	int							ceiling_color;
 	float						player_x;
 	float						player_y;
 	float						player_width;
