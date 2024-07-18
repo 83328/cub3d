@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/18 15:32:38 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/18 15:55:10 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,8 @@ int	main(int argc, char **argv)
 	load_test_texture_east(&game);
 	load_test_texture_south(&game);
 	load_test_texture_west(&game);
-	// printf validation colors
-	printf("f_red: %d\n", validation.f_red);
-	printf("f_green: %d\n", validation.f_green);
-	printf("f_blue: %d\n", validation.f_blue);
-	printf("c_red: %d\n", validation.c_red);
-	printf("c_green: %d\n", validation.c_green);
-	printf("c_blue: %d\n", validation.c_blue);
-	// printf game colors
-	printf("floor color: %d\n", game.floor_color);
-	printf("ceiling color: %d\n", game.ceiling_color);
-	game.ceiling_color = get_rgba(42, 42, 42, 42);
-	game.floor_color = get_rgba(42, 42, 42, 42);
-	printf("floor color: %d\n", game.floor_color);
-	printf("ceiling color: %d\n", game.ceiling_color);
+	game.ceiling_color = get_rgba(68, 68, 68, 255);
+	game.floor_color = get_rgba(220, 100, 0, 255);
 	mlx_key_hook(game.mlx, my_keyhook, &game);
 	mlx_close_hook(game.mlx, close_callback, &game);
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);

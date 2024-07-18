@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_projection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:27:21 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/15 14:43:07 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:54:18 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	draw_ceiling(t_game *game, int x, int wall_top_pixel)
 	y = 0;
 	while (y < wall_top_pixel)
 	{
-		color = get_rgba(68, 68, 68, 255);
+		//color = get_rgba(68, 68, 68, 255);
+		color = game->ceiling_color;
 		reverse_bits((uint32_t *)&color);
 		our_mlx_put_pixel(game->image, x, y, color);
 		y++;
@@ -117,7 +118,8 @@ void	draw_floor(t_game *game, int x, int wall_bottom_pixel)
 	while (y < WINDOW_HEIGHT)
 	{
 		//floor_color = get_rgba(136, 66, 136, 255);
-		floor_color = get_rgba(220, 100, 0, 255);
+		//floor_color = get_rgba(220, 100, 0, 255);
+		floor_color = game->floor_color;
 		reverse_bits((uint32_t *)&floor_color);
 		our_mlx_put_pixel(game->image, x, y, floor_color);
 		y++;
