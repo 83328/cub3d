@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:51:53 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 16:45:39 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:07:41 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ void	line_check_textures(char *line, t_validation *validation)
 			validation->west_texture += 1;
 		else if (line[i] == 'E' && line[i + 1] == 'A')
 			validation->east_texture += 1;
-		else if (line[i] == 'F')
-			validation->floor_color_num = 1;
-		else if (line[i] == 'C')
-			validation->ceiling_color_num = 1;
+		else if (line[i] == 'F' && line[i + 1] == ' ')
+			validation->floor_color_num += 1;
+		else if (line[i] == 'C' && line[i + 1] == ' ')
+			validation->ceiling_color_num += 1;
 		i++;
 	}
 }
