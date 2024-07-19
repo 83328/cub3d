@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:44:02 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/19 11:59:23 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 12:11:13 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,46 @@ void	validate_textures_and_colors(t_validation *validation)
 	printf("map_start_line: %d\n", validation->map_start_line);
 } */
 
-void process_file_lines(int fd, t_validation *validation, int map_start_line)
+static void	process_line(char *line, t_validation *validation, 
+	int *text_line_count)
 {
-	char *line;
-	int i;
-	int text_line_count = 0; // Counter for lines with text besides spaces or tabs
+	char	*ptr;
+	int		has_text;
 
+	ptr = line;
+	has_text = 0;
+	while (*ptr)
+	{
+		if (*ptr != ' ' && *ptr != '\t' && *ptr != '\n')
+		{
+			has_text = 1;
+			break ;
+		}
+		ptr++;
+	}
+	if (has_text)
+		(*text_line_count)++;
+	line_check_textures(line, validation);
+	color_check(line, validation);
+}
+
+void	process_file_lines(int fd, t_validation *validation, int map_start_line)
+{
+	char	*line;
+	int		text_line_count;
+	int		i;
+
+	text_line_count = 0;
 	i = map_start_line;
 	line = get_next_line(fd);
-	while (line && i)
+	while (line && i--)
 	{
-		char *ptr = line;
-		int has_text = 0; // Flag to indicate if the line has text
-		while (*ptr)
-		{
-			if (*ptr != ' ' && *ptr != '\t' && *ptr != '\n')
-			{
-				has_text = 1;
-				break;
-			}
-			ptr++;
-		}
-		if (has_text)
-			text_line_count++; // Increment counter if the line has text
-		line_check_textures(line, validation);
-		color_check(line, validation);
+		process_line(line, validation, &text_line_count);
 		free(line);
 		line = get_next_line(fd);
-		i--;
 	}
 	if (text_line_count != 6)
-		ft_error(ERR_LINE_COUNT, NULL); 
+		ft_error(ERR_LINE_COUNT, NULL);
 }
 
 void	validate_file(t_game *game, char *file, t_validation *validation)
