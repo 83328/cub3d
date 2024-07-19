@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/18 17:08:15 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 11:58:58 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define ERR_FLOOR_COLOR "Floor color is not a valid RGB value\n"
 # define ERR_CEILING_COLOR "Ceiling color is not a valid RGB value\n"
 # define ERR_MAP_SIZE "The map is too large\n"
+# define ERR_LINE_COUNT "The map file contains unexpected items\n"
 
 typedef struct s_validation
 {
