@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   wall_1_tex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 11:47:04 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/19 13:57:50 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/19 14:26:29 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_copy_path(char *path, char *file_path)
+void	ft_copy_path(char *path, char *file_path)
 {
-	int len = ft_strlen(file_path);
+	int	len;
+
+	len = ft_strlen(file_path);
 	ft_strlcpy(path, file_path, len);
 	path[len] = '\0';
 }
 
 void	load_test_texture_north(t_game *game)
 {
-	char path[100];
+	char	path[100];
+
 	ft_copy_path(path, game->file_path_no);
 	game->north_texture = mlx_load_png(path);
 	if (game->north_texture == NULL)
@@ -32,7 +35,8 @@ void	load_test_texture_north(t_game *game)
 
 void	load_test_texture_south(t_game *game)
 {
-	char path[100];
+	char	path[100];
+
 	ft_copy_path(path, game->file_path_so);
 	game->south_texture = mlx_load_png(path);
 	if (game->south_texture == NULL)
@@ -43,7 +47,8 @@ void	load_test_texture_south(t_game *game)
 
 void	load_test_texture_west(t_game *game)
 {
-	char path[100];
+	char	path[100];
+
 	ft_copy_path(path, game->file_path_we);
 	game->west_texture = mlx_load_png(path);
 	if (game->west_texture == NULL)
@@ -54,7 +59,8 @@ void	load_test_texture_west(t_game *game)
 
 void	load_test_texture_east(t_game *game)
 {
-	char path[100];
+	char	path[100];
+
 	ft_copy_path(path, game->file_path_ea);
 	game->east_texture = mlx_load_png(path);
 	if (game->east_texture == NULL)
