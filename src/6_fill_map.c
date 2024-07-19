@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:01:43 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/19 14:39:54 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:57:24 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,55 @@ void	process_line(char *line, t_game *game, t_process_args args)
 		game->map_grid_2d[args.i][k++] = 8;
 }
 
+void	handle_read_line_error(int fd)
+{
+	ft_error(ERR_READ_LINE, NULL);
+	close(fd);
+	exit(1);
+}
+
+void	process_map_line(int fd, t_game *game, int *direction_count, int i)
+{
+	char			*line;
+	t_process_args	args;
+
+	line = get_next_line(fd);
+	if (line == NULL)
+	{
+		handle_read_line_error(fd);
+	}
+	args.i = i;
+	args.direction_count = direction_count;
+	args.line_length = game->map_cols;
+	process_line(line, game, args);
+	free(line);
+}
+
 void	fill_map_grid(int fd, t_game *game)
 {
-	int		i;
-	int		direction_count;
-	char	*line;
-	
+	int	i;
+	int	direction_count;
+
+	i = 0;
+	direction_count = 0;
+	while (i < game->map_rows)
+	{
+		process_map_line(fd, game, &direction_count, i);
+		i++;
+	}
+	if (direction_count != 1)
+	{
+		ft_error(ERR_START_POINT, NULL);
+		close(fd);
+	}
+}
+
+/* void	fill_map_grid(int fd, t_game *game)
+{
+	int				i;
+	int				direction_count;
+	char			*line;
+	t_process_args	args;
 
 	i = 0;
 	direction_count = 0;
@@ -78,7 +121,9 @@ void	fill_map_grid(int fd, t_game *game)
 			ft_error(ERR_READ_LINE, NULL);
 			close(fd);
 		}
-		t_process_args args = {i, &direction_count, game->map_cols};
+		args.i = i;
+		args.direction_count = &direction_count;
+		args.line_length = game->map_cols;
 		process_line(line, game, args);
 		free(line);
 		i++;
@@ -87,9 +132,8 @@ void	fill_map_grid(int fd, t_game *game)
 	{
 		ft_error(ERR_START_POINT, NULL);
 		close(fd);
-		exit(1);
 	}
-}
+} */
 
 void	fill_2d_map_from_file(t_game *game, char argv[1])
 {
