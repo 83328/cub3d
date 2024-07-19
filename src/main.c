@@ -6,7 +6,7 @@
 /*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/18 15:59:57 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/19 14:00:34 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ void	close_callback(void *param)
 	exit(0);
 }
 
+void open_and_get_textures(char *filepath, t_game *game) {
+    int fd = open(filepath, O_RDONLY);
+    if (fd < 0) {
+        ft_error(ERR_OPEN, NULL);
+    }
+    get_textures(fd, game);
+    close(fd);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game			game;
@@ -75,6 +84,7 @@ int	main(int argc, char **argv)
 	game.image = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	if (!game.image || (mlx_image_to_window(game.mlx, game.image, 0, 0) < 0))
 		ft_error(ERR_IMG, NULL);
+	open_and_get_textures(argv[1], &game);
 	load_test_texture_north(&game);
 	load_test_texture_east(&game);
 	load_test_texture_south(&game);
