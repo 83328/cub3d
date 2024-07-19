@@ -1,7 +1,7 @@
-NO ./texture/wall1.png
-SO ./texture/wall2.png
-WE ./texture/wall3.png
-EA ./texture/wall4.png
+NO ./textures/32_tri.png
+SO ./textures/32_bronto.png
+WE ./textures/32_ptero.png
+EA ./textures/32_tyr.png
 
 F 220,100,0
 C 225,30,0
