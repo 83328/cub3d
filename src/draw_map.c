@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:44:27 by ohoro             #+#    #+#             */
-/*   Updated: 2024/06/27 12:15:10 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:09:06 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	fill_rectangle_white(t_game *game, int x, int y)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			mlx_put_pixel(game->image, x + i, y + j, 0xFFFFFFFF);
+			our_mlx_put_pixel(game->image, x + i, y + j, 0xFFFFFFFF);
 			j++;
 		}
 		i++;

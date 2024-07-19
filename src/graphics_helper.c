@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:59:32 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/15 12:12:22 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:09:32 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	put_pixel(int32_t x, int32_t y, mlx_image_t *image)
 	uint32_t	color;
 
 	color = ft_pixel(255, 255, 255, 255);
-	mlx_put_pixel(image, x, y, color);
+	our_mlx_put_pixel(image, x, y, color);
 }
 
 void	erase_pixel(int32_t x, int32_t y, mlx_image_t *image)
@@ -30,7 +30,7 @@ void	erase_pixel(int32_t x, int32_t y, mlx_image_t *image)
 	uint32_t	color;
 
 	color = ft_pixel(0, 0, 0, 0);
-	mlx_put_pixel(image, x, y, color);
+	our_mlx_put_pixel(image, x, y, color);
 }
 
 int32_t	get_step(int32_t start, int32_t end)
