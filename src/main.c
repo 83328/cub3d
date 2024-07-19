@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
+/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/19 14:00:34 by ohoro            ###   ########.fr       */
+/*   Updated: 2024/07/19 14:21:03 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,17 @@ void	close_callback(void *param)
 	exit(0);
 }
 
-void open_and_get_textures(char *filepath, t_game *game) {
-    int fd = open(filepath, O_RDONLY);
-    if (fd < 0) {
-        ft_error(ERR_OPEN, NULL);
-    }
-    get_textures(fd, game);
-    close(fd);
+void	open_and_get_textures(char *filepath, t_game *game)
+{
+	int	fd;
+
+	fd = open(filepath, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_error(ERR_OPEN, NULL);
+	}
+	get_textures(fd, game);
+	close(fd);
 }
 
 int	main(int argc, char **argv)
@@ -89,10 +93,10 @@ int	main(int argc, char **argv)
 	load_test_texture_east(&game);
 	load_test_texture_south(&game);
 	load_test_texture_west(&game);
-	//game.ceiling_color = get_rgba(68, 68, 68, 255);
-	//game.floor_color = get_rgba(220, 100, 0, 255);
-	game.ceiling_color = get_rgba(validation.c_red, validation.c_green, validation.c_blue, 255);
-	game.floor_color = get_rgba(validation.f_red, validation.f_green, validation.f_blue, 255);
+	game.ceiling_color = get_rgba(validation.c_red, validation.c_green, 
+			validation.c_blue, 255);
+	game.floor_color = get_rgba(validation.f_red, validation.f_green, 
+			validation.f_blue, 255);
 	mlx_key_hook(game.mlx, my_keyhook, &game);
 	mlx_close_hook(game.mlx, close_callback, &game);
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);
