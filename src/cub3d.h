@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/19 11:58:58 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:30:37 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,13 @@ typedef struct line
 	int32_t	x1;
 	int32_t	y1;
 }	t_line;
+
+typedef struct
+{
+	int i;
+	int *direction_count;
+	int line_length;
+} t_process_args;
 
 //2_file_check.c
 void	check_file(int argc, char **argv);

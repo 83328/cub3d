@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:01:43 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/16 15:06:46 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:39:54 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	skip_lines_before_map(int fd, t_game *game)
 	}
 }
 
-void	process_line(char *line, t_game *game, int i, int *direction_count, int line_length)
+void	process_line(char *line, t_game *game, t_process_args args)
 {
 	int	j;
 	int	k;
@@ -42,23 +42,23 @@ void	process_line(char *line, t_game *game, int i, int *direction_count, int lin
 	while (line[j] != '\n' && line[j] != '\0')
 	{
 		if (line[j] == '0')
-			game->map_grid_2d[i][k++] = 0;
+			game->map_grid_2d[args.i][k++] = 0;
 		else if (line[j] == '1')
-			game->map_grid_2d[i][k++] = 1;
+			game->map_grid_2d[args.i][k++] = 1;
 		else if (line[j] == 'N' || line[j] == 'W' || 
 			line[j] == 'E' || line[j] == 'S')
 		{
-			game->map_grid_2d[i][k] = 2;
+			game->map_grid_2d[args.i][k] = 2;
 			game->start_direction = line[j];
 			game->player_x = k * TILE_SIZE + (TILE_SIZE / 2);
-			game->player_y = i * TILE_SIZE + (TILE_SIZE / 2);
-			(*direction_count)++;
+			game->player_y = args.i * TILE_SIZE + (TILE_SIZE / 2);
+			(*args.direction_count)++;
 			k++;
 		}
 		j++;
 	}
-	while (k < line_length)
-		game->map_grid_2d[i][k++] = 8;
+	while (k < args.line_length)
+		game->map_grid_2d[args.i][k++] = 8;
 }
 
 void	fill_map_grid(int fd, t_game *game)
@@ -66,6 +66,7 @@ void	fill_map_grid(int fd, t_game *game)
 	int		i;
 	int		direction_count;
 	char	*line;
+	
 
 	i = 0;
 	direction_count = 0;
@@ -76,9 +77,9 @@ void	fill_map_grid(int fd, t_game *game)
 		{
 			ft_error(ERR_READ_LINE, NULL);
 			close(fd);
-			exit(1);
 		}
-		process_line(line, game, i, &direction_count, game->map_cols);
+		t_process_args args = {i, &direction_count, game->map_cols};
+		process_line(line, game, args);
 		free(line);
 		i++;
 	}
