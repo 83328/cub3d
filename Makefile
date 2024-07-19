@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+         #
+#    By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/18 14:52:04 by ohoro             #+#    #+#              #
-#    Updated: 2024/05/06 18:34:22 by ohoro            ###   ########.fr        #
+#    Updated: 2024/07/19 11:44:31 by alimpens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,17 @@ libft:
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) -o $(NAME)
-
+	@echo "\n"
+	@echo "---------------------------------------------------------------------------"
+	@echo "\n"
+	@echo "                                 bb      333333       dd                   "
+	@echo "                    cccc uu   uu bb         3333      dd                   "
+	@echo "                  cc     uu   uu bbbbbb    3333   dddddd                   "
+	@echo "                  cc     uu   uu bb   bb     333 dd   dd                   "
+	@echo "                   ccccc  uuuu u bbbbbb  333333   dddddd                   \n"
+	@echo "---------------------------------------------------------------------------"
+	@echo "\n"
+ 
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(LIBMLX)/build
