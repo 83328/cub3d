@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: ohoro <ohoro@student.42berlin.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:32:07 by alimpens          #+#    #+#             */
-/*   Updated: 2024/07/19 14:21:03 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:00:46 by ohoro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ void	open_and_get_textures(char *filepath, t_game *game)
 	get_textures(fd, game);
 	close(fd);
 }
+void load_all_textures_set_colors(t_game *game, t_validation *v)
+{
+	load_test_texture_north(game);
+	load_test_texture_east(game);
+	load_test_texture_south(game);
+	load_test_texture_west(game);
+	game->ceiling_color = get_rgba(v->c_red, v->c_green, 
+			v->c_blue, 255);
+	game->floor_color = get_rgba(v->f_red, v->f_green, 
+			v->f_blue, 255);
+}
 
 int	main(int argc, char **argv)
 {
@@ -75,10 +86,6 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	load_map_dimensions_from_file(&game, argv[1]);
 	validate_file(&game, argv[1], &validation);
-	printf("Map Dimensions: %d x %d\n", game.map_rows, game.map_cols);
-	printf("Map start: %d\n", game.map_start);
-	printf("Map end: %d\n", game.map_end);
-	printf("Map height: %d\n", game.map_rows);
 	allocate_map(&game);
 	fill_2d_map_from_file(&game, argv[1]);
 	print_map_grid_2d(&game);
@@ -89,14 +96,7 @@ int	main(int argc, char **argv)
 	if (!game.image || (mlx_image_to_window(game.mlx, game.image, 0, 0) < 0))
 		ft_error(ERR_IMG, NULL);
 	open_and_get_textures(argv[1], &game);
-	load_test_texture_north(&game);
-	load_test_texture_east(&game);
-	load_test_texture_south(&game);
-	load_test_texture_west(&game);
-	game.ceiling_color = get_rgba(validation.c_red, validation.c_green, 
-			validation.c_blue, 255);
-	game.floor_color = get_rgba(validation.f_red, validation.f_green, 
-			validation.f_blue, 255);
+	load_all_textures_set_colors(&game, &validation);
 	mlx_key_hook(game.mlx, my_keyhook, &game);
 	mlx_close_hook(game.mlx, close_callback, &game);
 	mlx_loop_hook(game.mlx, draw_all_and_clear, &game);
