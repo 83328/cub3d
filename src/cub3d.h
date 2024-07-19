@@ -6,7 +6,7 @@
 /*   By: alimpens <alimpens@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:56:41 by ohoro             #+#    #+#             */
-/*   Updated: 2024/07/19 14:30:37 by alimpens         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:07:46 by alimpens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,6 +328,7 @@ void	free_map_grid_2d(t_game *game);
 
 //utils_b.c
 void	ft_skip_spaces(char *line, int *i);
+void	handle_read_line_error(int fd);
 
 //validate_file.c
 void	validate_file(t_game *game, char *file, t_validation *validation);
@@ -338,3 +339,10 @@ void	parse_color_line_f(char *line, int *i, t_validation *v);
 void	parse_color_line_c(char *line, int *i, t_validation *v);
 void	color_check(char *line, t_validation *v);
 void	line_check_textures(char *line, t_validation *validation);
+
+//init.c
+float	init_direction(char direction);
+void	init_game(t_game *game);
+void	init_test_line(t_line *line);
+void	open_and_get_textures(char *filepath, t_game *game);
+void	load_all_textures_set_colors(t_game *game, t_validation *v);
